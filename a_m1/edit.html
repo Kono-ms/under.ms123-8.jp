@@ -1,0 +1,301 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+    <h1>不動産会社管理</h1>
+
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> Home</li>
+        <li><a href="/a_m1/">不動産会社管理</a></li>
+        <li>不動産会社登録・編集</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+
+        <div class="col-xs-12">
+            <div class="box box-warning">
+
+                <div class="box-header">
+                    <h3 class="box-title">登録・編集</h3>
+                </div><!-- /.box-header -->
+
+                <div class="box-body">
+
+                    [S-ERR]
+                    <div class="alert alert-warning alert-dismissible">
+                        <div class="message_box mb20">
+                            <p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+                        </div>
+                        <div class="page_text">
+                            <ul class="error_list">
+                                [ERRMSG]
+                            </ul>
+                        </div>
+                    </div>
+                    [E-ERR]
+
+                    <form method="post" action="./" enctype="multipart/form-data">
+                        <input type="hidden" name="mode" value="save">
+                        <input type="hidden" name="key" value="[ID]">
+                        <input type="hidden" name="sort" value="[SORT]">
+                        <input type="hidden" name="word" value="[WORD]">
+                        <input type="hidden" name="page" value="[PAGE]">
+                        <input type="hidden" name="lid" value="[LID]">
+                        <input type="hidden" name="token" value="[TOKEN]">
+                        <input type="hidden" name="ID" value="[ID]">
+                        <input type="hidden" name="SOCIALID" value="[SOCIALID]">
+                        <input type="hidden" name="M1_ETC01" value="[M1_ETC01]">
+                        <input type="hidden" name="M1_ETC02" value="[M1_ETC02]">
+                        <input type="hidden" name="M1_ETC03" value="[M1_ETC03]">
+                        <input type="hidden" name="M1_ETC04" value="[M1_ETC04]">
+                        <input type="hidden" name="M1_ETC05" value="[M1_ETC05]">
+                        <input type="hidden" name="M1_ETC06" value="[M1_ETC06]">
+                        <input type="hidden" name="M1_ETC07" value="[M1_ETC07]">
+                        <input type="hidden" name="M1_ETC08" value="[M1_ETC08]">
+                        <input type="hidden" name="M1_ETC09" value="[M1_ETC09]">
+                        <input type="hidden" name="M1_ETC10" value="[M1_ETC10]">
+                        <input type="hidden" name="M1_ETC11" value="[M1_ETC11]">
+                        <input type="hidden" name="M1_ETC12" value="[M1_ETC12]">
+                        <input type="hidden" name="M1_ETC13" value="[M1_ETC13]">
+                        <input type="hidden" name="M1_ETC14" value="[M1_ETC14]">
+                        <input type="hidden" name="M1_ETC15" value="[M1_ETC15]">
+                        <input type="hidden" name="M1_ETC16" value="[M1_ETC16]">
+                        <input type="hidden" name="M1_ETC17" value="[M1_ETC17]">
+                        <input type="hidden" name="M1_ETC18" value="[M1_ETC18]">
+                        <input type="hidden" name="M1_ETC19" value="[M1_ETC19]">
+                        <input type="hidden" name="M1_ETC20" value="[M1_ETC20]">
+
+                        【基本情報（アカウント）】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>会員ID</th>
+                                    <td><input type="text" name="MID" class="input_w10 form-control" value="[MID]"
+                                            size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>メールアドレス</th>
+                                    <td><input type="text" name="EMAIL" class="input_w10 form-control" value="[EMAIL]"
+                                            size="90"></td>
+                                </tr>
+                                [S-NEWDATA]
+                                <tr>
+                                    <th>パスワード</th>
+                                    <td><input type="text" name="PASS" class="input_w10 form-control" value=""
+                                            size="90"></td>
+                                </tr>
+                                [E-NEWDATA]
+                                [S-EDITDATA]
+                                <input type="hidden" name="PASS" value="[PASS]" size="90">
+                                [E-EDITDATA]
+                                <tr>
+                                    <th>公開フラグ</th>
+                                    <td>
+                                        <ul>[OPT-ENABLE]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>登録日時</th>
+                                    <td><input type="text" name="NEWDATE" class="input_w10 form-control"
+                                            value="[NEWDATE]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>更新日時</th>
+                                    <td><input type="text" name="EDITDATE" class="input_w10 form-control"
+                                            value="[EDITDATE]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【会社情報】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>会社名</th>
+                                    <td><input type="text" name="M1_DVAL01" class="input_w10 form-control"
+                                            value="[M1_DVAL01]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>会社名（ふりがな）</th>
+                                    <td><input type="text" name="M1_DVAL02" class="input_w10 form-control"
+                                            value="[M1_DVAL02]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>代表者名</th>
+                                    <td><input type="text" name="M1_DVAL03" class="input_w10 form-control"
+                                            value="[M1_DVAL03]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>所在地（郵便番号）</th>
+                                    <td><input type="text" name="M1_DVAL04" class="input_w10 form-control"
+                                            value="[M1_DVAL04]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>所在地（都道府県）</th>
+                                    <td><select name="M1_MSEL01"
+                                            class="input_select form-control">[OPT-M1_MSEL01]</select></td>
+                                </tr>
+                                <tr>
+                                    <th>所在地（市区町村）</th>
+                                    <td><input type="text" name="M1_DVAL05" class="input_w10 form-control"
+                                            value="[M1_DVAL05]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>所在地（番地・建物名）</th>
+                                    <td><input type="text" name="M1_DVAL06" class="input_w10 form-control"
+                                            value="[M1_DVAL06]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>電話番号</th>
+                                    <td><input type="text" name="M1_DVAL07" class="input_w10 form-control"
+                                            value="[M1_DVAL07]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>FAX番号</th>
+                                    <td><input type="text" name="M1_DVAL08" class="input_w10 form-control"
+                                            value="[M1_DVAL08]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>メールアドレス</th>
+                                    <td><input type="text" name="M1_DVAL09" class="input_w10 form-control"
+                                            value="[M1_DVAL09]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>免許番号</th>
+                                    <td><input type="text" name="M1_DVAL10" class="input_w10 form-control"
+                                            value="[M1_DVAL10]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>所属団体</th>
+                                    <td><input type="text" name="M1_DVAL11" class="input_w10 form-control"
+                                            value="[M1_DVAL11]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>資本金</th>
+                                    <td><input type="text" name="M1_DVAL12" class="input_w10 form-control"
+                                            value="[M1_DVAL12]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>営業時間</th>
+                                    <td><input type="text" name="M1_DVAL13" class="input_w10 form-control"
+                                            value="[M1_DVAL13]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>免許有効期限</th>
+                                    <td><input type="text" name="M1_DVAL18" class="input_w10 form-control"
+                                            value="[M1_DVAL18]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>設立年月</th>
+                                    <td><input type="text" name="M1_DVAL19" class="input_w10 form-control"
+                                            value="[M1_DVAL19]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>WebサイトURL</th>
+                                    <td><input type="text" name="M1_DVAL17" class="input_w10 form-control"
+                                            value="[M1_DVAL17]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>定休日</th>
+                                    <td>
+                                        <ul>[OPT-M1_MRDO01]</ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【担当者情報】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>担当者名</th>
+                                    <td><input type="text" name="M1_DVAL14" class="input_w10 form-control"
+                                            value="[M1_DVAL14]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>担当者メール</th>
+                                    <td><input type="text" name="M1_DVAL15" class="input_w10 form-control"
+                                            value="[M1_DVAL15]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>担当者電話番号</th>
+                                    <td><input type="text" name="M1_DVAL16" class="input_w10 form-control"
+                                            value="[M1_DVAL16]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【会社紹介】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>会社紹介文</th>
+                                    <td><textarea name="M1_DTXT01" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[M1_DTXT01]</textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【画像】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <!--DFIL01-->
+                                [S-NEWDATA]<tr>
+                                    <th>ロゴ画像</th>
+                                    <td><input type="file" name="EP_M1_DFIL01" value="[M1_DFIL01]" size="90"><input
+                                            type="hidden" name="M1_DFIL01" value="[M1_DFIL01]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>ロゴ画像</th>
+                                    <td><img src="[M1_DFIL01]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_M1_DFIL01"><br><input type="file" name="EP_M1_DFIL01"
+                                            value="[M1_DFIL01]" size="90"><input type="hidden" name="M1_DFIL01"
+                                            value="[M1_DFIL01]"></td>
+                                </tr>[E-EDITDATA]
+                            </tbody>
+                        </table>
+
+                        <!-- ============================================ -->
+                        <!-- 以下、ベースシステム予備項目（未使用）          -->
+                        <!-- 必要に応じてコメントを外して使用してください    -->
+                        <!-- ============================================ -->
+                        <!--
+                         <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr><th>M1_DVAL20-TITLE</th><td><input type="text" name="M1_DVAL20" class="input_w10 form-control" value="[M1_DVAL20]" size="90"></td></tr>
+                                <tr><th>M1_DVAL21-TITLE</th><td><input type="text" name="M1_DVAL21" class="input_w10 form-control" value="[M1_DVAL21]" size="90"></td></tr>
+                                <tr><th>M1_DVAL22-TITLE</th><td><input type="text" name="M1_DVAL22" class="input_w10 form-control" value="[M1_DVAL22]" size="90"></td></tr>
+                                <tr><th>M1_DVAL23-TITLE</th><td><input type="text" name="M1_DVAL23" class="input_w10 form-control" value="[M1_DVAL23]" size="90"></td></tr>
+                                <tr><th>M1_DVAL24-TITLE</th><td><input type="text" name="M1_DVAL24" class="input_w10 form-control" value="[M1_DVAL24]" size="90"></td></tr>
+                                <tr><th>M1_DVAL25-TITLE</th><td><input type="text" name="M1_DVAL25" class="input_w10 form-control" value="[M1_DVAL25]" size="90"></td></tr>
+                                <tr><th>M1_DVAL26-TITLE</th><td><input type="text" name="M1_DVAL26" class="input_w10 form-control" value="[M1_DVAL26]" size="90"></td></tr>
+                                <tr><th>M1_DVAL27-TITLE</th><td><input type="text" name="M1_DVAL27" class="input_w10 form-control" value="[M1_DVAL27]" size="90"></td></tr>
+                                <tr><th>M1_DVAL28-TITLE</th><td><input type="text" name="M1_DVAL28" class="input_w10 form-control" value="[M1_DVAL28]" size="90"></td></tr>
+                                <tr><th>M1_DVAL29-TITLE</th><td><input type="text" name="M1_DVAL29" class="input_w10 form-control" value="[M1_DVAL29]" size="90"></td></tr>
+                                <tr><th>M1_DVAL30-TITLE</th><td><input type="text" name="M1_DVAL30" class="input_w10 form-control" value="[M1_DVAL30]" size="90"></td></tr>
+                                <tr><th>M1_DTXT02-TITLE</th><td><textarea name="M1_DTXT02" class="textarea_w10 form-control" cols="70" rows="5">[M1_DTXT02]</textarea></td></tr>
+                                ～その他、予備項目～
+                            </tbody>
+                        </table>
+                        -->
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg" name="submit"
+                                    value="submit"
+                                    onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;">保存する</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

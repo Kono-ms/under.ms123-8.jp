@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>運営管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/html_a/AdminLTE/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/html_a/AdminLTE/plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="/html_a/AdminLTE/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/html_a/AdminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/html_a/css/common.css">
+    <link rel="shortcut icon" href="/html_a/img/favicon.ico">
+    <script src="/js/tinymce_v4.9.11/tinymce.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: "#editor",
+            language: "ja",
+            plugins: "textcolor table lists link image jbimages preview code media imagetools",
+            menubar: "false",
+            toolbar: ['code | undo redo | bold italic | forecolor backcolor | fontsizeselect ',
+                'numlist bullist | table | link | jbimages | alignleft aligncenter alignright alignjustify | outdent indent | media'],
+            paste_as_text: true,
+            fontsize_formats: '10px 12px 14px 16px 18px 20px 24px 34px',
+            entity_encoding: 'raw',
+            //width: 700,
+            height: 600,
+            relative_urls: false,
+            branding: false,
+            imagetools_cors_hosts: ['mydomain.com', 'otherdomain.com'],
+            imagetools_credentials_hosts: ['mydomain.com', 'otherdomain.com'],
+        });
+
+    </script>
+
+
+    <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <!--ヘッダー開始-->
+        <header class="main-header">
+
+
+            <!-- Logo -->
+            <a href="" class="logo">
+                <span class="logo-mini"></span>
+                <span class="logo-lg"><span></span><em>管理画面</em></span>
+            </a>
+
+
+            <!--Menu Icon-->
+            <nav class="navbar navbar-static-top">
+                <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <li>
+                            <a href=""><i class="fa fa-external-link"></i></a>
+                        </li>
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">運営管理者&nbsp;様</span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <p>ようこそ&nbsp;運営管理者&nbsp;様</p>
+                                </li>
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right"><a href="/admin/?lid=99999"
+                                            class="btn btn-default btn-flat">ログアウト</a></div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!--ヘッダー終了-->
+
+
+        <!--グローバル開始-->
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <!--<li class="header">メニュータイトル</li>-->
+
+                    <li class="header">不動産会社</li>
+                    <li>
+                        <a href="/a_m1/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>不動産会社管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_o1/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>不動産情報管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_blog1/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>不動産会社記事投稿管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="header">投資ユーザー</li>
+                    <li>
+                        <a href="/a_m2/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>投資ユーザー管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_o2/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>ユーザー希望条件管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_blog2/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>投資ユーザー記事投稿管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="header">コンテンツ管理</li>
+                    <li>
+                        <a href="/a_ccate/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>記事カテゴリー管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_info/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>記事管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_mail/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>メール管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_banner/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>バナー管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="header">ログデータ</li>
+                    <li>
+                        <a href="/a_match/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>マッチングデータ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_mcontact/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>依頼データ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_eval/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>評価データ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_iine/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>いいねデータ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_message/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>メッセージデータ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/a_message2/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>グループメッセージ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/a_bl/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>ブラックリストデータ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/a_contact/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>直接お問い合わせデータ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/a_admin/">
+                            <i class="fa fa-circle-o"></i>
+                            <span>ログイン管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!--グローバル終了-->
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            [MAIN]
+
+        </div><!-- /.content-wrapper -->
+
+
+
+        <!--フッター開始-->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.0.1
+            </div>
+            <strong>Coypright(c)inc.</a></strong>
+        </footer>
+        <!--フッター終了-->
+
+
+
+        <!-- Add the sidebar's background. This div must be placed
+immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+
+    <script src="/html_a/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/html_a/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/html_a/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="/html_a/AdminLTE/plugins/fastclick/fastclick.js"></script>
+    <script src="/html_a/AdminLTE/js/app.min.js"></script>
+    <script src="/html_a/AdminLTE/js/demo.js"></script>
+    <script src="/html_a/js/common.js"></script>
+
+</body>
+
+</html>

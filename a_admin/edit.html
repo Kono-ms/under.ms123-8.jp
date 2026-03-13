@@ -1,0 +1,89 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+	<h1>ログイン管理</h1>
+
+	<ol class="breadcrumb">
+		<li><i class="fa fa-dashboard"></i> Home</li>
+		<li><a href="/a_admin/">ログイン管理</a></li>
+		<li>ログイン登録・編集</li>
+	</ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+
+
+		<div class="col-xs-12">
+			<div class="box box-warning">
+
+				<div class="box-header">
+					<h3 class="box-title">登録・編集</h3>
+				</div><!-- /.box-header -->
+
+				<div class="box-body">
+
+					[ERR-S]
+					<div class="alert alert-warning alert-dismissible">
+						<div class="message_box mb20">
+							<p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+						</div>
+						<div class="page_text">
+							<ul class="error_list">
+								[ERR_MSG]
+							</ul>
+						</div>
+					</div>
+					[ERR-E]
+
+					<form method="post" action="./" enctype="multipart/form-data"
+						onsubmit="return confirm('保存してもよろしいですか？');">
+						<input type="hidden" name="mode" value="save">
+						<input type="hidden" name="key" value="[KEY]">
+						<input type="hidden" name="sort" value="[SORT]">
+						<input type="hidden" name="word" value="[WORD]">
+						<input type="hidden" name="page" value="[PAGE]">
+						<input type="hidden" name="lid" value="[LID]">
+						<input type="hidden" name="ID" value="[ID]">
+
+
+						<table id="table_summary" class="table table-bordered table_edit" summary="表">
+							<tbody>
+
+								<tr style="display: none;">
+									<th width="140">ログインID</th>
+									<td><input type="text" name="ADMIN_ID" class="input_w10 form-control"
+											value="[ADMIN_ID]" size="90" required></td>
+								</tr>
+								<tr>
+									<th width="140">ログインPASSWORD</th>
+									<td><input type="text" name="ADMIN_PASSWORD" class="input_w10 form-control"
+											value="[ADMIN_PASSWORD]" size="90" placeholder="" required></td>
+								</tr>
+
+								<tr style="display: none;">
+									<th width="140">開発者用ID</th>
+									<td><input type="text" name="DEV_ID" class="input_w10 form-control" value="[DEV_ID]"
+											size="90"></td>
+								</tr>
+								<tr style="display: none;">
+									<th width="140">開発者用PASSWORD</th>
+									<td><input type="text" name="DEV_PASSWORD" class="input_w10 form-control"
+											placeholder="" value="[DEV_PASSWORD]" size="90"></td>
+								</tr>
+
+						</table>
+						<button name="submitbtn" value="submitbtn" type="submit" class="btn btn-block btn-default"><i
+								class="fa fa-floppy-o"></i> 保存</button>
+					</form>
+
+
+				</div><!-- /.box-body -->
+			</div><!-- /.box -->
+
+
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+</section><!-- /.content -->

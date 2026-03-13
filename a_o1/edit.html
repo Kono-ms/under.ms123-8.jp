@@ -1,0 +1,555 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+    <h1>不動産情報管理</h1>
+
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> Home</li>
+        <li><a href="/a_o1/">不動産情報管理</a></li>
+        <li>不動産情報登録・編集</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+
+        <div class="col-xs-12">
+            <div class="box box-warning">
+
+                <div class="box-header">
+                    <h3 class="box-title">登録・編集</h3>
+                </div><!-- /.box-header -->
+
+                <div class="box-body">
+
+                    [S-ERR]
+                    <div class="alert alert-warning alert-dismissible">
+                        <div class="message_box mb20">
+                            <p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+                        </div>
+                        <div class="page_text">
+                            <ul class="error_list">
+                                [ERRMSG]
+                            </ul>
+                        </div>
+                    </div>
+                    [E-ERR]
+
+                    <form method="post" action="./" enctype="multipart/form-data">
+                        <input type="hidden" name="mode" value="save">
+                        <input type="hidden" name="key" value="[ID]">
+                        <input type="hidden" name="sort" value="[SORT]">
+                        <input type="hidden" name="word" value="[WORD]">
+                        <input type="hidden" name="page" value="[PAGE]">
+                        <input type="hidden" name="lid" value="[LID]">
+                        <input type="hidden" name="token" value="[TOKEN]">
+                        <input type="hidden" name="ID" value="[ID]">
+                        <input type="hidden" name="O1_ETC01" value="[O1_ETC01]">
+                        <input type="hidden" name="O1_ETC02" value="[O1_ETC02]">
+                        <input type="hidden" name="O1_ETC03" value="[O1_ETC03]">
+                        <input type="hidden" name="O1_ETC04" value="[O1_ETC04]">
+                        <input type="hidden" name="O1_ETC05" value="[O1_ETC05]">
+                        <input type="hidden" name="O1_ETC06" value="[O1_ETC06]">
+                        <input type="hidden" name="O1_ETC07" value="[O1_ETC07]">
+                        <input type="hidden" name="O1_ETC08" value="[O1_ETC08]">
+                        <input type="hidden" name="O1_ETC09" value="[O1_ETC09]">
+                        <input type="hidden" name="O1_ETC10" value="[O1_ETC10]">
+                        <input type="hidden" name="O1_ETC11" value="[O1_ETC11]">
+                        <input type="hidden" name="O1_ETC12" value="[O1_ETC12]">
+                        <input type="hidden" name="O1_ETC13" value="[O1_ETC13]">
+                        <input type="hidden" name="O1_ETC14" value="[O1_ETC14]">
+                        <input type="hidden" name="O1_ETC15" value="[O1_ETC15]">
+                        <input type="hidden" name="O1_ETC16" value="[O1_ETC16]">
+                        <input type="hidden" name="O1_ETC17" value="[O1_ETC17]">
+                        <input type="hidden" name="O1_ETC18" value="[O1_ETC18]">
+                        <input type="hidden" name="O1_ETC19" value="[O1_ETC19]">
+                        <input type="hidden" name="O1_ETC20" value="[O1_ETC20]">
+
+                        【基本情報（システム）】
+                        <table id="table_summary" class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>案件ID</th>
+                                    <td><input type="text" name="OID" class="input_w10 form-control" value="[OID]"
+                                            size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>会員ID</th>
+                                    <td><input type="text" name="MID" class="input_w10 form-control" value="[MID]"
+                                            size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>公開フラグ</th>
+                                    <td>
+                                        <ul>[OPT-ENABLE]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>登録日時</th>
+                                    <td><input type="text" name="NEWDATE" class="input_w10 form-control"
+                                            value="[NEWDATE]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>更新日時</th>
+                                    <td><input type="text" name="EDITDATE" class="input_w10 form-control"
+                                            value="[EDITDATE]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【物件概要】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>物件名</th>
+                                    <td><input type="text" name="O1_DVAL06" class="input_w10 form-control"
+                                            value="[O1_DVAL06]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>販売価格</th>
+                                    <td><input type="text" name="O1_DVAL01" class="input_w10 form-control"
+                                            value="[O1_DVAL01]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>表面利回り</th>
+                                    <td><input type="text" name="O1_DVAL29" class="input_w10 form-control"
+                                            value="[O1_DVAL29]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>想定年間収入</th>
+                                    <td><input type="text" name="O1_DVAL30" class="input_w10 form-control"
+                                            value="[O1_DVAL30]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>取引態様</th>
+                                    <td><input type="text" name="O1_DVAL04" class="input_w10 form-control"
+                                            value="[O1_DVAL04]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>管理ID</th>
+                                    <td><input type="text" name="O1_DVAL13" class="input_w10 form-control"
+                                            value="[O1_DVAL13]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>この物件の取扱不動産会社</th>
+                                    <td><input type="text" name="O1_DVAL14" class="input_w10 form-control"
+                                            value="[O1_DVAL14]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>不動産種別</th>
+                                    <td><select name="O1_MSEL01"
+                                            class="input_select form-control">[OPT-O1_MSEL01]</select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【所在地・アクセス】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>所在地(都道府県)</th>
+                                    <td>
+                                        <select name="O1_MRDO01"
+                                            class="input_select form-control">[OPT-O1_MRDO01]</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>所在地(市区町村)</th>
+                                    <td>
+                                        <select name="O1_MRDO02"
+                                            class="input_select form-control">[OPT-O1_MRDO02]</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>所在地(その他：番地・建物名)</th>
+                                    <td><input type="text" name="O1_DVAL02" class="input_w10 form-control"
+                                            value="[O1_DVAL02]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>沿線</th>
+                                    <td>
+                                        <ul>[OPT-O1_MRDO04]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>最寄り駅</th>
+                                    <td>
+                                        <ul>[OPT-O1_MRDO03]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>最寄駅までの距離</th>
+                                    <td><input type="text" name="O1_DVAL03" class="input_w10 form-control"
+                                            value="[O1_DVAL03]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【建物情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>所在階</th>
+                                    <td><input type="text" name="O1_DVAL05" class="input_w10 form-control"
+                                            value="[O1_DVAL05]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>総戸数</th>
+                                    <td><input type="text" name="O1_DVAL07" class="input_w10 form-control"
+                                            value="[O1_DVAL07]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>階数</th>
+                                    <td><input type="text" name="O1_DVAL08" class="input_w10 form-control"
+                                            value="[O1_DVAL08]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>建築月</th>
+                                    <td><input type="text" name="O1_DVAL15" class="input_w10 form-control"
+                                            value="[O1_DVAL15]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>建物面積</th>
+                                    <td><input type="text" name="O1_DVAL16" class="input_w10 form-control"
+                                            value="[O1_DVAL16]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>バルコニー面積</th>
+                                    <td><input type="text" name="O1_DVAL17" class="input_w10 form-control"
+                                            value="[O1_DVAL17]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>各住戸の専有面積</th>
+                                    <td><input type="text" name="O1_DVAL18" class="input_w10 form-control"
+                                            value="[O1_DVAL18]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>方角</th>
+                                    <td><input type="text" name="O1_DVAL19" class="input_w10 form-control"
+                                            value="[O1_DVAL19]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>間取り</th>
+                                    <td><input type="text" name="O1_DVAL22" class="input_w10 form-control"
+                                            value="[O1_DVAL22]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>占有面積</th>
+                                    <td><input type="text" name="O1_DVAL28" class="input_w10 form-control"
+                                            value="[O1_DVAL28]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>建物構造</th>
+                                    <td>
+                                        <ul>[OPT-O1_MRDO05]</ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【土地情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>建ぺい率</th>
+                                    <td><input type="text" name="O1_DVAL20" class="input_w10 form-control"
+                                            value="[O1_DVAL20]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>容積率</th>
+                                    <td><input type="text" name="O1_DVAL21" class="input_w10 form-control"
+                                            value="[O1_DVAL21]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>土地権利</th>
+                                    <td><input type="text" name="O1_DVAL23" class="input_w10 form-control"
+                                            value="[O1_DVAL23]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>土地面積</th>
+                                    <td><input type="text" name="O1_DVAL24" class="input_w10 form-control"
+                                            value="[O1_DVAL24]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>接道状況</th>
+                                    <td><input type="text" name="O1_DVAL25" class="input_w10 form-control"
+                                            value="[O1_DVAL25]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>用途地域</th>
+                                    <td><input type="text" name="O1_DVAL26" class="input_w10 form-control"
+                                            value="[O1_DVAL26]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>私道負担面積</th>
+                                    <td><input type="text" name="O1_DVAL27" class="input_w10 form-control"
+                                            value="[O1_DVAL27]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【日程・期限情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>情報公開日</th>
+                                    <td><input type="text" name="O1_DVAL09" class="input_w10 form-control"
+                                            value="[O1_DVAL09]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>直前の更新日</th>
+                                    <td><input type="text" name="O1_DVAL10" class="input_w10 form-control"
+                                            value="[O1_DVAL10]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>更新予定日</th>
+                                    <td><input type="text" name="O1_DVAL11" class="input_w10 form-control"
+                                            value="[O1_DVAL11]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>取引条件の有効期限</th>
+                                    <td><input type="text" name="O1_DVAL12" class="input_w10 form-control"
+                                            value="[O1_DVAL12]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【収益・管理情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>満室時利回り</th>
+                                    <td><textarea name="O1_DTXT01" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT01]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>満室時年収/月収</th>
+                                    <td><textarea name="O1_DTXT02" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT02]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>管理費/修繕積立</th>
+                                    <td><textarea name="O1_DTXT10" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT10]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>管理会社</th>
+                                    <td><textarea name="O1_DTXT11" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT11]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>管理方式/管理人</th>
+                                    <td><textarea name="O1_DTXT12" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT12]</textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【設備・その他情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>収容台数</th>
+                                    <td><textarea name="O1_DTXT03" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT03]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>駐車場</th>
+                                    <td><textarea name="O1_DTXT04" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT04]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>地目</th>
+                                    <td><textarea name="O1_DTXT05" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT05]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>防火法/国土法</th>
+                                    <td><textarea name="O1_DTXT06" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT06]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>都市計画区域</th>
+                                    <td><textarea name="O1_DTXT07" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT07]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>引渡</th>
+                                    <td><textarea name="O1_DTXT08" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT08]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>現況</th>
+                                    <td><textarea name="O1_DTXT09" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT09]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>備考</th>
+                                    <td><textarea name="O1_DTXT13" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT13]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>取扱不動産会社からのコメント</th>
+                                    <td><textarea name="O1_DTXT14" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT14]</textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>Point</th>
+                                    <td><textarea name="O1_DTXT15" class="textarea_w10 form-control" cols="70"
+                                            rows="5">[O1_DTXT15]</textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【物件画像ギャラリー】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <!--DFIL01-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー①</th>
+                                    <td><input type="file" name="EP_O1_DFIL01" value="[O1_DFIL01]" size="90"><input
+                                            type="hidden" name="O1_DFIL01" value="[O1_DFIL01]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー①</th>
+                                    <td><img src="[O1_DFIL01]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL01"><br><input type="file" name="EP_O1_DFIL01"
+                                            value="[O1_DFIL01]" size="90"><input type="hidden" name="O1_DFIL01"
+                                            value="[O1_DFIL01]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL02-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー②</th>
+                                    <td><input type="file" name="EP_O1_DFIL02" value="[O1_DFIL02]" size="90"><input
+                                            type="hidden" name="O1_DFIL02" value="[O1_DFIL02]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー②</th>
+                                    <td><img src="[O1_DFIL02]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL02"><br><input type="file" name="EP_O1_DFIL02"
+                                            value="[O1_DFIL02]" size="90"><input type="hidden" name="O1_DFIL02"
+                                            value="[O1_DFIL02]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL03-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー③</th>
+                                    <td><input type="file" name="EP_O1_DFIL03" value="[O1_DFIL03]" size="90"><input
+                                            type="hidden" name="O1_DFIL03" value="[O1_DFIL03]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー③</th>
+                                    <td><img src="[O1_DFIL03]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL03"><br><input type="file" name="EP_O1_DFIL03"
+                                            value="[O1_DFIL03]" size="90"><input type="hidden" name="O1_DFIL03"
+                                            value="[O1_DFIL03]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL04-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー④</th>
+                                    <td><input type="file" name="EP_O1_DFIL04" value="[O1_DFIL04]" size="90"><input
+                                            type="hidden" name="O1_DFIL04" value="[O1_DFIL04]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー④</th>
+                                    <td><img src="[O1_DFIL04]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL04"><br><input type="file" name="EP_O1_DFIL04"
+                                            value="[O1_DFIL04]" size="90"><input type="hidden" name="O1_DFIL04"
+                                            value="[O1_DFIL04]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL05-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑤</th>
+                                    <td><input type="file" name="EP_O1_DFIL05" value="[O1_DFIL05]" size="90"><input
+                                            type="hidden" name="O1_DFIL05" value="[O1_DFIL05]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑤</th>
+                                    <td><img src="[O1_DFIL05]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL05"><br><input type="file" name="EP_O1_DFIL05"
+                                            value="[O1_DFIL05]" size="90"><input type="hidden" name="O1_DFIL05"
+                                            value="[O1_DFIL05]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL06-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑥</th>
+                                    <td><input type="file" name="EP_O1_DFIL06" value="[O1_DFIL06]" size="90"><input
+                                            type="hidden" name="O1_DFIL06" value="[O1_DFIL06]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑥</th>
+                                    <td><img src="[O1_DFIL06]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL06"><br><input type="file" name="EP_O1_DFIL06"
+                                            value="[O1_DFIL06]" size="90"><input type="hidden" name="O1_DFIL06"
+                                            value="[O1_DFIL06]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL07-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑦</th>
+                                    <td><input type="file" name="EP_O1_DFIL07" value="[O1_DFIL07]" size="90"><input
+                                            type="hidden" name="O1_DFIL07" value="[O1_DFIL07]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑦</th>
+                                    <td><img src="[O1_DFIL07]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL07"><br><input type="file" name="EP_O1_DFIL07"
+                                            value="[O1_DFIL07]" size="90"><input type="hidden" name="O1_DFIL07"
+                                            value="[O1_DFIL07]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL08-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑧</th>
+                                    <td><input type="file" name="EP_O1_DFIL08" value="[O1_DFIL08]" size="90"><input
+                                            type="hidden" name="O1_DFIL08" value="[O1_DFIL08]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑧</th>
+                                    <td><img src="[O1_DFIL08]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL08"><br><input type="file" name="EP_O1_DFIL08"
+                                            value="[O1_DFIL08]" size="90"><input type="hidden" name="O1_DFIL08"
+                                            value="[O1_DFIL08]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL09-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑨</th>
+                                    <td><input type="file" name="EP_O1_DFIL09" value="[O1_DFIL09]" size="90"><input
+                                            type="hidden" name="O1_DFIL09" value="[O1_DFIL09]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑨</th>
+                                    <td><img src="[O1_DFIL09]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL09"><br><input type="file" name="EP_O1_DFIL09"
+                                            value="[O1_DFIL09]" size="90"><input type="hidden" name="O1_DFIL09"
+                                            value="[O1_DFIL09]"></td>
+                                </tr>[E-EDITDATA]
+                                <!--DFIL10-->
+                                [S-NEWDATA]<tr>
+                                    <th>物件画像ギャラリー⑩</th>
+                                    <td><input type="file" name="EP_O1_DFIL10" value="[O1_DFIL10]" size="90"><input
+                                            type="hidden" name="O1_DFIL10" value="[O1_DFIL10]"></td>
+                                </tr>[E-NEWDATA]
+                                [S-EDITDATA]<tr>
+                                    <th>物件画像ギャラリー⑩</th>
+                                    <td><img src="[O1_DFIL10]" width="200"> 削除 <input type="checkbox"
+                                            name="DEL_IMAGE_O1_DFIL10"><br><input type="file" name="EP_O1_DFIL10"
+                                            value="[O1_DFIL10]" size="90"><input type="hidden" name="O1_DFIL10"
+                                            value="[O1_DFIL10]"></td>
+                                </tr>[E-EDITDATA]
+                            </tbody>
+                        </table>
+
+                        <button name="submit" value="submit" type="submit" class="btn btn-block btn-default"
+                            onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;"><i
+                                class="fa fa-floppy-o"></i> 保存</button>
+                    </form>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

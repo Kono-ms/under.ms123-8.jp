@@ -1,0 +1,188 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+    <h1>ユーザー希望条件管理</h1>
+
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> Home</li>
+        <li><a href="/a_o1/">ユーザー希望条件管理</a></li>
+        <li>ユーザー希望条件登録・編集</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+
+        <div class="col-xs-12">
+            <div class="box box-warning">
+
+                <div class="box-header">
+                    <h3 class="box-title">登録・編集</h3>
+                </div><!-- /.box-header -->
+
+                <div class="box-body">
+
+                    [S-ERR]
+                    <div class="alert alert-warning alert-dismissible">
+                        <div class="message_box mb20">
+                            <p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+                        </div>
+                        <div class="page_text">
+                            <ul class="error_list">
+                                [ERRMSG]
+                            </ul>
+                        </div>
+                    </div>
+                    [E-ERR]
+
+
+                    <form method="post" action="./" enctype="multipart/form-data">
+                        <input type="hidden" name="mode" value="save">
+                        <input type="hidden" name="key" value="[ID]">
+                        <input type="hidden" name="sort" value="[SORT]">
+                        <input type="hidden" name="word" value="[WORD]">
+                        <input type="hidden" name="page" value="[PAGE]">
+                        <input type="hidden" name="lid" value="[LID]">
+                        <input type="hidden" name="token" value="[TOKEN]">
+                        <input type="hidden" name="ID" value="[ID]">
+                        <input type="hidden" name="O2_ETC01" value="[O2_ETC01]">
+                        <input type="hidden" name="O2_ETC02" value="[O2_ETC02]">
+                        <input type="hidden" name="O2_ETC03" value="[O2_ETC03]">
+                        <input type="hidden" name="O2_ETC04" value="[O2_ETC04]">
+                        <input type="hidden" name="O2_ETC05" value="[O2_ETC05]">
+                        <input type="hidden" name="O2_ETC06" value="[O2_ETC06]">
+                        <input type="hidden" name="O2_ETC07" value="[O2_ETC07]">
+                        <input type="hidden" name="O2_ETC08" value="[O2_ETC08]">
+                        <input type="hidden" name="O2_ETC09" value="[O2_ETC09]">
+                        <input type="hidden" name="O2_ETC10" value="[O2_ETC10]">
+                        <input type="hidden" name="O2_ETC11" value="[O2_ETC11]">
+                        <input type="hidden" name="O2_ETC12" value="[O2_ETC12]">
+                        <input type="hidden" name="O2_ETC13" value="[O2_ETC13]">
+                        <input type="hidden" name="O2_ETC14" value="[O2_ETC14]">
+                        <input type="hidden" name="O2_ETC15" value="[O2_ETC15]">
+                        <input type="hidden" name="O2_ETC16" value="[O2_ETC16]">
+                        <input type="hidden" name="O2_ETC17" value="[O2_ETC17]">
+                        <input type="hidden" name="O2_ETC18" value="[O2_ETC18]">
+                        <input type="hidden" name="O2_ETC19" value="[O2_ETC19]">
+                        <input type="hidden" name="O2_ETC20" value="[O2_ETC20]">
+
+                        【基本情報（システム）】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>希望条件ID</th>
+                                    <td><input type="text" name="OID" class="input_w10 form-control" value="[OID]"
+                                            size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>会員ID</th>
+                                    <td><input type="text" name="MID" class="input_w10 form-control" value="[MID]"
+                                            size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>公開フラグ</th>
+                                    <td>
+                                        <ul>[OPT-ENABLE]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>登録日時</th>
+                                    <td><input type="text" name="NEWDATE" class="input_w10 form-control"
+                                            value="[NEWDATE]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>更新日時</th>
+                                    <td><input type="text" name="EDITDATE" class="input_w10 form-control"
+                                            value="[EDITDATE]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【希望条件】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>物件価格</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="text" name="O2_DVAL01" class="form-control"
+                                                    value="[O2_DVAL01]" placeholder="下限（万円）">
+                                            </div>
+                                            <div class="col-xs-1 text-center">～</div>
+                                            <div class="col-xs-5">
+                                                <input type="text" name="O2_DVAL02" class="form-control"
+                                                    value="[O2_DVAL02]" placeholder="上限（万円）">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <th>最寄り駅までの時間</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="text" name="O2_DVAL03" class="form-control"
+                                                    value="[O2_DVAL03]" placeholder="時間">
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>利回り</th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="text" name="O2_DVAL29" class="form-control"
+                                                    value="[O2_DVAL29]" placeholder="下限（％）">
+                                            </div>
+                                            <div class="col-xs-1 text-center">～</div>
+                                            <div class="col-xs-5">
+                                                <input type="text" name="O2_DVAL30" class="form-control"
+                                                    value="[O2_DVAL30]" placeholder="上限（％）">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>沿線から選ぶ：路線</th>
+                                    <td>
+                                        <ul>[OPT-O2_MRDO03]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>沿線から選ぶ：駅</th>
+                                    <td>
+                                        <ul>[OPT-O2_MRDO04]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>構造</th>
+                                    <td>
+                                        <ul>[OPT-O2_MRDO05]</ul>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <button name="submit" value="submit" type="submit" class="btn btn-block btn-default"
+                            onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;"><i
+                                class="fa fa-floppy-o"></i> 保存</button>
+                    </form>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

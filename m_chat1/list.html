@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>メッセージ｜WEBSITE-NAME</title>
+  <meta name="description"
+    content="メッセージのページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
+  <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/icon-192x192.png">
+  <!--template=/common/template/head.html-->
+  <script src="/common/js/mbase-chat.js?v=[DEBUG-TIMESTAMP]"></script>
+  <script>
+    // NOTE: 2023.09.15 ozawa mbase-chat.jsの新設（詳細はjsを参照）
+    // NOTE: 2020.12.01 yamamoto 縦幅の自動調整
+    var contact_id = '';
+    var contact_status = '';
+    $(function () {
+      // 最新ステータス
+      // NOTE: 「ステータス提示」ボタンの表示制御用
+      let latest_status = '[LATEST_STATUS]';
+
+      // モーダルの起動ボタン
+      $('#popup_btn').on('click', function () {
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('#mask_mcontact').show();
+        $('#popup_mcontact').fadeIn();
+      });
+      $('#popup_btn2').on('click', function () {
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=2&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('#mask_mcontact').show();
+        $('#popup_mcontact').fadeIn();
+      });
+      $('#popup_btn3').on('click', function () {
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=3&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('#mask_mcontact').show();
+        $('#popup_mcontact').fadeIn();
+      });
+      $('#popup_btn4').on('click', function () {
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=4&etc02=[ETC02]&etc03=[ETC03]&contact_id=&side=1&rid=[MID1]');
+        $('#mask_mcontact').show();
+        $('#popup_mcontact').fadeIn();
+      });
+      $('#popup_title_btn').on('click', function () {
+        $('.ifrm_mcontact').attr('src', '/m_mtitle/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('#mask_mcontact').show();
+        $('#popup_mcontact').fadeIn();
+      });
+      $('#popup_webmtg_btn').on('click', function () {
+        window.open('https://msc-meet.com/mbase-[MID1]-[MID2]');
+      });
+
+      // NOTE: 2020.12.02 yamamoto 金額提示状況
+      contact_id = '[CONTACT_ID]';
+      if (contact_id != '') {
+        $('#popup_btn').css('display', 'none');
+        $('#popup_btn2').css('display', 'inline');
+        $('#popup_btn3').css('display', 'inline');
+      }
+    });
+  </script>
+  <script>
+    // ファイル選択
+    function file_select(id) {
+      var val = $('#' + id).val();
+      if (val.indexOf('/') != -1) {
+        val2 = val.split('/');
+        val = val2[val2.length - 1];
+      }
+      else if (val.indexOf('\\') != -1) {
+        val2 = val.split('\\');
+        val = val2[val2.length - 1];
+      }
+      $('#file_upload_name_' + id).text(val);
+      $('#' + id + '_delete').show();
+    }
+    // ファイル削除
+    function file_undo(id) {
+      $('#' + id).val('');
+      $('#file_upload_name_' + id).html('');
+      $('#' + id + '_delete').hide();
+    }
+  </script>
+  <script>
+    $(function () {
+      // チャット画面の自動更新
+      setInterval(function () {
+
+        let mid1 = '[MID1]';
+        let mid2 = '[MID2]';
+        let etc02 = '[ETC02]';
+        let etc03 = '[ETC03]';
+        let newdate = '[NEWDATE]';
+
+        $.ajax({
+          type: "POST",
+          url: "https://mbase.ms123.jp//msg.php",
+          data: { mid1: mid1, mid2: mid2, etc02: etc02, etc03: etc03, newdate: newdate }
+        }).done(function (data) {
+          if (data != "0") {
+            location.href = 'https://mbase.ms123.jp/m_chat1/?mode=list&word=[MID1]-[MID2]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]';
+            // location.reload(); //リロード
+          }
+        }).fail(function () {
+          console.log("msg.php error");
+        });
+      }, 3000);// 3秒ごとに実行
+    });
+  </script>
+</head>
+
+<body>
+  <div class="wrap sub">
+    <!--template=/common/template/header.html-->
+    <!-- 以上共通 -->
+    <div class="breadcrumb">
+      <div class="l-container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="/">トップ</a></li>
+          <li class="breadcrumb__item"><a href="/m_message1/">メッセージ一覧</a></li>
+          <li class="breadcrumb__item">[D-M2-M2_DVAL01]さんとのメッセージ</li>
+        </ol>
+      </div>
+    </div>
+
+    <!--コンテンツ開始-->
+    <section class="chat-outline bg__gray" data-chat-outline>
+      <div class="l-container">
+
+        <!--チャットヘッダー-->
+        <div class="chat-header" data-chat-header>
+          <div class="c-head">
+            <h1 class="c-head__ttl">[TITLE]</h1>
+          </div>
+          <div class="chat__status">
+            <button type="button" class="btn" id="popup_title_btn"><span>タイトル編集</span></button>
+          </div>
+          <div class="chat__status">[CONTACT_STATUS]</div>
+        </div>
+
+        <div class="chat-inner">
+
+          <!--チャット本文-->
+          <iframe class="ifrm" frameborder="none" data-chat-iframe
+            src="/m_chat1/chatinner.php?aid=[AID]&t=[T]&etc02=[ETC02]&etc03=[ETC03]"></iframe>
+
+          <!--チャットフッター-->
+          <div class="chat-footer" data-chat-footer>
+            <form method="post" enctype="multipart/form-data"
+              action="./?mode=list&word=[AID]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]">
+
+              <input type="hidden" name="mode" value="send">
+              <input type="hidden" name="word" value="[AID]">
+              <input type="hidden" name="mid1" value="[MID1]">
+              <input type="hidden" name="mid2" value="[MID2]">
+
+              <!--チャット入力-->
+              <textarea rows="5" cols="60" name="COMMENT" placeholder=""></textarea>
+
+              <!--チャットボタン配置用-->
+              <div class="submit__area">
+
+                <!--チャット　ファイル選択ボタン-->
+                <label for="file1" class="chat__file-select">
+                  <span style="cursor:pointer;"></span>
+                  <div class="btn-file">
+                    <input type="file" id="file1" name="file1" style="display:none;" onchange="file_select('file1');"
+                      accept="image/*;capture=camera" />
+                  </div>
+                </label>
+                <!--チャット　選択ファイル名-->
+                <span class="chat__file-name" id="file_upload_name_file1"></span>
+                <!--チャット　選択ファイル削除ボタン-->
+                <a href="javascript:file_undo('file1');" class="chat__file-del" style="display:none;" id="file1_delete">削除</a>
+                <!--チャット　送信ボタンとポップアップボタン-->
+                <div class="chat__submit">
+                  <input type="submit" name="submit" value="送信">
+                  <input type="button" id="popup_btn" name="popup_btn" value="金額を提示">
+                  <input type="button" id="popup_btn2" name="popup_btn2" value="金額を訂正" style="display:none;">
+                  <input type="button" id="popup_btn3" name="popup_btn3" value="依頼を取り消す" style="display:none;">
+                  <input type="button" id="popup_btn4" name="popup_btn4" value="ステータスを提示">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--コンテンツ終了-->
+
+    <!-- 以下共通 -->
+  </div>
+  <style>
+    .popup_mcontact {
+      display: none;
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
+      z-index: 10002;
+    }
+
+    .mask_mcontact {
+      display: none;
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: #808080;
+      opacity: 0.5;
+      z-index: 10001;
+    }
+  </style>
+  <div id="popup_mcontact" class="popup_mcontact">
+    <iframe class="ifrm_mcontact" src="" frameborder="none"></iframe>
+  </div>
+  <div id="mask_mcontact" class="mask_mcontact"> </div>
+</body>
+
+</html>

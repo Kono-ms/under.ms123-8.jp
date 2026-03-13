@@ -1,0 +1,75 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+<h1>依頼管理</h1>
+
+<ol class="breadcrumb">
+<li><i class="fa fa-dashboard"></i> Home</li>
+<li><a href="/a_contact/">依頼管理</a></li>
+<li>依頼登録・編集</li>
+</ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+<div class="row">
+
+
+<div class="col-xs-12">
+<div class="box box-warning">
+
+<div class="box-header">
+<h3 class="box-title">登録・編集</h3>
+</div><!-- /.box-header -->
+
+<div class="box-body">
+
+[S-ERR]
+<div class="alert alert-warning alert-dismissible">
+<div class="message_box mb20">
+<p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+</div>
+<div class="page_text">
+<ul class="error_list">
+[ERRMSG]
+</ul>
+</div>
+</div>
+[E-ERR]
+
+<form  method="post" action="./" enctype="multipart/form-data">
+<input type="hidden" name="mode" value="save">
+<input type="hidden" name="key" value="[ID]">
+<input type="hidden" name="sort" value="[SORT]">
+<input type="hidden" name="word" value="[WORD]">
+<input type="hidden" name="page" value="[PAGE]">
+<input type="hidden" name="lid" value="[LID]">
+<input type="hidden" name="token" value="[TOKEN]">
+<input type="hidden" name="ID" value="[ID]">
+
+
+<table id="table_summary" class="table table-bordered table_edit" summary="表">
+<tbody>
+
+<tr><th>種別</th><td><ul>[OPT-SYUBETSU]</ul></td></tr>
+<tr><th>会社名</th><td><input type="text" name="TMP01" class="input_w10 form-control" value="[TMP01]" size="30"></td></tr>
+<tr><th>お名前</th><td><input type="text" name="NAME" class="input_w10 form-control" value="[NAME]" size="30"></td></tr>
+<tr><th>メールアドレス</th><td><input type="text" name="EMAIL" class="input_w10 form-control" value="[EMAIL]" size="30"></td></tr>
+<tr><th>電話番号</th><td><input type="text" name="TEL" class="input_w10 form-control" value="[TEL]" size="30"></td></tr>
+<tr><th>お問い合わせ内容</th><td><textarea name="COMMENT" class="textarea_w10 form-control" cols="70" rows="5">[COMMENT]</textarea></td></tr>
+<tr><th>送信日時</th><td><input type="text" name="NEWDATE" class="input_w10 form-control" value="[NEWDATE]" size="30"></td></tr>
+
+</tbody>
+</table>
+<button name="submit" value="submit" type="submit" class="btn btn-block btn-default" onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;"><i class="fa fa-floppy-o"></i> 保存</button>
+</form>
+
+
+</div><!-- /.box-body -->
+</div><!-- /.box -->
+
+
+</div><!-- /.col -->
+</div><!-- /.row -->
+</section><!-- /.content -->

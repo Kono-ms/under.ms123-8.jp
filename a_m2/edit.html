@@ -1,0 +1,263 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+    <h1>投資ユーザー管理</h1>
+
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> Home</li>
+        <li><a href="/a_m2/">投資ユーザー管理</a></li>
+        <li>投資ユーザー登録・編集</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+
+        <div class="col-xs-12">
+            <div class="box box-warning">
+
+                <div class="box-header">
+                    <h3 class="box-title">登録・編集</h3>
+                </div><!-- /.box-header -->
+
+                <div class="box-body">
+
+                    [S-ERR]
+                    <div class="alert alert-warning alert-dismissible">
+                        <div class="message_box mb20">
+                            <p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+                        </div>
+                        <div class="page_text">
+                            <ul class="error_list">
+                                [ERRMSG]
+                            </ul>
+                        </div>
+                    </div>
+                    [E-ERR]
+
+                    <form method="post" action="./" enctype="multipart/form-data">
+                        <input type="hidden" name="mode" value="save">
+                        <input type="hidden" name="key" value="[ID]">
+                        <input type="hidden" name="sort" value="[SORT]">
+                        <input type="hidden" name="word" value="[WORD]">
+                        <input type="hidden" name="page" value="[PAGE]">
+                        <input type="hidden" name="lid" value="[LID]">
+                        <input type="hidden" name="token" value="[TOKEN]">
+                        <input type="hidden" name="ID" value="[ID]">
+                        <input type="hidden" name="SOCIALID" value="[SOCIALID]">
+                        <input type="hidden" name="M2_ETC01" value="[M2_ETC01]">
+                        <input type="hidden" name="M2_ETC02" value="[M2_ETC02]">
+                        <input type="hidden" name="M2_ETC03" value="[M2_ETC03]">
+                        <input type="hidden" name="M2_ETC04" value="[M2_ETC04]">
+                        <input type="hidden" name="M2_ETC05" value="[M2_ETC05]">
+                        <input type="hidden" name="M2_ETC06" value="[M2_ETC06]">
+                        <input type="hidden" name="M2_ETC07" value="[M2_ETC07]">
+                        <input type="hidden" name="M2_ETC08" value="[M2_ETC08]">
+                        <input type="hidden" name="M2_ETC09" value="[M2_ETC09]">
+                        <input type="hidden" name="M2_ETC10" value="[M2_ETC10]">
+                        <input type="hidden" name="M2_ETC11" value="[M2_ETC11]">
+                        <input type="hidden" name="M2_ETC12" value="[M2_ETC12]">
+                        <input type="hidden" name="M2_ETC13" value="[M2_ETC13]">
+                        <input type="hidden" name="M2_ETC14" value="[M2_ETC14]">
+                        <input type="hidden" name="M2_ETC15" value="[M2_ETC15]">
+                        <input type="hidden" name="M2_ETC16" value="[M2_ETC16]">
+                        <input type="hidden" name="M2_ETC17" value="[M2_ETC17]">
+                        <input type="hidden" name="M2_ETC18" value="[M2_ETC18]">
+                        <input type="hidden" name="M2_ETC19" value="[M2_ETC19]">
+                        <input type="hidden" name="M2_ETC20" value="[M2_ETC20]">
+
+                        【基本情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>会員ID</th>
+                                    <td><input type="text" name="MID" class="input_w10 form-control" value="[MID]"
+                                            size="90" placeholder="自動採番"></td>
+                                </tr>
+                                <tr>
+                                    <th>メールアドレス</th>
+                                    <td><input type="text" name="EMAIL" class="input_w10 form-control" value="[EMAIL]"
+                                            size="90" placeholder="example@example.com"></td>
+                                </tr>
+                                [S-NEWDATA]
+                                <tr>
+                                    <th>パスワード</th>
+                                    <td><input type="text" name="PASS" class="input_w10 form-control" value="" size="90"
+                                            placeholder="半角英数字"></td>
+                                </tr>
+                                [E-NEWDATA]
+                                [S-EDITDATA]
+                                <input type="hidden" name="PASS" value="[PASS]" size="90">
+                                [E-EDITDATA]
+                                <tr>
+                                    <th>公開フラグ</th>
+                                    <td>
+                                        <ul>[OPT-ENABLE]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>登録日時</th>
+                                    <td><input type="text" name="NEWDATE" class="input_w10 form-control"
+                                            value="[NEWDATE]" size="90"></td>
+                                </tr>
+                                <tr>
+                                    <th>更新日時</th>
+                                    <td><input type="text" name="EDITDATE" class="input_w10 form-control"
+                                            value="[EDITDATE]" size="90"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【個人情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>姓</th>
+                                    <td><input type="text" name="M2_DVAL01" class="input_w10 form-control"
+                                            value="[M2_DVAL01]" size="90" placeholder="山田"></td>
+                                </tr>
+                                <tr>
+                                    <th>名</th>
+                                    <td><input type="text" name="M2_DVAL02" class="input_w10 form-control"
+                                            value="[M2_DVAL02]" size="90" placeholder="太郎"></td>
+                                </tr>
+                                <tr>
+                                    <th>せい（ふりがな）</th>
+                                    <td><input type="text" name="M2_DVAL03" class="input_w10 form-control"
+                                            value="[M2_DVAL03]" size="90" placeholder="やまだ"></td>
+                                </tr>
+                                <tr>
+                                    <th>めい（ふりがな）</th>
+                                    <td><input type="text" name="M2_DVAL04" class="input_w10 form-control"
+                                            value="[M2_DVAL04]" size="90" placeholder="たろう"></td>
+                                </tr>
+                                <tr>
+                                    <th>職業</th>
+                                    <td><select name="M2_MSEL02"
+                                            class="input_select form-control">[OPT-M2_MSEL02]</select></td>
+                                </tr>
+                                <tr>
+                                    <th>勤務先業種</th>
+                                    <td><select name="M2_MSEL03"
+                                            class="input_select form-control">[OPT-M2_MSEL03]</select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【住所・連絡先】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>郵便番号</th>
+                                    <td><input type="text" name="M2_DVAL05" class="input_w10 form-control"
+                                            value="[M2_DVAL05]" size="90" placeholder="000-0000"></td>
+                                </tr>
+                                <tr>
+                                    <th>都道府県</th>
+                                    <td><select name="M2_MSEL01"
+                                            class="input_select form-control">[OPT-M2_MSEL01]</select></td>
+                                </tr>
+                                <tr>
+                                    <th>市区町村</th>
+                                    <td><input type="text" name="M2_DVAL06" class="input_w10 form-control"
+                                            value="[M2_DVAL06]" size="90" placeholder="○○市○○区"></td>
+                                </tr>
+                                <tr>
+                                    <th>番地</th>
+                                    <td><input type="text" name="M2_DVAL07" class="input_w10 form-control"
+                                            value="[M2_DVAL07]" size="90" placeholder="1-2-3"></td>
+                                </tr>
+                                <tr>
+                                    <th>建物名・部屋番号</th>
+                                    <td><input type="text" name="M2_DVAL08" class="input_w10 form-control"
+                                            value="[M2_DVAL08]" size="90" placeholder="○○マンション 101号室"></td>
+                                </tr>
+                                <tr>
+                                    <th>電話番号</th>
+                                    <td><input type="text" name="M2_DVAL09" class="input_w10 form-control"
+                                            value="[M2_DVAL09]" size="90" placeholder="090-0000-0000"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【投資・資産情報】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>年間家賃収入</th>
+                                    <td><input type="text" name="M2_DVAL10" class="input_w10 form-control"
+                                            value="[M2_DVAL10]" size="90" placeholder="万円"></td>
+                                </tr>
+                                <tr>
+                                    <th>年収</th>
+                                    <td><input type="text" name="M2_DVAL11" class="input_w10 form-control"
+                                            value="[M2_DVAL11]" size="90" placeholder="万円"></td>
+                                </tr>
+                                <tr>
+                                    <th>自己資金</th>
+                                    <td><input type="text" name="M2_DVAL12" class="input_w10 form-control"
+                                            value="[M2_DVAL12]" size="90" placeholder="万円"></td>
+                                </tr>
+                                <tr>
+                                    <th>保有不動産（数）</th>
+                                    <td><input type="text" name="M2_DVAL13" class="input_w10 form-control"
+                                            value="[M2_DVAL13]" size="90" placeholder="件"></td>
+                                </tr>
+                                <tr>
+                                    <th>保有不動産（種類）</th>
+                                    <td><select name="M2_MSEL04"
+                                            class="input_select form-control">[OPT-M2_MSEL04]</select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        【メール受信設定】
+                        <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr>
+                                    <th>メール受信：新着</th>
+                                    <td>
+                                        <ul>[OPT-M2_MRDO01]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>メール受信：提案メール</th>
+                                    <td>
+                                        <ul>[OPT-M2_MRDO02]</ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>メール受信：オウカガイ</th>
+                                    <td>
+                                        <ul>[OPT-M2_MRDO03]</ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- ===== ベースシステム未使用項目（コメントアウト） ===== -->
+                        <!--
+                         <table class="table table-bordered table_edit" summary="表">
+                            <tbody>
+                                <tr><th>M2_DVAL14-TITLE</th><td><input type="text" name="M2_DVAL14" class="input_w10 form-control" value="[M2_DVAL14]" size="90"></td></tr>
+                                ～
+                            </tbody>
+                        </table>
+                        -->
+
+                        <button name="submit" value="submit" type="submit" class="btn btn-primary btn-block btn-lg"
+                            onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;"><i
+                                class="fa fa-floppy-o"></i> 保存</button>
+                    </form>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

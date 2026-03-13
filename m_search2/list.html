@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>不動産情報一覧｜WEBSITE-NAME</title>
+<meta name="description" content="不動産情報一覧のページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
+<link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/icon-192x192.png">
+<!--template=/common/template/head.html-->
+</head>
+
+<body>
+<div class="wrap sub">
+
+<!--template=/common/template/header.html--> 
+
+<!-- 以上共通 -->
+<div class="breadcrumb">
+  <div class="l-container">
+    <ol class="breadcrumb__list">
+      <li class="breadcrumb__item"><a href="/">トップ</a></li>
+      <li class="breadcrumb__item">不動産情報一覧</li>
+    </ol>
+  </div>
+</div>
+<section class="subpage-head">
+  <div class="l-container">
+    <div class="c-head">
+      <h1 class="c-head__ttl"> 不動産情報一覧 </h1>
+      <p class="c-head__txt">不動産情報が[RECCOUNT]人見つかりました</p>
+    </div>
+  </div>
+</section>
+<section class="search">
+  <div class="search__area">
+    <ul class="search__word">
+      <li class="search__ttl">検索条件</li>
+      [SEL_WORD]
+    </ul>
+    <ul class="search__sort">
+      <li class="search__ttl">並び替え</li>
+      [SEL_SORT]
+    </ul>
+  </div>
+  <div class="search__area search__area--second">
+  <form method="get" action="./">
+    <ul class="search__filter">
+    <li class="search__ttl">検索フィルター</li>
+    <li class="search__item select">
+      <input type="hidden" name="mode" value="list">
+      <input type="hidden" name="sort" value="[SORT]">
+      <input type="hidden" name="word" value="[WORD]">
+      <span>
+      <select name="sel1" onChange="submit(this.form);">
+        <option value="">▼不動産種別を選択</option>
+        
+        
+[SEL_S1]
+
+      
+      </select>
+      </span> </li>
+    <li class="search__item select"> <span>
+      <select name="sel2" onChange="submit(this.form);">
+        <option value="">▼O1_MSEL02-TITLEを選択</option>
+        
+          
+[SEL_S2]
+
+        
+      </select>
+      </span> </li>
+    <li class="search__item">
+      <div id="modal-drawer">
+      <input id="modal-input" type="checkbox" class="modal-unshown">
+      <label id="modal-open" class="modal__btn" for="modal-input"> <span class="sort">こだわり検索</span> </label>
+      <label class="modal-unshown" id="modal-close" for="modal-input"></label>
+      <div id="modal-content">
+      <div class="c-head">
+        <h2 class="c-head__ttl">こだわり条件</h2>
+      </div>
+  </form>
+  <form name="form1" method="get" action="/m_search2/">
+    <input type="hidden" name="mode" value="list">
+    <input type="hidden" name="page" value="1">
+    <input type="hidden" name="sort" value="[SORT]">
+    <input type="hidden" name="sel1" value="[SEL1]">
+    <input type="hidden" name="sel2" value="[SEL2]">
+    <table class="tableset" summary="検索フォーム">
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL03-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL03]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL04-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL04]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL05-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL05]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL06-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL06]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL07-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL07]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL08-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL08]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL09-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL09]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MSEL10-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MSEL10]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">所在地(都道府県)</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO01]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">所在地(市区町村)</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO02]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">最寄り駅</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO03]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">沿線</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO04]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">建物構造</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO05]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MRDO06-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO06]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MRDO07-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO07]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MRDO08-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO08]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MRDO09-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO09]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MRDO10-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MRDO10]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK01-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK01]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK02-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK02]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK03-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK03]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK04-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK04]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK05-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK05]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK06-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK06]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK07-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK07]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK08-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK08]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK09-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK09]
+          </ul></td>
+      </tr>
+      <tr class="tableset__list">
+        <th class="tableset__ttl">O1_MCHK10-TITLE</th>
+        <td class="tableset__txt"><ul>
+            [OPT-O1_MCHK10]
+          </ul></td>
+      </tr>
+    </table>
+    <div class="btn btn__attract">
+      <button onClick"form1.submit();">この条件で検索</button>
+    </div>
+    </div>
+    </div>
+    </li>
+    </ul>
+  </form>
+  </div>
+</section>
+<section class="result">
+  <div class="l-container">
+    <div class="result__list">
+      <meta LIST-START>
+      <meta LIST-END>
+    </div>
+    <div class="pagination">
+      <div class="pagination__list"> [PAGING] </div>
+    </div>
+  </div>
+</section>
+
+  [S-FLOW]
+  <!--template=/common/template/flow.html--> 
+  [E-FLOW]
+  [S-FLOW1]
+  <!--template=/common/template/flow1.html--> 
+  [E-FLOW1]
+  [S-FLOW2]
+  <!--template=/common/template/flow2.html--> 
+  [E-FLOW2]
+
+<!-- 以下共通 --> 
+
+<!--template=/common/template/footer.html-->
+
+</div>
+</body>
+</html>

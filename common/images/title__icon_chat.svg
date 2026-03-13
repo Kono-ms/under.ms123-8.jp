@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="パス_364" data-name="パス 364" d="M0,0H24V24H0Z" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="グループ_1663" data-name="グループ 1663" transform="translate(-95 -2554)">
+    <circle id="楕円形_10" data-name="楕円形 10" cx="25" cy="25" r="25" transform="translate(95 2554)" fill="#122823"/>
+    <g id="typing" transform="translate(108 2567)" clip-path="url(#clip-path)">
+      <path id="パス_363" data-name="パス 363" d="M11.965.046A11.92,11.92,0,1,1,7,22.8L1.054,23.874A.857.857,0,0,1,.1,22.729l1.7-4.535A11.92,11.92,0,0,1,11.964.046ZM6.442,11.964v.005H6.431v-.005h.01Zm-.005-1.706a1.708,1.708,0,1,0,1.708,1.708A1.708,1.708,0,0,0,6.437,10.259Zm5.538,1.708v0h-.011v.005h.011Zm-1.714,0a1.708,1.708,0,1,1,1.708,1.708A1.708,1.708,0,0,1,10.26,11.967Zm7.245,0v.005h-.011v-.005h.01ZM17.5,10.259a1.708,1.708,0,1,0,1.708,1.708A1.708,1.708,0,0,0,17.5,10.259Z" transform="translate(0.032 0.033)" fill="#64a8ac" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

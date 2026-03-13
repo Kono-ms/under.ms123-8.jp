@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユーザー希望条件一覧｜WEBSITE-NAME</title>
+  <meta name="description"
+    content="不動産情報一覧のページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
+  <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/icon-192x192.png">
+
+  <link rel="stylesheet" href="/html_a/AdminLTE/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="/html_a/css/common.css">
+  <link rel="shortcut icon" href="/html_a/img/favicon.ico">
+  <style>
+    .search__item button {
+      width: 100%;
+      height: 5.5rem;
+      padding: 0 1rem;
+      background: #1eb4dc;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-box-shadow: 0 0 1rem rgb(0 0 0 / 10%);
+      box-shadow: 0 0 1rem rgb(0 0 0 / 10%);
+    }
+
+    .select2 select {
+      height: 4.5rem;
+      line-height: 4.3rem;
+      padding: 0 2.5rem 0 1.5rem;
+      background: #fff;
+      border: 1px solid #e9eced;
+      border-radius: .5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .1)
+    }
+  </style>
+
+  <!--template=/common/template/head.html-->
+</head>
+
+<body>
+  <div class="wrap sub">
+
+    <!--template=/common/template/header.html-->
+
+    <!-- 以上共通 -->
+    <div class="breadcrumb">
+      <div class="l-container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item">マイページトップ</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="common-layout">
+      <div class="common-layout__wrap">
+        <main class="common-layout__main">
+          <section class="mypage-quickaction">
+            <div class="mypage-quickaction__cnt">
+              <div class="mypage-quickaction__head">
+                <h2 class="mypage-quickaction__head-ttl">クイックアクション</span></h2>
+                <span class="mypage-quickaction__head-ttl-ico"><img src="/common/images/title__icon_quick.svg" alt="">
+              </div>
+              <div class="mypage-quickaction__list">
+                <div class="mypage-quickaction__item">
+                  <div class="mypage-quickaction__item-btn">
+                    <a href="">
+                      <span class="mypage-quickaction__item-btn-ico"><img src="/common/images/btn__icon_quick01.svg" alt=""></span>
+                      <span class="mypage-quickaction__item-btn-label">物件を登録する</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="mypage-quickaction__item">
+                  <div class="mypage-quickaction__item-btn">
+                    <a href="">
+                      <span class="mypage-quickaction__item-btn-ico"><img src="/common/images/btn__icon_quick02.svg" alt=""></span>
+                      <span class="mypage-quickaction__item-btn-label">物件を提案する</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="mypage-quickaction__item">
+                  <div class="mypage-quickaction__item-btn">
+                    <a href="">
+                      <span class="mypage-quickaction__item-btn-ico"><img src="/common/images/btn__icon_quick03.svg" alt=""></span>
+                      <span class="mypage-quickaction__item-btn-label">オウカガイを送る</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="table_summary" class="mypage-post">
+            <div class="mypage-post__cnt">
+
+              <div class="mypage-post__head">
+                <h2 class="mypage-post__head-ttl">物件情報一覧</h2>
+                <div class="mypage-post__head-menu">
+                  <a class="mypage-post__head-menu-btn" href="./?mode=list">
+                    <span class="mypage-post__head-menu-lead">もっと見る</span>
+                    <span class="mypage-post__head-menu-ico">
+            <img src="/common/images/btn__icon_w2.svg" alt="">
+          </span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mypage-post__list">
+
+                <meta LIST-START>
+
+                <div class="mypage-post__item">
+
+                  <div class="mypage-post__item-medal">
+                    <span class="mypage-post__item-medal-item">公開中</span>
+                    <span class="mypage-post__item-medal-item">マッチング物件</span>
+                  </div>
+
+                  <div class="mypage-post__item-data">
+
+                    <div class="mypage-post__item-data-thumb">
+                      <div class="mypage-post__item-data-thumb-cat">
+                        <span class="mypage-post__item-data-thumb-cat-ico"></span>
+                        <span class="mypage-post__item-data-thumb-cat-lead">
+                [O1_MSEL01]
+              </span>
+                      </div>
+                      <figure class="mypage-post__item-data-thumb-frame"></figure>
+                    </div>
+
+                    <div class="mypage-post__item-data-about">
+
+                      <div class="mypage-post__item-data-about-ttl">
+                        <h3 class="mypage-post__item-data-about-ttl-lead">
+                          [O2_DTXT01]
+                        </h3>
+                      </div>
+
+                      <p class="mypage-post__item-data-about-company">
+                        登録日時：[O1_DTXT02]
+                      </p>
+
+                      <p class="mypage-post__item-data-about-address">
+                        [O2_DTXT02]
+                      </p>
+
+                      <ul class="mypage-post__item-data-about-list">
+                        <li class="mypage-post__item-data-about-label">
+                          [O2_DTXT03]
+                        </li>
+                        <li class="mypage-post__item-data-about-label">
+                          [O2_DTXT04]
+                        </li>
+                        <li class="mypage-post__item-data-about-label">
+                          [O2_DTXT05]
+                        </li>
+                        <li class="mypage-post__item-data-about-label">
+                          [O2_DTXT06]
+                        </li>
+                      </ul>
+
+                    </div>
+
+                  </div>
+
+                  <div class="mypage-post__item-foot">
+
+                    <div class="mypage-post__item-foot-price">
+                      <div class="mypage-post__item-foot-price-buy">
+                        <span class="mypage-post__item-foot-price-buy-label">価格</span>
+                        <span class="mypage-post__item-foot-price-buy-num">[O1_DVAL01]</span>
+                        <span class="mypage-post__item-foot-price-buy-unit">万円</span>
+                      </div>
+
+                      <div class="mypage-post__item-foot-price-gain">
+                        <span class="mypage-post__item-foot-price-gain-label">利回り</span>
+                        <span class="mypage-post__item-foot-price-gain-num">[O1_DTXT01]</span>
+                        <span class="mypage-post__item-foot-price-gain-unit">％</span>
+                      </div>
+                    </div>
+
+                    <div class="mypage-post__item-foot-menu">
+                      <a class="mypage-post__item-foot-menu-btn mypage-post__item-foot-menu-btn--col01"
+                         href="/m_search2/?mode=disp&key=[O1_ID]&etc02=[ETC02]&etc03=[ETC03]">
+                        <span class="mypage-post__item-foot-menu-btn-label">詳細を見る</span>
+                      </a>
+                      <a class="mypage-post__item-foot-menu-btn mypage-post__item-foot-menu-btn--col02"
+                         href="/m_chat2/?mode=list&word=[AID]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]">
+                        <span class="mypage-post__item-foot-menu-btn-label">提案を送る</span>
+                      </a>
+                    </div>
+
+                  </div>
+
+                  <div class="mypage-post__item-edit">
+                    <div class="mypage-post__item-edit-menu">
+                      <a class="mypage-post__item-edit-menu-btn" href="./?mode=delete&key=[O1_ID]">
+                        <span class="mypage-post__item-edit-menu-btn-label">削除</span>
+                      </a>
+                      <a class="mypage-post__item-edit-menu-btn" href="./?mode=edit&key=[O1_ID]">
+                        <span class="mypage-post__item-edit-menu-btn-label">編集</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+
+                <meta LIST-END>
+
+              </div>
+
+            </div>
+          </section>
+
+        </main>
+        <aside class="common-layout__side">
+          <section class="mypage-news">
+            <h3 class="common-layout__side-ttl">運営からのお知らせ</h3>
+            <ul class="mypage-news__list">
+              <li class="mypage-news__list-item">
+                <a href="">
+                  <p class="mypage-news__list-item-ttl">
+                    <span class="mypage-news__list-item-ttl-lead">サービスメンテナンスのお知らせ</span>
+                    <span class="mypage-news__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>
+                  </p>
+                  <p class="mypage-news__list-item-date">2025.11.31 09:21</p>
+                </a>
+              </li>
+              <li class="mypage-news__list-item">
+                <a target="_blank" href="">
+                  <p class="mypage-news__list-item-ttl">
+                    <span class="mypage-news__list-item-ttl-lead">利用規約の改定のお知らせ</span>
+                    <span class="mypage-news__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>
+                  </p>
+                  <p class="mypage-news__list-item-date">2025.12.28 17:11投稿</p>
+                </a>
+              </li>
+            </ul>
+            <div class="mypage-news__more">
+              <a target="_blank" href="">
+                <span class="mypage-news__more-label">一覧へ</span>
+                <span class="mypage-news__more-ico"><img src="/common/images/btn__arw_g2.svg" alt=""></span>
+              </a>
+            </div>
+          </section>
+          <section class="mypage-message">
+            <h3 class="common-layout__side-ttl">メッセージ一覧</h3>
+            <ul class="mypage-message__list">
+              <li class="mypage-message__list-item">
+                <a target="_blank" href="">
+                  <p class="mypage-message__list-item-ttl">
+                    <span class="mypage-message__list-item-ttl-lead">下北沢駅7分｜満室稼働中3階建・角地立地の一棟マンション（鉄骨造）</span>
+                    <span class="mypage-message__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>
+                  </p>
+                  <p class="mypage-message__list-item-company">URBX不動産</p>
+                  <p class="mypage-message__list-item-date">2025.10.10 13:17</p>
+                </a>
+              </li>
+              <li class="mypage-message__list-item">
+                <a target="_blank" href="">
+                  <p class="mypage-message__list-item-ttl">
+                    <span class="mypage-message__list-item-ttl-lead">【LPP×フルローン可能性有】３路線３駅利用可×平坦×高稼働</span>
+                    <span class="mypage-message__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>
+                  </p>
+                  <p class="mypage-message__list-item-company">URBX不動産</p>
+                  <p class="mypage-message__list-item-date">2025.10.10 13:17</p>
+                </a>
+              </li>
+            </ul>
+            <div class="mypage-news__more">
+              <a href="">
+                <span class="mypage-news__more-label">一覧へ</span>
+                <span class="mypage-news__more-ico"><img src="/common/images/btn__arw_g2.svg" alt=""></span>
+              </a>
+            </div>
+          </section>
+
+        </aside>
+      </div>
+    </div>
+    <!--
+    <section class="search">
+
+      <div class="search__area search__area--second">
+
+        <form method="get" name="form1" action="./">
+          <ul class="search__filter">
+
+            <li class="search__ttl">検索条件</li>
+            <li class="search__item ">
+              <span>
+                <input type="text" name="word" value="[WORD]" class="form-control" placeholder="フリーワード">
+              </span>
+            </li>
+
+            <li class="search__item select2">
+              <input type="hidden" name="mode" value="list">
+              <input type="hidden" name="sort" value="[SORT]">
+
+
+              <span>
+                <select name="sel1">
+                  <option value="">▼ステータスを選択</option>
+                  [SEL_S1]
+                </select>
+              </span>
+            </li>
+
+            <li class="search__item">
+              <button onClick="form1.submit();">この条件で検索</button>
+            </li>
+        </form>
+
+        </ul>
+
+
+      </div>
+    </section>
+    -->
+    <!--
+    <section class="result">
+      <div class="l-container">
+        <div class="box box-default">
+          <div class="box-body top-list">
+
+            <table id="table_summary" class="table table-bordered table-hover" summary="表">
+
+
+              <thead>
+                <tr>
+                  <th>会社名</th>
+                  <th>販売価格</th>
+                  <th style="min-width: 50px">案件詳細</th>
+                  <th>満室時利回り</th>
+                  <th>不動産種別</th>
+                  <th>O1_MSEL02-TITLE</th>
+
+                  <th>物件価格（下限）</th>
+                  <th>O2_DTXT01-TITLE</th>
+                  <th>O2_MSEL01-TITLE</th>
+                  <th>O2_MSEL02-TITLE</th>
+                  <th>ステータス</th>
+
+                  <th>メッセージ</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <meta LIST-START>
+                <tr>
+                  <td>[M1_DVAL01]</td>
+                  <td>[O1_DVAL01]</td>
+                  <td><a href="/m_search2/?mode=disp&key=[O1_ID]&etc02=[ETC02]&etc03=[ETC03]" class="detail_btn">
+                      案件詳細</a>
+                  </td>
+                  <td>[O1_DTXT01]</td>
+                  <td>[O1_MSEL01]</td>
+                  <td>[O1_MSEL02]</td>
+
+                  <td>[O2_DVAL01]</td>
+                  <td>[O2_DTXT01]</td>
+                  <td>[O2_MSEL01]</td>
+                  <td>[O2_MSEL02]</td>
+
+                  <td>
+                    <form method="get" name="form[ID]" action="./">
+                      <input type="hidden" name="mode" value="status">
+                      <input type="hidden" name="page" value="[PAGE]">
+                      <input type="hidden" name="key" value="[ID]">
+                      <select class="form-control" onchange="form[ID].submit();" name="STATUS">[OPT-STATUS]</select>
+                    </form>
+                  </td>
+                  <td><a href="/m_chat2/?mode=list&word=[AID]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]"
+                      style="color:blue;"> メッセージを見る[S-TOP_MIDOKU]<span class="item__badge"
+                        style="">[TOP_MIDOKU]</span>[E-TOP_MIDOKU]</a>
+                  </td>
+
+                </tr>
+                <meta LIST-END>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <div class="pagination__list"> [PAGING] </div>
+        </div>
+      </div>
+    </section>
+    -->
+
+
+    <!-- 以下共通 -->
+
+    <!--template=/common/template/footer.html-->
+  </div>
+</body>
+
+</html>

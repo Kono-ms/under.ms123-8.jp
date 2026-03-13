@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0" />
+  <meta name="format-detection" content="telephone=no, address=no, email=no" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>[METAWORD1]コラム一覧｜WEBSITE-NAME</title>
+  <meta name="description"
+    content="コラム一覧のページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="/common/css/info.css" />
+  <link rel="stylesheet" href="/common/css/info-res.css" />
+  <!--template=/common/template/head.html-->
+  <!--[if lt IE 9]>
+<script src="/common/js/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+  <script language='javascript' src='https://ad-track.jp/ad/js/lpjs.js'></script>
+  <div class="wrap sub">
+    <!--template=/common/template/header.html-->
+    <!-- パンくず開始 -->
+    <div class="breadcrumb">
+      <div class="l-container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="/">トップ</a></li>
+          [PAN]
+        </ol>
+      </div>
+    </div>
+    <!-- パンくず終了 -->
+
+    <!-- コンテンツ開始 -->
+    <div id="content" class="clearfix bg_f2f6f8">
+      <div class="base_wrap clearfix">
+
+        <div class="flex_wrap">
+          <div class="columun_left_wrap">
+            <div class="column_kind_wrap">
+              <div class="side_TITLE01">
+                <h4>カテゴリー一覧</h4>
+              </div>
+              <ul class="category_part">
+                [CLIST]
+              </ul>
+            </div>
+          </div>
+          <article id="main" class="columun_center_wrap">
+            <h2 class="TITLE02">コラムを読む</h2>
+            <div class="columun_list_wrap">
+              <!--<meta LIST-START>-->
+              <a href="/info/[URL]/" class="column_wrap">
+                <div>
+                  <div class="column_img"> <img src="[PIC]" alt="[ALT]"> </div>
+                  <div class="column_text">
+                    <h4 class="column_TITLE">[D-TITLE]</h4>
+                    <div>
+                      <p class="column_category">[D-CCATE]</p>
+                      <p class="column_date">[D-DATE]</p>
+                    </div>
+                    <p class="column_main">[L-COMMENT]…</p>
+                  </div>
+                </div>
+              </a>
+              <!--<meta LIST-END>-->
+            </div>
+            <div class="paging clearfix">
+              <ul>
+                [PAGING]
+              </ul>
+            </div>
+          </article>
+
+
+          <div class="columun_right_wrap">
+
+            <!--ソーシャルボタン開始-->
+            <div class="ninja_onebutton" style="margin-bottom:15px;">
+              <script type="text/javascript">
+                //<![CDATA[
+                (function (d) {
+                  if (typeof (window.NINJA_CO_JP_ONETAG_BUTTON_118385e87b74c78ae14a9e20d9acfcca) == 'undefined') {
+                    document.write("<sc" + "ript type='text\/javascript' src='\/\/omt.shinobi.jp\/b\/118385e87b74c78ae14a9e20d9acfcca'><\/sc" + "ript>");
+                  } else {
+                    window.NINJA_CO_JP_ONETAG_BUTTON_118385e87b74c78ae14a9e20d9acfcca.ONETAGButton_Load();
+                  }
+                })(document);
+                //]]>
+              </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;"
+                class="ninja_onebutton_hidden"></span>
+            </div>
+            <!--ソーシャルボタン終了-->
+
+
+            <div class="column_kind_wrap pc_disp">
+              <div class="side_TITLE01">
+                <h4>新着記事</h4>
+              </div>
+              [NEW_LIST2]
+            </div>
+            <script>
+              $(function () {
+                $('.bxslider').bxSlider({
+                  auto: true,
+                  pause: 10000,
+                  slideWidth: 500,
+                  touchEnabled: true,
+                  speed: 1000,
+                  minSlides: 2,
+                  maxSlides: 4,
+                  moveSlides: 1,
+                  shrinkItems: true,
+                  slideMargin: 0,
+                });
+              });
+            </script>
+            <div class="column_kind_wrap sp_disp">
+              <div class="side_TITLE01">
+                <h4>人気記事ランキング</h4>
+              </div>
+              <!--[NEW_LIST] スマホ用ランキング-->
+              <ul class="bxslider">
+                [NEW_LIST2_SP]
+              </ul>
+            </div>
+
+            [BANNER]
+          </div>
+          <!-- // .flex_wrap -->
+
+        </div>
+        <!-- // .base_wrap -->
+      </div>
+      <!-- コンテンツ終了 -->
+      <!--フッター開始-->
+      <!--template=/common/template/footer.html-->
+      <!--フッター終了-->
+    </div><!--div#wrapper:end-->
+</body>
+
+</html>
