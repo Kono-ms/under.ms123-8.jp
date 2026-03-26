@@ -571,6 +571,15 @@ function RequestData($obj,$a,$b,$key,$mode)
 		}
 	}
 
+	// 物件種別の自動振り分け
+	// 条件: 「媒介受付済み又は売主直情報」がON または
+	//       「他社ポータルサイト未公開」かつ「レインズ未公開」がON の場合はマッチング物件
+	$flagEtc01 = ($FieldValue[96] ?? '') === '1';
+	$flagEtc02 = ($FieldValue[97] ?? '') === '1';
+	$flagEtc03 = ($FieldValue[98] ?? '') === '1';
+	$isMatching = $flagEtc01 || ($flagEtc02 && $flagEtc03);
+	$FieldValue[99] = $isMatching ? 'マッチング物件' : '提案物件';
+
 	return $function_ret;
 }
 
