@@ -394,14 +394,6 @@ function GetTopMessageListHtml()
 
 	$list_html = '';
 	$limit = 5;
-	$self_m2_name = '';
-
-	$StrSQL_M2="SELECT M2_DVAL01 FROM DAT_M2 where MID='".$_SESSION['MID']."';";
-	$rs_m2=mysqli_query(ConnDB(),$StrSQL_M2);
-	if($rs_m2){
-		$item_m2 = mysqli_fetch_assoc($rs_m2);
-		$self_m2_name = $item_m2['M2_DVAL01'];
-	}
 
 	$StrSQL = "SELECT AID, ETC02, ifnull(ETC03,'') as ETC03, max(NEWDATE) as LDATE ";
 	$StrSQL .= "FROM DAT_MESSAGE ";
@@ -424,6 +416,18 @@ function GetTopMessageListHtml()
 			$partner_mid = $mid2;
 		} else {
 			$partner_mid = $mid1;
+		}
+
+		$partner_m2_name = '';
+		$StrSQL_M2="SELECT M2_DVAL01, M2_DVAL02 FROM DAT_M2 where MID='".$partner_mid."';";
+		$rs_m2=mysqli_query(ConnDB(),$StrSQL_M2);
+		if($rs_m2){
+			$item_m2 = mysqli_fetch_assoc($rs_m2);
+			if($item_m2){
+				$sei = isset($item_m2['M2_DVAL01']) ? trim($item_m2['M2_DVAL01']) : '';
+				$mei = isset($item_m2['M2_DVAL02']) ? trim($item_m2['M2_DVAL02']) : '';
+				$partner_m2_name = trim($sei.' '.$mei);
+			}
 		}
 
 		$title = '';
@@ -465,7 +469,7 @@ function GetTopMessageListHtml()
 		$list_html .= '<span class="mypage-message__list-item-ttl-lead">'.htmlspecialchars($title).'</span>';
 		$list_html .= '<span class="mypage-message__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>';
 		$list_html .= '</p>';
-		$list_html .= '<p class="mypage-message__list-item-company">'.htmlspecialchars($self_m2_name).'</p>';
+		$list_html .= '<p class="mypage-message__list-item-company">'.htmlspecialchars($partner_m2_name).'</p>';
 		$list_html .= '<p class="mypage-message__list-item-date">'.$ldate.'</p>';
 		$list_html .= '</a>';
 		$list_html .= '</li>';
