@@ -61,6 +61,7 @@
           <input type="hidden" name="page" value="[PAGE]">
           <input type="hidden" name="lid" value="[LID]">
           <input type="hidden" name="token" value="[TOKEN]">
+          <input type="hidden" name="entry_intent" value="[ENTRY_INTENT]">
           <input type="hidden" name="ID" value="[ID]">
           <input type="hidden" name="MID" value="[MID]">
           <input type="hidden" name="OID" value="[OID]">
@@ -577,8 +578,7 @@
 -->
 
           <div class="btn formset__btn">
-            <input type="submit" value="この内容で保存する" name="submit"
-              onclick="var ok=confirm('保存してもよろしいですか？');if (ok) this.form.submit(); return false;" />
+            <input type="submit" value="この内容で保存する" name="submit" />
           </div>
         </form>
       </div>
@@ -599,19 +599,87 @@
       return;
     }
 
+    var entryIntent = "[ENTRY_INTENT]";
+    var submitButton = document.querySelector('input[type="submit"][name="submit"]');
+    var form = submitButton ? submitButton.form : null;
+    var lastChanged = null;
+
     etc01.checked = "[O1_ETC01]" === "1";
     etc02.checked = "[O1_ETC02]" === "1";
     etc03.checked = "[O1_ETC03]" === "1";
+
+    if (entryIntent === "matching" && "[ID]" === "") {
+      etc01.checked = true;
+      etc02.checked = false;
+      etc03.checked = false;
+    } else if (entryIntent === "teian" && "[ID]" === "") {
+      etc01.checked = false;
+      etc02.checked = false;
+      etc03.checked = false;
+    }
 
     function updatePropertyType() {
       var isMatching = etc01.checked || (etc02.checked && etc03.checked);
       matchingRadio.checked = isMatching;
       teianRadio.checked = !isMatching;
+      return isMatching;
     }
 
-    etc01.addEventListener('change', updatePropertyType);
-    etc02.addEventListener('change', updatePropertyType);
-    etc03.addEventListener('change', updatePropertyType);
+    function getIntentLabel() {
+      if (entryIntent === "matching") {
+        return "マッチング物件";
+      }
+      if (entryIntent === "teian") {
+        return "提案物件";
+      }
+      return "";
+    }
+
+    function confirmIfIntentMismatch() {
+      var isMatching = updatePropertyType();
+      if (!entryIntent) {
+        return true;
+      }
+      var isMismatch = (entryIntent === "matching" && !isMatching) || (entryIntent === "teian" && isMatching);
+      if (!isMismatch) {
+        return true;
+      }
+      var nextType = isMatching ? "マッチング物件" : "提案物件";
+      var ok = window.confirm("現在のフラグ条件では物件種別が「" + nextType + "」になります。よろしいですか？");
+      if (ok) {
+        return true;
+      }
+
+      if (lastChanged && lastChanged.type === "checkbox") {
+        lastChanged.checked = !lastChanged.checked;
+        updatePropertyType();
+      }
+      return false;
+    }
+
+    function onFlagChanged(event) {
+      lastChanged = event.target;
+      confirmIfIntentMismatch();
+    }
+
+    etc01.addEventListener('change', onFlagChanged);
+    etc02.addEventListener('change', onFlagChanged);
+    etc03.addEventListener('change', onFlagChanged);
+
+    if (form && submitButton) {
+      submitButton.onclick = function () {
+        if (!confirmIfIntentMismatch()) {
+          return false;
+        }
+        var intentLabel = getIntentLabel();
+        var suffix = intentLabel ? "\\n（遷移元: " + intentLabel + "登録）" : "";
+        var ok = window.confirm("保存してもよろしいですか？" + suffix);
+        if (ok) {
+          form.submit();
+        }
+        return false;
+      };
+    }
 
     updatePropertyType();
   })();

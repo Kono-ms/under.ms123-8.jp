@@ -38,6 +38,7 @@ function Main()
 		$page=mysqli_real_escape_string(ConnDB(),$_GET['page'] ?? '');
 		$lid=mysqli_real_escape_string(ConnDB(),$_GET['lid'] ?? '');
 		$token=mysqli_real_escape_string(ConnDB(),$_GET['token'] ?? '');
+		$entryIntent=mysqli_real_escape_string(ConnDB(),$_GET['entry_intent'] ?? '');
 	} else {
 		$mode=mysqli_real_escape_string(ConnDB(),$_POST['mode'] ?? '');
 		$sort=mysqli_real_escape_string(ConnDB(),$_POST['sort'] ?? '');
@@ -46,6 +47,7 @@ function Main()
 		$page=mysqli_real_escape_string(ConnDB(),$_POST['page'] ?? '');
 		$lid=mysqli_real_escape_string(ConnDB(),$_POST['lid'] ?? '');
 		$token=mysqli_real_escape_string(ConnDB(),$_POST['token'] ?? '');
+		$entryIntent=mysqli_real_escape_string(ConnDB(),$_POST['entry_intent'] ?? '');
 	}
 
 	if ($mode==""){
@@ -175,7 +177,7 @@ function Main()
 			break;
 	}
 
-	DispData($mode,$sort,$word,$key,$page,$lid,$token);
+	DispData($mode,$sort,$word,$key,$page,$lid,$token,$entryIntent);
 
 	return $function_ret;
 }
@@ -186,7 +188,7 @@ function Main()
 //引数 $mode,$sort,$word,$key,$page,$lid
 //戻値 なし
 //=========================================================================================================
-function DispData($mode,$sort,$word,$key,$page,$lid,$token)
+function DispData($mode,$sort,$word,$key,$page,$lid,$token,$entryIntent)
 {
 
 	eval(globals());
@@ -380,6 +382,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 			$_SESSION['token'] = $token;
 		}
 		$str=str_replace("[TOKEN]",$token,$str);
+		$str=str_replace("[ENTRY_INTENT]",$entryIntent,$str);
 
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
@@ -498,6 +501,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 			$_SESSION['token'] = $token;
 		}
 		$str=str_replace("[TOKEN]",$token,$str);
+		$str=str_replace("[ENTRY_INTENT]",$entryIntent,$str);
 
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
