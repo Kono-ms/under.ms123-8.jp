@@ -803,6 +803,12 @@ section {
   margin: 0 1rem 1rem 0
 }
 
+.formset__list--stack li {
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+}
+
 .input_select,
 .formset__input [type="text"],
 .formset__input [type="email"],
