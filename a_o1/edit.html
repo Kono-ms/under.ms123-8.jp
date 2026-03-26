@@ -47,10 +47,6 @@
                         <input type="hidden" name="lid" value="[LID]">
                         <input type="hidden" name="token" value="[TOKEN]">
                         <input type="hidden" name="ID" value="[ID]">
-                        <input type="hidden" name="O1_ETC01" value="[O1_ETC01]">
-                        <input type="hidden" name="O1_ETC02" value="[O1_ETC02]">
-                        <input type="hidden" name="O1_ETC03" value="[O1_ETC03]">
-                        <input type="hidden" name="O1_ETC04" value="[O1_ETC04]">
                         <input type="hidden" name="O1_ETC05" value="[O1_ETC05]">
                         <input type="hidden" name="O1_ETC06" value="[O1_ETC06]">
                         <input type="hidden" name="O1_ETC07" value="[O1_ETC07]">
@@ -142,6 +138,30 @@
                                     <th>不動産種別</th>
                                     <td><select name="O1_MSEL01"
                                             class="input_select form-control">[OPT-O1_MSEL01]</select></td>
+                                </tr>
+                                <tr>
+                                    <th>フラグ</th>
+                                    <td>
+                                        <div>
+                                            <input type="hidden" name="O1_ETC01" value="0">
+                                            <label><input id="AO1_ETC01" type="checkbox" name="O1_ETC01" value="1"> 媒介受付済み又は売主直情報</label>
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="O1_ETC02" value="0">
+                                            <label><input id="AO1_ETC02" type="checkbox" name="O1_ETC02" value="1"> 他社ポータルサイト未公開</label>
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="O1_ETC03" value="0">
+                                            <label><input id="AO1_ETC03" type="checkbox" name="O1_ETC03" value="1"> レインズ未公開</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>物件種別</th>
+                                    <td>
+                                        <label><input id="AO1_ETC04_MATCHING" type="radio" name="O1_ETC04" value="マッチング物件"> マッチング物件</label>
+                                        <label style="margin-left: 12px;"><input id="AO1_ETC04_TEIAN" type="radio" name="O1_ETC04" value="提案物件"> 提案物件</label>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -553,3 +573,32 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
+<script>
+    (function () {
+        var etc01 = document.getElementById('AO1_ETC01');
+        var etc02 = document.getElementById('AO1_ETC02');
+        var etc03 = document.getElementById('AO1_ETC03');
+        var matchingRadio = document.getElementById('AO1_ETC04_MATCHING');
+        var teianRadio = document.getElementById('AO1_ETC04_TEIAN');
+
+        if (!etc01 || !etc02 || !etc03 || !matchingRadio || !teianRadio) {
+            return;
+        }
+
+        etc01.checked = "[O1_ETC01]" === "1";
+        etc02.checked = "[O1_ETC02]" === "1";
+        etc03.checked = "[O1_ETC03]" === "1";
+
+        function updatePropertyType() {
+            var isMatching = etc01.checked || (etc02.checked && etc03.checked);
+            matchingRadio.checked = isMatching;
+            teianRadio.checked = !isMatching;
+        }
+
+        etc01.addEventListener('change', updatePropertyType);
+        etc02.addEventListener('change', updatePropertyType);
+        etc03.addEventListener('change', updatePropertyType);
+
+        updatePropertyType();
+    })();
+</script>
