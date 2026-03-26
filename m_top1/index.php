@@ -367,6 +367,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$sel1)
 	$str=str_replace("[LID]",$lid,$str);
 	$str=str_replace("[RECCOUNT]",$reccount,$str);
 	$str=str_replace("[hiduke]",$hiduke,$str);
+	$str=str_replace("[TOP_MESSAGE_LIST]", GetTopMessageListHtml(), $str);
 
 	// CSRFトークン生成
 	if($token==""){
@@ -380,6 +381,98 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$sel1)
 
 	return $function_ret;
 } 
+
+//=========================================================================================================
+//名前 サイドメッセージ一覧取得
+//機能 マイページ右側のメッセージ一覧HTMLを生成する
+//引数 なし
+//戻値 HTML文字列
+//=========================================================================================================
+function GetTopMessageListHtml()
+{
+	eval(globals());
+
+	$list_html = '';
+	$limit = 5;
+	$self_m2_name = '';
+
+	$StrSQL_M2="SELECT M2_DVAL01 FROM DAT_M2 where MID='".$_SESSION['MID']."';";
+	$rs_m2=mysqli_query(ConnDB(),$StrSQL_M2);
+	if($rs_m2){
+		$item_m2 = mysqli_fetch_assoc($rs_m2);
+		$self_m2_name = $item_m2['M2_DVAL01'];
+	}
+
+	$StrSQL = "SELECT AID, ETC02, ifnull(ETC03,'') as ETC03, max(NEWDATE) as LDATE ";
+	$StrSQL .= "FROM DAT_MESSAGE ";
+	$StrSQL .= "WHERE AID like '%".$_SESSION['MID']."%' ";
+	$StrSQL .= "GROUP BY AID, ETC02, ifnull(ETC03,'') ";
+	$StrSQL .= "ORDER BY LDATE DESC ";
+	$StrSQL .= "LIMIT ".$limit.";";
+	$rs = mysqli_query(ConnDB(), $StrSQL);
+
+	if($rs == false || mysqli_num_rows($rs) == 0){
+		return '<li class="mypage-message__list-item"><p>まだメッセージはありません。</p></li>';
+	}
+
+	while($item = mysqli_fetch_assoc($rs)) {
+		$ids = explode('-', $item['AID']);
+		$mid1 = $ids[0];
+		$mid2 = $ids[1];
+
+		if($mid1 == $_SESSION['MID']){
+			$partner_mid = $mid2;
+		} else {
+			$partner_mid = $mid1;
+		}
+
+		$title = '';
+		$StrSQL_TITLE="SELECT COMMENT FROM DAT_MESSAGE where AID='".$item['AID']."' and ETC02='".$item['ETC02']."' and ifnull(ETC03,'')='".$item['ETC03']."' and COMMENT like '[タイトル変更]%' order by ID desc;";
+		$rs_title=mysqli_query(ConnDB(),$StrSQL_TITLE);
+		if($rs_title){
+			$item_title = mysqli_fetch_assoc($rs_title);
+			if($item_title && $item_title['COMMENT'] != ''){
+				$preg = preg_match_all('/タイトル「.+?」/i', $item_title['COMMENT'], $match);
+				for($i = 0; $i < count($match[0]); $i++) {
+					$tmp = str_replace('タイトル「', '', $match[0][$i]);
+					$title = str_replace('」', '', $tmp);
+				}
+			}
+		}
+
+		if($title == '') {
+			$StrSQL_O1="SELECT DAT_O1.O1_DVAL01 FROM DAT_O1 join DAT_IINE on DAT_O1.OID = DAT_IINE.OIDT where DAT_IINE.MID='".$_SESSION['MID']."' and DAT_IINE.MIDT='".$partner_mid."';";
+			$rs_o1=mysqli_query(ConnDB(),$StrSQL_O1);
+			if($rs_o1){
+				$item_o1 = mysqli_fetch_assoc($rs_o1);
+				$title = $item_o1['O1_DVAL01'];
+			}
+		}
+		if($title == ''){
+			$title = '(タイトル未設定)';
+		}
+
+		$ldate = htmlspecialchars($item['LDATE']);
+		$timestamp = strtotime($item['LDATE']);
+		if($timestamp !== false){
+			$ldate = date('Y.m.d H:i', $timestamp);
+		}
+
+		$link = '/m_chat2/?mode=list&word='.$item['AID'].'&mid1='.$mid1.'&mid2='.$mid2.'&etc02='.$item['ETC02'].'&etc03='.$item['ETC03'];
+		$list_html .= '<li class="mypage-message__list-item">';
+		$list_html .= '<a href="'.$link.'">';
+		$list_html .= '<p class="mypage-message__list-item-ttl">';
+		$list_html .= '<span class="mypage-message__list-item-ttl-lead">'.htmlspecialchars($title).'</span>';
+		$list_html .= '<span class="mypage-message__list-item-ttl-ico"><img src="/common/images/link__icom_window.svg" alt=""></span>';
+		$list_html .= '</p>';
+		$list_html .= '<p class="mypage-message__list-item-company">'.htmlspecialchars($self_m2_name).'</p>';
+		$list_html .= '<p class="mypage-message__list-item-date">'.$ldate.'</p>';
+		$list_html .= '</a>';
+		$list_html .= '</li>';
+	}
+
+	return $list_html;
+}
 
 //=========================================================================================================
 //名前 
