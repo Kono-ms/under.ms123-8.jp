@@ -1,101 +1,328 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WEBSITE-NAMEについて｜WEBSITE-NAME</title>
-<meta name="description" content="WEBSITE-NAMEについてのページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
-<link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/icon-192x192.png">
-<!--template=/common/template/head.html--> 
-<!-- ogp -->
-<meta property="og:type" content="article" />
-<meta property="og:TITLE" content="WEBSITE-NAMEについて｜WEBSITE-NAME" />
-<meta property="og:description" content="WEBSITE-NAMEについてのページ。WEBSITE-NAMEは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
-<meta property="og:image" content="[BASE_URL]/common/images/ogp-top.png">
-<meta property="og:image:alt" content="WEBSITE-NAMEの共有用画像">
-<meta property="og:url" content="[BASE_URL]/register1/" />
-<meta property="og:site_name" content="WEBSITE-NAME" />
-<!-- facebook -->
-<meta property="article:publisher" content="https://www.facebook.com/FB-URL/">
-<meta property="fb:app_id" content="FB-APPID" />
-<!-- twitter card -->
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@TW-NAME" />
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNDER 投資家向けサービス</title>
+<meta name="description" content="一般公開されない収益不動産が、条件に合う会員にだけ届く。UNDERは、非公開型の不動産マッチングサービスです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* TOPページに合わせた明るく清潔感のあるカラーパレット */
+    --c-primary: #16332B; /* 深く落ち着いたダークグリーン */
+    --c-accent: #2563EB; /* 清潔感のあるブルー（リンクやアイコンの差し色） */
+    --c-base: #F8FAFC; /* 明るいライトグレー */
+    --c-white: #FFFFFF;
+    --c-text-main: #333333;
+    --c-text-sub: #555555;
+    --c-border: #E2E8F0;
 
+    --font-en: 'Inter', sans-serif;
+    --font-ja: 'Noto Sans JP', sans-serif;
+    --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Reset & Typography */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-ja); color: var(--c-text-main); background: var(--c-white); line-height: 1.8; font-size: 15px; letter-spacing: 0.03em; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease); }
+  ul, ol { list-style: none; }
+
+  h1, h2, h3 { font-family: var(--font-ja); font-weight: 700; color: var(--c-primary); }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.4; }
+  h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.5; text-align: center; margin-bottom: 40px; }
+  h3 { font-size: 18px; line-height: 1.5; margin-bottom: 12px; }
+  .en-label { font-family: var(--font-en); font-size: 13px; font-weight: 600; color: var(--c-primary); display: block; text-align: center; margin-bottom: 16px; letter-spacing: 0.1em; }
+  .lead-text { font-size: 16px; color: var(--c-text-sub); text-align: center; max-width: 720px; margin: 0 auto 56px; line-height: 2; }
+
+  /* Layout */
+  .l-container { max-width: 1080px; margin: 0 auto; padding: 0 4%; position: relative; z-index: 2; }
+  .l-section { padding: 100px 0; }
+  .l-section--gray { background: var(--c-base); }
+
+  /* Buttons */
+  .c-btn-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .c-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 240px; height: 56px; padding: 0 32px; font-size: 15px; font-weight: 600; border-radius: 4px; transition: all 0.3s var(--ease); cursor: pointer; }
+  .c-btn--primary { background: var(--c-primary); color: var(--c-white); border: 1px solid var(--c-primary); }
+  .c-btn--primary:hover { background: #1f473c; transform: translateY(-2px); box-shadow: 0 8px 16px rgba(22, 51, 43, 0.15); }
+  .c-btn--secondary { background: var(--c-white); color: var(--c-primary); border: 1px solid var(--c-primary); }
+  .c-btn--secondary:hover { background: var(--c-base); }
+
+  /* Cards */
+  .c-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .c-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .c-card { background: var(--c-white); padding: 40px 32px; border: 1px solid var(--c-border); border-radius: 8px; transition: box-shadow 0.3s var(--ease); text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .c-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .c-card__icon { width: 56px; height: 56px; background: var(--c-base); color: var(--c-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .c-card p { font-size: 14px; color: var(--c-text-sub); text-align: left; width: 100%; }
+
+  /* Table */
+  .c-table { width: 100%; border-collapse: collapse; background: var(--c-white); border: 1px solid var(--c-border); border-radius: 8px; overflow: hidden; }
+  .c-table th, .c-table td { padding: 24px 32px; border-bottom: 1px solid var(--c-border); text-align: left; vertical-align: middle; }
+  .c-table tr:last-child th, .c-table tr:last-child td { border-bottom: none; }
+  .c-table th { width: 22%; font-weight: 700; background: var(--c-base); color: var(--c-primary); }
+  .c-table td { width: 39%; font-size: 15px; }
+  .c-table td.is-under { background: rgba(22, 51, 43, 0.03); font-weight: 700; color: var(--c-primary); }
+  .c-table__label { display: block; font-size: 12px; color: var(--c-text-sub); margin-bottom: 4px; font-weight: normal; }
+
+  /* Flow */
+  .c-flow { display: flex; gap: 24px; }
+  .c-flow__item { flex: 1; background: var(--c-white); padding: 32px 24px; border: 1px solid var(--c-border); border-radius: 8px; position: relative; }
+  .c-flow__num { font-family: var(--font-en); font-size: 24px; font-weight: 700; color: var(--c-primary); display: block; margin-bottom: 16px; opacity: 0.2; }
+
+  /* FAQ */
+  .c-faq details { background: var(--c-white); border: 1px solid var(--c-border); margin-bottom: 16px; border-radius: 8px; }
+  .c-faq summary { padding: 24px 32px; font-size: 16px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--c-primary); }
+  .c-faq summary::-webkit-details-marker { display: none; }
+  .c-faq summary::after { content: '+'; font-size: 24px; font-weight: 400; transition: transform 0.3s; }
+  .c-faq details[open] summary::after { transform: rotate(45deg); }
+  .c-faq__answer { padding: 0 32px 24px; font-size: 15px; color: var(--c-text-sub); border-top: 1px dashed var(--c-border); margin-top: 16px; padding-top: 16px; }
+
+  /* Hero */
+  .p-hero { position: relative; padding: 160px 0 120px; background: url('https://images.unsplash.com/photo-1502899576159-f224dc2349fa?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat; }
+  .p-hero::before { content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); } /* 明るいオーバーレイ */
+  .p-hero__box { position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto; }
+
+  @media (max-width: 768px) {
+    .l-section { padding: 64px 0; }
+    .c-grid-4, .c-grid-3, .c-flow { grid-template-columns: 1fr; flex-direction: column; }
+    .c-btn { width: 100%; min-width: auto; }
+    .c-table th, .c-table td { display: block; width: 100%; padding: 16px; }
+    .c-table th { border-bottom: none; padding-bottom: 4px; }
+  }
+</style>
+</head>
 <body>
-<div id="about" class="wrap sub"> 
-  <!--template=/common/template/header.html--> 
-  
-  <!-- 以上共通 -->
-  <div class="breadcrumb bg__gray">
+
+  <section class="p-hero">
     <div class="l-container">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__item"><a href="/">トップ</a></li>
-        <li class="breadcrumb__item">WEBSITE-NAMEについて</li>
-      </ol>
-    </div>
-  </div>
-  <section class="subpage-head bg__gray">
-    <div class="l-container">
-        <div class="c-head">
-          <h1 class="c-head__ttl">WEBSITE-NAMEについて</h1>
+      <div class="p-hero__box">
+        <h1 style="margin-bottom: 24px;">一般公開されない収益不動産が、<br>あなたにだけ届く。</h1>
+        <p style="font-size: 16px; color: var(--c-text-main); margin-bottom: 40px; line-height: 2;">
+          UNDERは、条件に合う会員にだけ非公開物件を届ける、<br>クローズド型の不動産マッチングサービスです。<br>探し続けるのではなく、出会うべき情報が届く体験を提供します。
+        </p>
+        <div class="c-btn-wrap">
+          <a href="#register" class="c-btn c-btn--primary">会員登録はこちら</a>
+          <a href="#how" class="c-btn c-btn--secondary">サービスの仕組みを見る</a>
         </div>
-    </div>
-  </section>
-    <section class="about">
-    <div class="l-container">
-          <h2 class="about__ttl">メッセージのタイトルが入ります<br>メッセージのタイトルが入りますメッセージの。</h2>
-        <div class="about__txt"><p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。</p><p>
-            テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。</p><p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。</p><p>
-            テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。<br>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります。</p></div>
-    </div>
-  </section>
-    <section class="bg__gray">
-    <h2 class="about-section__ttl effect-fade">タイトルが入りますタイトルが入りますタイトルが入ります</h2>
-    </section>
-  <section class="solve">
-    <div class="l-container">
-      <div class="solve__item even c-flex c-flex--between c-flex--wrap">
-        <div class="solve__desc effect-fade fade-r">
-          <p class="solve__num">Feature01</p>
-          <h3 class="solve__ttl">特徴1のタイトル</h3>
-          <p class="solve__txt">特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。</p>
-        </div>
-        <div class="solve__img effect-fade fade-l"><amp-img src="/common/images/solve__img01.jpg" width="100" height="66" layout="responsive" alt=""></amp-img></div>
-      </div>
-      <div class="solve__item c-flex c-flex--between c-flex--wrap">
-        <div class="solve__desc effect-fade fade-l">
-          <p class="solve__num">Feature02</p>
-          <h3 class="solve__ttl">特徴2のタイトル</h3>
-          <p class="solve__txt">特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。</p>
-        </div>
-        <div class="solve__img effect-fade fade-r"><amp-img src="/common/images/solve__img02.jpg" width="100" height="66" layout="responsive" alt=""></amp-img></div>
-      </div>
-      <div class="solve__item even c-flex c-flex--between c-flex--wrap">
-        <div class="solve__desc effect-fade fade-r">
-          <p class="solve__num">Feature03</p>
-          <h3 class="solve__ttl">特徴3のタイトル</h3>
-          <p class="solve__txt">特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。特徴の説明テキストが入ります。</p>
-        </div>
-        <div class="solve__img effect-fade fade-l"><amp-img src="/common/images/solve__img03.jpg" width="100" height="66" layout="responsive" alt=""></amp-img></div>
       </div>
     </div>
   </section>
-  [S-FLOW]
-  <!--template=/common/template/flow.html--> 
-  [E-FLOW]
-  [S-FLOW1]
-  <!--template=/common/template/flow1.html--> 
-  [E-FLOW1]
-  [S-FLOW2]
-  <!--template=/common/template/flow2.html--> 
-  [E-FLOW2]
-  <!-- 以下共通 --> 
-  
-  <!--template=/common/template/footer.html--> 
-</div>
+
+  <section class="l-section l-section--gray">
+    <div class="l-container">
+      <span class="en-label">UNDERでできること</span>
+      <h2>自分に合う物件だけを、<br>静かに受け取る。</h2>
+      <p class="lead-text">不特定多数に向けて公開された大量の情報から探すのではなく、登録した条件に合う物件だけが届く。UNDERは、投資家の判断効率を高めるための非公開型サービスです。</p>
+
+      <div class="c-grid-4">
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+          </div>
+          <h3>条件に合う物件だけ届く</h3>
+          <p>エリア、価格帯、利回りなどの条件に基づき、自分に合う情報だけを受け取れます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </div>
+          <h3>一般公開前の情報に出会える</h3>
+          <p>広く市場に出る前の、水面下で動く収益不動産情報に触れられます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3>情報鮮度が高い</h3>
+          <p>不特定多数に拡散しない仕組みだから、価格や条件の変化で情報価値が下がりにくいのが特長です。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          </div>
+          <h3>探す手間を減らせる</h3>
+          <p>毎日大量の物件情報を見比べなくても、届いた中から精度高く検討できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section">
+    <div class="l-container">
+      <h2>なぜ、良い物件に出会いにくいのか？</h2>
+      <p class="lead-text">収益不動産の世界では、条件の良い情報ほど広く公開されず、限られたルートで動いていることがあります。<br>一般的な検索サイトだけでは、出会える情報に限界があります。</p>
+
+      <div class="c-grid-3">
+        <div class="c-card" style="box-shadow: none; background: var(--c-base); border: none;">
+          <h3>公開情報は競争が激しい</h3>
+          <p>誰でも見られる情報は検討者が多く、良い物件ほど早く動いてしまいます。</p>
+        </div>
+        <div class="c-card" style="box-shadow: none; background: var(--c-base); border: none;">
+          <h3>水面下の案件は見つけにくい</h3>
+          <p>売主意向や流通事情により、一般公開されないまま動く物件も少なくありません。</p>
+        </div>
+        <div class="c-card" style="box-shadow: none; background: var(--c-base); border: none;">
+          <h3>検索だけでは限界がある</h3>
+          <p>条件に近い物件を探し続けても、本当に欲しい情報にたどり着けるとは限りません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="l-section l-section--gray">
+    <div class="l-container">
+      <h2>UNDERの仕組み</h2>
+      <p class="lead-text">UNDERでは、会員登録後に購入条件を設定いただき、<br>条件に合う情報だけが段階的に届く仕組みを採用しています。</p>
+
+      <div class="c-grid-3">
+        <div class="c-card">
+          <div class="c-card__icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg></div>
+          <h3>マイページで受け取る</h3>
+          <p>条件に合致した物件情報が、会員ごとのマイページに届きます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg></div>
+          <h3>個別提案で受け取る</h3>
+          <p>状況に応じて、チャット形式で限定的な提案を受け取ることができます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>
+          <h3>メールで受け取る</h3>
+          <p>スピード感を重視したい情報は、メールで直接受け取ることも可能です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section">
+    <div class="l-container">
+      <h2>通常のポータルサイトとの違い</h2>
+
+      <table class="c-table">
+        <tbody>
+          <tr>
+            <th>情報の見つけ方</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>自分で検索して探す</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>条件に合う情報が届く</td>
+          </tr>
+          <tr>
+            <th>公開範囲</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>不特定多数に公開</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>条件に合う会員に限定配信</td>
+          </tr>
+          <tr>
+            <th>情報の鮮度</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>公開中に鮮度が落ちやすい</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>水面下流通により鮮度を保ちやすい</td>
+          </tr>
+          <tr>
+            <th>検討効率</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>大量比較が必要</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>届いた情報を精度高く判断できる</td>
+          </tr>
+          <tr>
+            <th>出会える案件</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>一般公開案件が中心</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>非公開型の情報にも接点を持てる</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="l-section l-section--gray">
+    <div class="l-container">
+      <div style="background: var(--c-white); padding: 64px 40px; border-radius: 8px; border: 1px solid var(--c-border); max-width: 800px; margin: 0 auto;">
+        <h2 style="margin-bottom: 40px;">こんな方におすすめです</h2>
+        <ul style="max-width: 480px; margin: 0 auto; text-align: left;">
+          <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position:absolute; left:0; color:var(--c-primary);">✔</span> 一般公開前の情報に触れたい</li>
+          <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position:absolute; left:0; color:var(--c-primary);">✔</span> 条件に合う物件だけ効率よく見たい</li>
+          <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position:absolute; left:0; color:var(--c-primary);">✔</span> 水面下で動く収益不動産にアクセスしたい</li>
+          <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position:absolute; left:0; color:var(--c-primary);">✔</span> 忙しい中でも判断しやすい環境がほしい</li>
+          <li style="padding-left: 24px; position: relative;"><span style="position:absolute; left:0; color:var(--c-primary);">✔</span> 不動産会社から直接提案も受けたい</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section">
+    <div class="l-container">
+      <h2>ご利用の流れ</h2>
+      <div class="c-flow">
+        <div class="c-flow__item">
+          <span class="c-flow__num">1</span>
+          <h3>会員登録</h3>
+          <p style="font-size: 14px; color: var(--c-text-sub);">基本情報を入力し、サービス利用を開始します。</p>
+        </div>
+        <div class="c-flow__item">
+          <span class="c-flow__num">2</span>
+          <h3>条件登録</h3>
+          <p style="font-size: 14px; color: var(--c-text-sub);">希望エリア、価格帯、利回りなどの条件を登録します。</p>
+        </div>
+        <div class="c-flow__item">
+          <span class="c-flow__num">3</span>
+          <h3>物件情報を受け取る</h3>
+          <p style="font-size: 14px; color: var(--c-text-sub);">条件に合う物件がマイページやメールなどで届きます。</p>
+        </div>
+        <div class="c-flow__item">
+          <span class="c-flow__num">4</span>
+          <h3>検討・問い合わせ</h3>
+          <p style="font-size: 14px; color: var(--c-text-sub);">気になる案件について詳細確認や問い合わせへ進みます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section" style="background: var(--c-primary); color: var(--c-white);">
+    <div class="l-container" style="text-align: center;">
+      <h2 style="color: var(--c-white);">公開されすぎないから、<br>判断しやすい。</h2>
+      <p style="font-size: 16px; color: #E2E8F0; margin-bottom: 40px; line-height: 2;">
+        UNDERは、不特定多数への一斉公開ではなく、<br>条件に合う会員へ限定して情報を届ける仕組みです。<br>情報の質と鮮度を保ちながら、落ち着いて検討しやすい環境を整えています。
+      </p>
+      <div class="c-btn-wrap">
+        <a href="#register" class="c-btn c-btn--secondary" style="background: var(--c-white); color: var(--c-primary);">会員登録する</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section l-section--gray">
+    <div class="l-container" style="max-width: 800px;">
+      <h2>よくある質問</h2>
+      <div class="c-faq">
+        <details open>
+          <summary>会員登録すると、すぐに物件情報が見られますか？</summary>
+          <div class="c-faq__answer">登録内容や条件設定の完了後、条件に合う情報から順次ご案内します。</div>
+        </details>
+        <details>
+          <summary>サイト上で自由に全物件を検索できますか？</summary>
+          <div class="c-faq__answer">UNDERは非公開型サービスのため、誰でも全物件を検索できる仕組みではありません。条件に合う情報を個別に届ける設計です。</div>
+        </details>
+        <details>
+          <summary>利用料はかかりますか？</summary>
+          <div class="c-faq__answer">詳細はサービス案内をご確認ください。利用条件に応じてご案内します。</div>
+        </details>
+        <details>
+          <summary>初心者でも利用できますか？</summary>
+          <div class="c-faq__answer">ご利用自体は可能ですが、UNDERは条件に合う情報を効率よく受け取りたい方に向いたサービスです。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section">
+    <div class="l-container" style="text-align: center;">
+      <h2 style="margin-bottom: 24px;">探すより、届く。<br>公開される前に、出会う。</h2>
+      <p class="lead-text" style="margin-bottom: 40px;">条件に合う非公開物件との出会いを、<br>もっと静かに、もっと効率的に。</p>
+      <div class="c-btn-wrap">
+        <a href="#register" class="c-btn c-btn--primary">会員登録する</a>
+        <a href="#contact" class="c-btn c-btn--secondary">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
