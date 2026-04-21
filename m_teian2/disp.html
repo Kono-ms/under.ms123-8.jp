@@ -117,7 +117,7 @@
                   <span class="teian-step__search-label-item">医療業</span>
                 </div>
                 <div class="teian-step__search-select">
-                  <a href="#" class="js-open-search-modal">
+                  <a href="#teianSearchModal">
                     <span class="teian-step__search-select-lead">検索条件を変更</span>
                     <span class="teian-step__search-select-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="5.206" height="8.411" viewBox="0 0 5.206 8.411">
@@ -409,12 +409,18 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
+    }
+    .teian-search-modal__overlay {
+      position: absolute;
+      inset: 0;
       background: rgba(0, 0, 0, 0.5);
     }
-    .teian-search-modal.is-open {
+    .teian-search-modal:target {
       display: flex;
     }
     .teian-search-modal__dialog {
+      position: relative;
+      z-index: 1;
       width: min(760px, 100%);
       max-height: 90vh;
       overflow-y: auto;
@@ -434,8 +440,9 @@
       font-size: 20px;
     }
     .teian-search-modal__close {
-      border: 0;
-      background: transparent;
+      display: inline-block;
+      color: #122823;
+      text-decoration: none;
       font-size: 28px;
       line-height: 1;
       cursor: pointer;
@@ -473,11 +480,15 @@
       gap: 10px;
     }
     .teian-search-modal__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       height: 40px;
       padding: 0 18px;
       border: 1px solid #64a8ac;
       background: #fff;
       color: #64a8ac;
+      text-decoration: none;
       cursor: pointer;
     }
     .teian-search-modal__btn--primary {
@@ -487,10 +498,11 @@
   </style>
 
   <div class="teian-search-modal" id="teianSearchModal" aria-hidden="true">
+    <a href="#" class="teian-search-modal__overlay" aria-label="閉じる"></a>
     <div class="teian-search-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="teianSearchModalTitle">
       <div class="teian-search-modal__head">
         <h3 class="teian-search-modal__title" id="teianSearchModalTitle">検索条件を変更</h3>
-        <button type="button" class="teian-search-modal__close js-close-search-modal" aria-label="閉じる">×</button>
+        <a href="#" class="teian-search-modal__close" aria-label="閉じる">×</a>
       </div>
       <div class="teian-search-modal__form-grid">
         <div class="teian-search-modal__field">
@@ -635,41 +647,11 @@
         </div>
       </div>
       <div class="teian-search-modal__actions">
-        <button type="button" class="teian-search-modal__btn js-close-search-modal">キャンセル</button>
-        <button type="button" class="teian-search-modal__btn teian-search-modal__btn--primary js-close-search-modal">この条件で検索（仮）</button>
+        <a href="#" class="teian-search-modal__btn">キャンセル</a>
+        <a href="#" class="teian-search-modal__btn teian-search-modal__btn--primary">この条件で検索（仮）</a>
       </div>
     </div>
   </div>
-
-  <script>
-    (function() {
-      var modal = document.getElementById('teianSearchModal');
-      if (!modal) return;
-      var openButtons = document.querySelectorAll('.js-open-search-modal');
-      var closeButtons = modal.querySelectorAll('.js-close-search-modal');
-      var openModal = function(e) {
-        e.preventDefault();
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-      };
-      var closeModal = function() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-      };
-      openButtons.forEach(function(btn) {
-        btn.addEventListener('click', openModal);
-      });
-      closeButtons.forEach(function(btn) {
-        btn.addEventListener('click', closeModal);
-      });
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-      });
-    })();
-  </script>
 
 </body>
 </html>
