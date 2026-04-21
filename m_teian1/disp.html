@@ -127,7 +127,7 @@
                     <span class="teian-step__search-label-item">医療業</span>
                   </div>
                   <div class="teian-step__search-select">
-                    <a href="#">
+                    <a href="#" class="js-open-search-modal">
                       <span class="teian-step__search-select-lead">検索条件を変更</span>
                       <span class="teian-step__search-select-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="5.206" height="8.411" viewBox="0 0 5.206 8.411">
@@ -409,6 +409,278 @@
     <!-- 以下共通 -->
     <!--template=/common/template/footer.html-->
   </div>
+
+  <style>
+    .teian-search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .teian-search-modal.is-open {
+      display: flex;
+    }
+    .teian-search-modal__dialog {
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .teian-search-modal__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .teian-search-modal__title {
+      margin: 0;
+      font-size: 20px;
+    }
+    .teian-search-modal__close {
+      border: 0;
+      background: transparent;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .teian-search-modal__form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .teian-search-modal__field-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .teian-search-modal__field-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .teian-search-modal__field-row span {
+      text-align: center;
+    }
+    .teian-search-modal input,
+    .teian-search-modal select {
+      width: 100%;
+      height: 40px;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .teian-search-modal__actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .teian-search-modal__btn {
+      height: 40px;
+      padding: 0 18px;
+      border: 1px solid #64a8ac;
+      background: #fff;
+      color: #64a8ac;
+      cursor: pointer;
+    }
+    .teian-search-modal__btn--primary {
+      background: #64a8ac;
+      color: #fff;
+    }
+  </style>
+
+  <div class="teian-search-modal" id="teianSearchModal" aria-hidden="true">
+    <div class="teian-search-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="teianSearchModalTitle">
+      <div class="teian-search-modal__head">
+        <h3 class="teian-search-modal__title" id="teianSearchModalTitle">検索条件を変更</h3>
+        <button type="button" class="teian-search-modal__close js-close-search-modal" aria-label="閉じる">×</button>
+      </div>
+      <div class="teian-search-modal__form-grid">
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望物件価格</label>
+          <div class="teian-search-modal__field-row">
+            <input type="number" placeholder="下限">
+            <span>〜</span>
+            <input type="number" placeholder="上限">
+          </div>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望利回り</label>
+          <div class="teian-search-modal__field-row">
+            <input type="number" step="0.1" placeholder="下限">
+            <span>〜</span>
+            <input type="number" step="0.1" placeholder="上限">
+          </div>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望エリア（都道府県）</label>
+          <select>
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="aomori">青森県</option>
+                        <option value="iwate">岩手県</option>
+                        <option value="miyagi">宮城県</option>
+                        <option value="akita">秋田県</option>
+                        <option value="yamagata">山形県</option>
+                        <option value="fukushima">福島県</option>
+                        <option value="ibaraki">茨城県</option>
+                        <option value="tochigi">栃木県</option>
+                        <option value="gunma">群馬県</option>
+                        <option value="saitama">埼玉県</option>
+                        <option value="chiba">千葉県</option>
+                        <option value="tokyo">東京都</option>
+                        <option value="kanagawa">神奈川県</option>
+                        <option value="niigata">新潟県</option>
+                        <option value="toyama">富山県</option>
+                        <option value="ishikawa">石川県</option>
+                        <option value="fukui">福井県</option>
+                        <option value="yamanashi">山梨県</option>
+                        <option value="nagano">長野県</option>
+                        <option value="gifu">岐阜県</option>
+                        <option value="shizuoka">静岡県</option>
+                        <option value="aichi">愛知県</option>
+                        <option value="mie">三重県</option>
+                        <option value="shiga">滋賀県</option>
+                        <option value="kyoto">京都府</option>
+                        <option value="osaka">大阪府</option>
+                        <option value="hyogo">兵庫県</option>
+                        <option value="nara">奈良県</option>
+                        <option value="wakayama">和歌山県</option>
+                        <option value="tottori">鳥取県</option>
+                        <option value="shimane">島根県</option>
+                        <option value="okayama">岡山県</option>
+                        <option value="hiroshima">広島県</option>
+                        <option value="yamaguchi">山口県</option>
+                        <option value="tokushima">徳島県</option>
+                        <option value="kagawa">香川県</option>
+                        <option value="ehime">愛媛県</option>
+                        <option value="kochi">高知県</option>
+                        <option value="fukuoka">福岡県</option>
+                        <option value="saga">佐賀県</option>
+                        <option value="nagasaki">長崎県</option>
+                        <option value="kumamoto">熊本県</option>
+                        <option value="oita">大分県</option>
+                        <option value="miyazaki">宮崎県</option>
+                        <option value="kagoshima">鹿児島県</option>
+                        <option value="okinawa">沖縄県</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望エリア詳細（市区町村）</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">駅検索用の希望エリア（都道府県）</label>
+          <select>
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="aomori">青森県</option>
+                        <option value="iwate">岩手県</option>
+                        <option value="miyagi">宮城県</option>
+                        <option value="akita">秋田県</option>
+                        <option value="yamagata">山形県</option>
+                        <option value="fukushima">福島県</option>
+                        <option value="ibaraki">茨城県</option>
+                        <option value="tochigi">栃木県</option>
+                        <option value="gunma">群馬県</option>
+                        <option value="saitama">埼玉県</option>
+                        <option value="chiba">千葉県</option>
+                        <option value="tokyo">東京都</option>
+                        <option value="kanagawa">神奈川県</option>
+                        <option value="niigata">新潟県</option>
+                        <option value="toyama">富山県</option>
+                        <option value="ishikawa">石川県</option>
+                        <option value="fukui">福井県</option>
+                        <option value="yamanashi">山梨県</option>
+                        <option value="nagano">長野県</option>
+                        <option value="gifu">岐阜県</option>
+                        <option value="shizuoka">静岡県</option>
+                        <option value="aichi">愛知県</option>
+                        <option value="mie">三重県</option>
+                        <option value="shiga">滋賀県</option>
+                        <option value="kyoto">京都府</option>
+                        <option value="osaka">大阪府</option>
+                        <option value="hyogo">兵庫県</option>
+                        <option value="nara">奈良県</option>
+                        <option value="wakayama">和歌山県</option>
+                        <option value="tottori">鳥取県</option>
+                        <option value="shimane">島根県</option>
+                        <option value="okayama">岡山県</option>
+                        <option value="hiroshima">広島県</option>
+                        <option value="yamaguchi">山口県</option>
+                        <option value="tokushima">徳島県</option>
+                        <option value="kagawa">香川県</option>
+                        <option value="ehime">愛媛県</option>
+                        <option value="kochi">高知県</option>
+                        <option value="fukuoka">福岡県</option>
+                        <option value="saga">佐賀県</option>
+                        <option value="nagasaki">長崎県</option>
+                        <option value="kumamoto">熊本県</option>
+                        <option value="oita">大分県</option>
+                        <option value="miyazaki">宮崎県</option>
+                        <option value="kagoshima">鹿児島県</option>
+                        <option value="okinawa">沖縄県</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望路線</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望駅</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+      </div>
+      <div class="teian-search-modal__actions">
+        <button type="button" class="teian-search-modal__btn js-close-search-modal">キャンセル</button>
+        <button type="button" class="teian-search-modal__btn teian-search-modal__btn--primary js-close-search-modal">この条件で検索（仮）</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var modal = document.getElementById('teianSearchModal');
+      if (!modal) return;
+      var openButtons = document.querySelectorAll('.js-open-search-modal');
+      var closeButtons = modal.querySelectorAll('.js-close-search-modal');
+      var openModal = function(e) {
+        e.preventDefault();
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      };
+      var closeModal = function() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      };
+      openButtons.forEach(function(btn) {
+        btn.addEventListener('click', openModal);
+      });
+      closeButtons.forEach(function(btn) {
+        btn.addEventListener('click', closeModal);
+      });
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
+
 </body>
 
 </html>
