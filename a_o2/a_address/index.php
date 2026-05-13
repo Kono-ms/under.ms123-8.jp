@@ -1,44 +1,47 @@
 <?php
 
-require "../config.php";
+
+	require "../config.php";
 require "../base_a.php";
-require './config.php';
+
+	require './config.php';
 
 set_time_limit(7200);
 
-//データベース接続
-//ConnDB();
-//メイン処理
-Main();
+
+Main();//メイン処理
 
 //=========================================================================================================
-//名前 Main関数
-//機能 プログラムのメイン関数
-//引数 なし
-//戻値 なし
+//名前 
+//機能\ 
+//引数 
+//戻値 
 //=========================================================================================================
 function Main()
 {
 
 	eval(globals());
 
-	if(!isset($_POST['mode']) || $_POST['mode']===""){
-		$mode=mysqli_real_escape_string(ConnDB(),$_GET['mode'] ?? '');
-		$sort=mysqli_real_escape_string(ConnDB(),$_GET['sort'] ?? '');
-		$word=mysqli_real_escape_string(ConnDB(),$_GET['word'] ?? '');
-		$key=mysqli_real_escape_string(ConnDB(),$_GET['key'] ?? '');
-		$page=mysqli_real_escape_string(ConnDB(),$_GET['page'] ?? '');
-		$lid=mysqli_real_escape_string(ConnDB(),$_GET['lid'] ?? '');
-		$token=mysqli_real_escape_string(ConnDB(),$_GET['token'] ?? '');
+	if($_POST['mode']==""){
+		$mode=$_GET['mode'];
+		$sort=$_GET['sort'];
+		$word=mb_convert_encoding($_GET['word'], "UTF-8", "auto");
+		$key=$_GET['key'];
+		$page=$_GET['page'];
+		$lid=$_GET['lid'];
 	} else {
-		$mode=mysqli_real_escape_string(ConnDB(),$_POST['mode'] ?? '');
-		$sort=mysqli_real_escape_string(ConnDB(),$_POST['sort'] ?? '');
-		$word=mysqli_real_escape_string(ConnDB(),$_POST['word'] ?? '');
-		$key=mysqli_real_escape_string(ConnDB(),$_POST['key'] ?? '');
-		$page=mysqli_real_escape_string(ConnDB(),$_POST['page'] ?? '');
-		$lid=mysqli_real_escape_string(ConnDB(),$_POST['lid'] ?? '');
-		$token=mysqli_real_escape_string(ConnDB(),$_POST['token'] ?? '');
+		$mode=$_POST['mode'];
+		$sort=$_POST['sort'];
+		$word=mb_convert_encoding($_POST['word'], "UTF-8", "auto");
+		$key=$_POST['key'];
+		$page=$_POST['page'];
+		$lid=$_POST['lid'];
 	}
+
+//	$StrSQL="UPDATE DAT_ADDRESS SET PO='1' WHERE N2 like '%区\r\n'";
+//	if (!(mysqli_query(ConnDB(),$StrSQL))) {
+//		die;
+//	}
 
 	if ($mode==""){
 		$mode="list";
@@ -59,30 +62,17 @@ function Main()
 			LoadData($key);
 			break;
 		case "save":
-			// CSRFチェック OKならDB書き込み
-			if ($_SESSION['token']==$token) {
-				LoadData($key);
-				RequestData($obj,$a,$b,$key,$mode);
-				$msg=ErrorCheck();
-				if ($msg==""){
-					SaveData($key);
-					$mode="list";
-					if ($page==""){
-						$page=1;
-					} 
-				}
-			}
-			break;
-		case "delete":
-			// CSRFチェック OKならDB削除
-			if ($_SESSION['token']==$token) {
-				RequestData($obj,$a,$b,$key,$mode);
-				DeleteData($key);
-			}
+			LoadData($key);
+			RequestData($obj,$a,$b,$key,$mode);
+			SaveData($key);
 			$mode="list";
 			if ($page==""){
 				$page=1;
 			} 
+			break;
+		case "delete":
+			RequestData($obj,$a,$b,$key,$mode);
+			DeleteData($key);
 			break;
 		case "back":
 			RequestData($obj,$a,$b,$key,$mode);
@@ -105,58 +95,32 @@ function Main()
 			break;
 	} 
 
-	DispData($mode,$sort,$word,$key,$page,$lid,$token);
+	DispData($mode,$sort,$word,$key,$page,$lid);
 
 	return $function_ret;
 } 
 
 //=========================================================================================================
-//名前 画面表示処理
-//機能 Modeによって画面表示
-//引数 $mode,$sort,$word,$key,$page,$lid
-//戻値 なし
+//名前 
+//機能\ 
+//引数 
+//戻値 
 //=========================================================================================================
-function DispData($mode,$sort,$word,$key,$page,$lid,$token)
+function DispData($mode,$sort,$word,$key,$page,$lid)
 {
 
 	eval(globals());
 
-	//各テンプレートファイル名
-	$htmlnew = "edit.html";
-	$htmledit = "edit.html";
-	$htmlconf = "conf.html";
-	$htmlend = "end.html";
-	$htmldisp = "disp.html";
-	$htmlerr = "edit.html";
-	$htmllist = "list.html";
-
-	$FieldParam[73]="";
-	$tmp="";
-	$StrSQL="SELECT CD1,N1 FROM DAT_ADDRESS group by CD1,N1 order by cast(CD1 as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$tmp.=$item["N1"];
-	}
-	$FieldParam[73]=$tmp;
-
-	$FieldParam[74]="";
-	$tmp="";
-	$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS group by N2,N3 order by cast(SORT as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$val=str_replace("\r", "", str_replace("\n", "", $item['N2'].$item['N3']));
-		$tmp.=$val;
-	}
-	$FieldParam[74]=$tmp;
+//各テンプレートファイル名
+  $htmlnew = "./a_address_edit.html";
+  $htmledit = "./a_address_edit.html";
+  $htmlconf = "./a_address_conf.html";
+  $htmlend = "./a_address_end.html";
+  $htmldisp = "./a_address_disp.html";
+  $htmlerr = "./a_address_edit.html";
+  $htmllist = "./a_address_list.html";
 
 	if ($mode!="list"){
-
 		switch ($mode){
 			case "new":
 				$filename=$htmlnew;
@@ -191,18 +155,10 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				$errmsg="";
 				break;
 			case "save":
-				$msg=ErrorCheck();
-				if ($msg==""){
-					$filename=$htmlend;
-					$msg01="保存";
-					$msg02="";
-					$errmsg="";
-				} else {
-					$filename=$htmlerr;
-					$msg01=$msg;
-					$msg02="";
-					$errmsg=$msg;
-				} 
+				$filename=$htmlend;
+				$msg01="保存";
+				$msg02="";
+				$errmsg="";
 				break;
 			case "delete":
 				$filename=$htmlend;
@@ -224,11 +180,15 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str = MakeHTML($str,1,$lid);
 
 		if ($mode=="new"){
-			$str=DispParam($str, "NEWDATA");
-			$str=DispParamNone($str, "EDITDATA");
+			$str=str_replace("[S-NEWDATA]","",$str);
+			$str=str_replace("[E-NEWDATA]","",$str);
+			$str=str_replace("[S-EDITDATA]","<!--",$str);
+			$str=str_replace("[E-EDITDATA]","-->",$str);
 		} else {
-			$str=DispParamNone($str, "NEWDATA");
-			$str=DispParam($str, "EDITDATA");
+			$str=str_replace("[S-NEWDATA]","<!--",$str);
+			$str=str_replace("[E-NEWDATA]","-->",$str);
+			$str=str_replace("[S-EDITDATA]","",$str);
+			$str=str_replace("[E-EDITDATA]","",$str);
 		} 
 
 		for ($i=0; $i<=$FieldMax; $i=$i+1){
@@ -238,26 +198,29 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 					$str=str_replace("[D-".$FieldName[$i]."]",$filepath1."s.gif",$str);
 				} 
 
-				if(strstr($FieldValue[$i],"s.gif") !== false){
-					$str=DispParamNone($str, $FieldName[$i]);
+				if(strstr($FieldValue[$i],"s.gif") == true){
+					$str=str_replace("[S-".$FieldName[$i]."]","<!--",$str);
+					$str=str_replace("[E-".$FieldName[$i]."]","-->",$str);
 				} else {
-					$str=DispParam($str, $FieldName[$i]);
+					$str=str_replace("[S-".$FieldName[$i]."]","",$str);
+					$str=str_replace("[E-".$FieldName[$i]."]","",$str);
 				} 
 			} else {
 				if ($FieldValue[$i]==""){
-					$str=DispParamNone($str, $FieldName[$i]);
+					$str=str_replace("[S-".$FieldName[$i]."]","<!--",$str);
+					$str=str_replace("[E-".$FieldName[$i]."]","-->",$str);
 				} else {
-					$str=DispParam($str, $FieldName[$i]);
+					$str=str_replace("[S-".$FieldName[$i]."]","",$str);
+					$str=str_replace("[E-".$FieldName[$i]."]","",$str);
 				} 
+
 			} 
-			// HTMLエスケープ処理（詳細表示系、HIDDEN値）
-			$str=str_replace("[".$FieldName[$i]."]",htmlspecialchars($FieldValue[$i]),$str);
-			$str=str_replace("[D-".$FieldName[$i]."]",str_replace("\r\n","<br>",str_replace($FieldName[$i].":","",htmlspecialchars($FieldValue[$i]))),$str);
+			$str=str_replace("[".$FieldName[$i]."]",$FieldValue[$i],$str);
 			if ($FieldAtt[$i]=="1"){
 				$strtmp="";
 				$strtmp=$strtmp."<option value=''>▼選択して下さい</option>";
 				$tmp=explode("::",$FieldParam[$i]);
-				for ($j=0; $j<count($tmp); $j=$j+1) {
+				for ($j=0; $j<get_count($tmp); $j=$j+1) {
 					$strtmp=$strtmp."<option value='".$FieldName[$i].":".$tmp[$j]."'>".$tmp[$j]."</option>";
 
 				}
@@ -272,14 +235,14 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 			if ($FieldAtt[$i]=="2"){
 				$strtmp="";
 				$tmp=explode("::",$FieldParam[$i]);
-				$strtmp=$strtmp."<ul>";
-				for ($j=0; $j<count($tmp); $j=$j+1) {
-					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"radio\" name=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
+				$strtmp=$strtmp."<ul class='mlist25p'>";
+				for ($j=0; $j<get_count($tmp); $j=$j+1) {
+					$strtmp=$strtmp."<li><input type='radio' name='".$FieldName[$i]."' value='".$FieldName[$i].":".$tmp[$j]."'>&nbsp;".$tmp[$j]."</li>";
 				}
 				$strtmp=$strtmp."</ul>";
 				$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);
 				if (($filename==$htmlerr || $mode=="new" || $mode=="edit") && $FieldValue[$i]!="") {
-					$str=str_replace("\"".$FieldValue[$i]."\"","\"".$FieldValue[$i]."\" checked",$str);
+					$str=str_replace("'".$FieldValue[$i]."'","'".$FieldValue[$i]."' checked",$str);
 				} 
 			} 
 
@@ -287,21 +250,22 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				$strtmp="";
 				$tmp=explode("::",$FieldParam[$i]);
 				$strtmp=$strtmp."<ul class='mlist25p'>";
-				for ($j=0; $j<count($tmp); $j=$j+1) {
-					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"checkbox\" name=\"".$FieldName[$i]."[]\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
+				for ($j=0; $j<get_count($tmp); $j=$j+1) {
+					$strtmp=$strtmp."<li><input type='checkbox' name='".$FieldName[$i]."[]' value='".$FieldName[$i].":".$tmp[$j]."'>&nbsp;".$tmp[$j]."</li>";
 				}
 				$strtmp=$strtmp."</ul>";
 				$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);
 				if (($filename==$htmlerr || $mode=="new" || $mode=="edit") && $FieldValue[$i]!="") {
 					$tmp=explode("\t",$FieldValue[$i]);
-					for ($j=0; $j<count($tmp); $j=$j+1) {
-						$str=str_replace("\"".$tmp[$j]."\"","\"".$tmp[$j]."\" checked",$str);
+					for ($j=0; $j<get_count($tmp); $j=$j+1) {
+						$str=str_replace("'".$tmp[$j]."'","'".$tmp[$j]."' checked",$str);
 					}
 				} 
 			} 
 
+			$str=str_replace("[D-".$FieldName[$i]."]",str_replace("\r\n","<br />",str_replace($FieldName[$i].":","",$FieldValue[$i])),$str);
 			if (is_numeric($FieldValue[$i])) {
-				$str=str_replace("[N-".$FieldName[$i]."]",number_format($FieldValue[$i],0),$str);
+				$str=str_replace("[N-".$FieldName[$i]."]",number_format((float)$FieldValue[$i],0),$str);
 			} else {
 				$str=str_replace("[N-".$FieldName[$i]."]","",$str);
 			} 
@@ -315,23 +279,21 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		} else {
 			$str=DispParamNone($str, "ERR");
 		}
+
 		$str=str_replace("[SORT]",$sort,$str);
 		$str=str_replace("[WORD]",$word,$str);
 		$str=str_replace("[PAGE]",$page,$str);
 		$str=str_replace("[KEY]",$key,$str);
 		$str=str_replace("[LID]",$lid,$str);
 
-		// CSRFトークン生成
-		if($token==""){
-			$token=htmlspecialchars(session_id());
-			$_SESSION['token'] = $token;
-		}
-		$str=str_replace("[TOKEN]",$token,$str);
+		$str=str_replace("[BASE_DOMAIN]",BASE_DOMAIN,$str);
+$str=str_replace("[BASE_URL]",BASE_URL,$str);
+print $str;
 
-		$str=str_replace("[BASE_URL]",BASE_URL,$str);
-	print $str;
+	}
+		else
+	{
 
-	} else {
 
 		$filename=$htmllist;
 
@@ -339,27 +301,27 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$tso=@fopen($fp,"r");
 
 		while( $line = fgets($tso,1024) ){
-			if(strstr($line,"LIST-START") !== false){
-				break;
-			}
 			$strU=$strU.$line.chr(13);
-		}
-		while( $line = fgets($tso,1024) ){
-			if(strstr($line,"LIST-END") !== false){
+			if(strstr($line,"LIST-START") == true){
 				break;
 			}
-			$strM=$strM.$line.chr(13);
 		}
 		while( $line = fgets($tso,1024) ){
-			$strD=$strD.$line;
+			$strM=$strM.$line.chr(13);
+			if(strstr($line,"LIST-END") == true){
+				break;
+			}
+		}
+		while( $line = fgets($tso,1024) ){
+			$strD=$strD.$line.chr(13);
 		}
 		fclose($tso);
 
-		// SQLインジェクション対策
-		$StrSQL="SELECT * FROM ".$TableName." ".ListSql(mysqli_real_escape_string(ConnDB(),$sort),mysqli_real_escape_string(ConnDB(),$word)).";";
+		$StrSQL="";
+		$StrSQL="SELECT * FROM ".$TableName." ".ListSql($sort,$word).";";
 		$rs=mysqli_query(ConnDB(),$StrSQL);
 		$item=mysqli_num_rows($rs);
-		if($item==0) {
+		if($item=="") {
 			$pagestr="";
 			$strMain="<tr><td align=center colspan=7>対象データがありません。</td></tr>";
 		} else {
@@ -415,18 +377,13 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 							$str=str_replace("[D-".$FieldName[$i]."]",$filepath1."s.gif",$str);
 						} 
 					} 
-					// HTMLエスケープ処理（一覧表示系）
-					$str=str_replace("[".$FieldName[$i]."]",htmlspecialchars($item[$FieldName[$i]]),$str);
-					$str=str_replace("[D-".$FieldName[$i]."]",str_replace("\r\n","<br>",str_replace($FieldName[$i].":","",htmlspecialchars($item[$FieldName[$i]]))),$str);
+
+					$str=str_replace("[".$FieldName[$i]."]",$item[$FieldName[$i]],$str);
+					$str=str_replace("[D-".$FieldName[$i]."]",str_replace("\r\n","<br />",str_replace($FieldName[$i].":","",$item[$FieldName[$i]])),$str);
 					if (is_numeric($item[$FieldName[$i]])) {
-						$str=str_replace("[N-".$FieldName[$i]."]",number_format($item[$FieldName[$i]],0),$str);
+						$str=str_replace("[N-".$FieldName[$i]."]",number_format((float)$item[$FieldName[$i]],0),$str);
 					} else {
 						$str=str_replace("[N-".$FieldName[$i]."]","",$str);
-					} 
-					if ($item[$FieldName[$i]]==""){
-						$str=DispParamNone($str, $FieldName[$i]);
-					} else {
-						$str=DispParam($str, $FieldName[$i]);
 					} 
 				}
 
@@ -458,15 +415,9 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str=str_replace("[KEY]",$key,$str);
 		$str=str_replace("[LID]",$lid,$str);
 
-		// CSRFトークン生成
-		if($token==""){
-			$token=htmlspecialchars(session_id());
-			$_SESSION['token'] = $token;
-		}
-		$str=str_replace("[TOKEN]",$token,$str);
-
-		$str=str_replace("[BASE_URL]",BASE_URL,$str);
-	print $str;
+		$str=str_replace("[BASE_DOMAIN]",BASE_DOMAIN,$str);
+$str=str_replace("[BASE_URL]",BASE_URL,$str);
+print $str;
 
 	} 
 
@@ -475,52 +426,42 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 } 
 
 //=========================================================================================================
-//名前 データリクエストパラメータ処理
-//機能 データリクエストパラメータの処理と画像の保存
-//引数 $obj,$a,$b,$key,$mode
-//戻値 $function_ret;
+//名前 
+//機能\ 
+//引数 
+//戻値 
 //=========================================================================================================
 function RequestData($obj,$a,$b,$key,$mode)
 {
 	eval(globals());
 
-	// HTMLエスケープ処理（リクエストパラメータ）
-	// クロスサイトスクリプティング対策
 	for ($i=0; $i<=$FieldMax; $i=$i+1) {
 		if ($FieldAtt[$i]==3) {
-			if (isset($_POST[$FieldName[$i]])) {
-				$postVal = $_POST[$FieldName[$i]];
-				if(is_string($postVal) && strstr($postVal,"\t") !== false) {
-					$FieldValue[$i]=htmlspecialchars($postVal);
-				} else {
-					$FieldValue[$i]="";
-					if (is_array($postVal)) {
-						for ($j=0; $j<count($postVal); $j=$j+1) {
-						if ($j!=0) {
-							$FieldValue[$i]=$FieldValue[$i]."\t";
-						}
-						$FieldValue[$i]=$FieldValue[$i].$postVal[$j];
-						}
+			if(is_array($_POST[$FieldName[$i]]) == true) {
+				$FieldValue[$i]="";
+				for ($j=0; $j<get_count($_POST[$FieldName[$i]]); $j=$j+1) {
+					if ($j!=0) {
+						$FieldValue[$i]=$FieldValue[$i]."\t";
 					}
+					$FieldValue[$i]=$FieldValue[$i].$_POST[$FieldName[$i]][$j];
 				}
+			} else {
+				$FieldValue[$i]=$_POST[$FieldName[$i]];
 			}
+
 		} else {
-			$FieldValue[$i]=htmlspecialchars(str_replace("\\","",($_POST[$FieldName[$i]] ?? '')));
+			$FieldValue[$i]=str_replace("\\","",$_POST[$FieldName[$i]]);
 		}
-		if ($FieldAtt[$i]==4 && $mode=="save") {
-			// $exts = explode("[/\\.]", $_FILES["EP_".$FieldName[$i]]['name']);
-			// $n = count($exts) - 1;
-			// $extention = $exts[$n];
-			// if ($extention=="jpeg") {
-			// 	$extention="jpg";
-			// } 
-			$file = pathinfo($_FILES["EP_".$FieldName[$i]]['name'] ?? '');
-			$extention=$file['extension'] ?? '';
-			
+		if ($FieldAtt[$i]==4 && $mode=="saveconf") {
+			$exts = explode("[/\\.]", $_FILES["EP_".$FieldName[$i]]['name']);
+			$n = get_count($exts) - 1;
+			$extention = $exts[$n];
+			if ($extention=="jpeg") {
+				$extention="jpg";
+			} 
+
 			if ($extention!="" && !!isset($extention)) {
-				//特殊文字削除
-				$filename=$FieldName[$i]."-".date("YmdHis");
-				$filename = preg_replace("/[^ぁ-んァ-ンーa-zA-Z0-9一-龠０-９\-\r]+/u",'A' ,$filename).".".$extention;
+				$filename=$FieldName[$i]."-".date("YmdHis").".".$extention;
 				$FieldValue[$i]=$filepath1.$filename;
 			} else {
 				if ($FieldValue[$i]=="" || !isset($FieldValue[$i])) {
@@ -528,119 +469,14 @@ function RequestData($obj,$a,$b,$key,$mode)
 					$FieldValue[$i]=$filepath1.$filename;
 				} 
 			} 
-			if (($_POST["DEL_IMAGE_".$FieldName[$i]] ?? '')=="on") {
+			if ($_POST["DEL_IMAGE_".$FieldName[$i]]=="on") {
 				$filename="s.gif";
 				$FieldValue[$i]=$filepath1.$filename;
 			}
 			if ($filename!="s.gif" && ($extention!="" && !!isset($extention))) {
-				// 2021.08.18 yamamoto エラーなのにアップロードされる問題の対応
-				if(ErrorCheck() == '') {
-					move_uploaded_file($_FILES["EP_".$FieldName[$i]]["tmp_name"], "data/".$filename);
-					pic_resize("data/".$filename, 800,800);
-				}
+				move_uploaded_file($_FILES["EP_".$FieldName[$i]]["tmp_name"], "data/".$filename);
 			} 
 		} 
-	}
-
-	// 物件種別の自動振り分け
-	// 条件: 「媒介受付済み又は売主直情報」がON または
-	//       「他社ポータルサイト未公開」かつ「レインズ未公開」がON の場合はマッチング物件
-	$flagEtc01 = ($FieldValue[96] ?? '') === '1';
-	$flagEtc02 = ($FieldValue[97] ?? '') === '1';
-	$flagEtc03 = ($FieldValue[98] ?? '') === '1';
-	$isMatching = $flagEtc01 || ($flagEtc02 && $flagEtc03);
-	$FieldValue[99] = $isMatching ? 'マッチング物件' : '提案物件';
-
-	return $function_ret;
-} 
-
-//=========================================================================================================
-//名前 DB読み込み
-//機能 DBからレコードを取得
-//引数 $key
-//戻値 $function_ret
-//=========================================================================================================
-function LoadData($key)
-{
-	eval(globals());
-
-	// SQLインジェクション対策
-	// HTMLエスケープ処理（SQL読み込み）
-	$StrSQL="SELECT * FROM ".$TableName." WHERE ".$FieldName[$FieldKey]."='".mysqli_real_escape_string(ConnDB(),$key)."';";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-
-	if ($rs==true) {
-		$item = mysqli_fetch_assoc($rs);
-		for ($i=0; $i<=$FieldMax; $i=$i+1) {
-			$FieldValue[$i]=htmlspecialchars($item[$FieldName[$i]]);
-		}
-	} 
-
-	return $function_ret;
-} 
-
-//=========================================================================================================
-//名前 DB書き込み
-//機能 DBにレコードを保存
-//引数 $key
-//戻値 $function_ret
-//=========================================================================================================
-function SaveData($key)
-{
-	eval(globals());
-
-	// SQLインジェクション対策
-	// HTMLエスケープ処理（SQL書き込み）
-	$StrSQL="SELECT * FROM ".$TableName." WHERE `".$FieldName[$FieldKey]."`='".mysqli_real_escape_string(ConnDB(),$key)."';";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-	$item=mysqli_num_rows($rs);
-	if($item==0) {
-		$StrSQL="INSERT INTO ".$TableName." (";
-		for ($i=1; $i<=$FieldMax; $i++) {
-			if($i>1){
-				$StrSQL.=",";
-			}
-			$StrSQL.="`".$FieldName[$i]."`";
-		}
-		$StrSQL=$StrSQL.") VALUES (";
-		for ($i=1; $i<=$FieldMax; $i++) {
-			if($i>1){
-				$StrSQL.=",";
-			}
-			$StrSQL.="'".str_replace("'","''",htmlspecialchars($FieldValue[$i]))."'";
-		}
-		$StrSQL=$StrSQL.")";
-	} else {
-		$StrSQL="UPDATE ".$TableName." SET ";
-		for ($i=1; $i<=$FieldMax; $i++) {
-			if($i>1){
-				$StrSQL.=",";
-			}
-			$StrSQL.="`".$FieldName[$i]."`='".str_replace("'","''",htmlspecialchars($FieldValue[$i]))."'";
-		}
-		$StrSQL=$StrSQL." WHERE ".$FieldName[$FieldKey]."='".$key."'";
-	} 
-	if (!(mysqli_query(ConnDB(),$StrSQL))) {
-		die;
-	}
-
-	return $function_ret;
-} 
-
-//=========================================================================================================
-//名前 DB削除
-//機能 DBからレコードを削除
-//引数 $key
-//戻値 $function_ret
-//=========================================================================================================
-function DeleteData($key)
-{
-	eval(globals());
-
-	// SQLインジェクション対策
-	$StrSQL="DELETE FROM ".$TableName." WHERE ".$FieldName[$FieldKey]."='".mysqli_real_escape_string(ConnDB(),$key)."';";
-	if (!(mysqli_query(ConnDB(),$StrSQL))) {
-		die;
 	}
 
 	return $function_ret;
@@ -661,9 +497,9 @@ function ExportData()
 	$StrSQL="SELECT * FROM ".$TableName." order by ID";
 	$rs=mysqli_query(ConnDB(),$StrSQL);
 	$item=mysqli_num_rows($rs);
-	if($item<>0) {
+	if($item<>"") {
 		header("Content-Type: application/octet-stream");
-		header("Content-Disposition: attachment; filename=member".date('Ymd').".txt");
+		header("Content-Disposition: attachment; filename=clinic".date('Ymd').".txt");
 
 		$str="";
 		for ($j=0; $j<=$FieldMax; $j=$j+1){
@@ -695,10 +531,10 @@ function ExportData()
 } 
 
 //=========================================================================================================
-//名前 タブ区切りデータのインポート処理
-//機能 タブ区切りテキストデータ（ShiftJIS→UTF-8）のエクスポート処理
-//引数 なし
-//戻値 なし
+//名前 
+//機能\ 
+//引数 
+//戻値 
 //=========================================================================================================
 function ImportData($obj,$a,$b,$key,$mode)
 {
@@ -709,7 +545,7 @@ function ImportData($obj,$a,$b,$key,$mode)
 
 	$cnt=0;
 	$cols=explode("\t",$txt);
-	for ($i=0; $i<=count($cols); $i=$i+1){
+	for ($i=0; $i<=get_count($cols); $i=$i+1){
 		if($cols[$i]<>""){
 			$cnt++;
 		}
@@ -732,7 +568,7 @@ function ImportData($obj,$a,$b,$key,$mode)
 			$StrSQL="SELECT * FROM ".$TableName." where ID='".$cols[0]."';";
 			$rs=mysqli_query(ConnDB(),$StrSQL);
 			$item=mysqli_num_rows($rs);
-			if($item==0) {
+			if($item=="") {
 				$tmp="";
 				for ($j=0; $j<$cnt; $j=$j+1){
 					if ($tmp!=""){
@@ -773,18 +609,134 @@ function ImportData($obj,$a,$b,$key,$mode)
 } 
 
 //=========================================================================================================
-//名前 DB初期化
-//機能 DBとの接続を確立する
-//引数 なし
-//戻値 $function_ret
+//名前 
+//機能\ 
+//引数 
+//戻値 
+//=========================================================================================================
+function LoadData($key)
+{
+	eval(globals());
+
+	$StrSQL="";
+	$StrSQL="SELECT * FROM ".$TableName." WHERE ".$FieldName[$FieldKey]."='".$key."';";
+	$rs=mysqli_query(ConnDB(),$StrSQL);
+
+	if ($rs==true) {
+		$item = mysqli_fetch_assoc($rs);
+		for ($i=0; $i<=$FieldMax; $i=$i+1) {
+			$FieldValue[$i]=$item[$FieldName[$i]];
+		}
+	} 
+
+	return $function_ret;
+} 
+
+//=========================================================================================================
+//名前 
+//機能\ 
+//引数 
+//戻値 
+//=========================================================================================================
+function SaveData($key)
+{
+	eval(globals());
+
+	$StrSQL="";
+	$StrSQL="SELECT * FROM ".$TableName." WHERE `".$FieldName[$FieldKey]."`='".$key."';";
+	$rs=mysqli_query(ConnDB(),$StrSQL);
+	$cnt=mysqli_num_rows($rs);
+	if($cnt=="" || $cnt==0) {
+		$StrSQL="INSERT INTO ".$TableName." (";
+		for ($i=1; $i<=$FieldMax-1; $i=$i+1) {
+			$StrSQL=$StrSQL."`".$FieldName[$i]."`,";
+		}
+
+		$StrSQL=$StrSQL."`".$FieldName[$FieldMax]."`";
+		$StrSQL=$StrSQL.") VALUES (";
+		for ($i=1; $i<=$FieldMax-1; $i=$i+1) {
+			$StrSQL=$StrSQL."'".str_replace("'","''",$FieldValue[$i])."',";
+		}
+
+		$StrSQL=$StrSQL."'".str_replace("'","''",$FieldValue[$FieldMax])."'";
+		$StrSQL=$StrSQL.")";
+	} else {
+		$StrSQL="UPDATE ".$TableName." SET ";
+		for ($i=1; $i<=$FieldMax-1; $i=$i+1) {
+			$StrSQL=$StrSQL."`".$FieldName[$i]."`='".str_replace("'","''",$FieldValue[$i])."',";
+		}
+
+		$StrSQL=$StrSQL."`".$FieldName[$FieldMax]."`='".str_replace("'","''",$FieldValue[$FieldMax])."' ";
+		$StrSQL=$StrSQL."WHERE ".$FieldName[$FieldKey]."='".$key."'";
+	} 
+
+
+	if (!(mysqli_query(ConnDB(),$StrSQL))) {
+		die;
+	}
+
+	return $function_ret;
+} 
+
+//=========================================================================================================
+//名前 
+//機能\ 
+//引数 
+//戻値 
+//=========================================================================================================
+function DeleteData($key)
+{
+	eval(globals());
+
+	$StrSQL="";
+	$StrSQL="DELETE FROM ".$TableName." WHERE ".$FieldName[$FieldKey]."='".$key."';";
+
+	if (!(mysqli_query(ConnDB(),$StrSQL))) {
+		die;
+	}
+
+	return $function_ret;
+} 
+
+//======================================================================
+//名前 GetFld
+//機能\ フィールドの値を取得
+//引数 (i) pfldCol		：フィールド
+//		 (i) pvarNull		：Null時代替
+//戻値 フィールド値
+//詳細 
+//======================================================================
+function GetFld($pfldCol,$pvarNull)
+{
+	eval(globals());
+
+//Null確認
+	if (!isset($pfldCol->Value)==true) {
+		$function_ret=$pvarNull;
+		return $function_ret;
+	} 
+
+
+//値取得
+	$function_ret=$pfldCol->Value;
+
+	return $function_ret;
+} 
+
+//=========================================================================================================
+//【関数名】	:ConnDB()
+//【機能\】	:データベースへの接続
+//【引数】	:なし
+//【戻り値】	:なし
+//【備考】	:DB接続
 //=========================================================================================================
 function ConnDB()
 {
-	static $conn = null;
-	if ($conn === null) {
-		$conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWD, DB_DBNAME);
-	}
-	return $conn;
+	eval(globals());
+
+	$ConnDB=mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWD, DB_DBNAME);
+
+	return $ConnDB;
 } 
 
 ?>

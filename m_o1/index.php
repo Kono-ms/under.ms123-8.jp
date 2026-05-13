@@ -201,7 +201,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$entryIntent)
 	$htmldisp = "disp.html";
 	$htmlerr = "edit.html";
 	$htmllist = "list.html";
-
+echo "<!--mode:".$mode."-->";
 	if ($mode!="list"){
 		switch ($mode){
 			case "new":
@@ -267,6 +267,31 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$entryIntent)
 				break;
 		}
 
+		$FieldParam[73]="";
+		$tmp="";
+		$StrSQL="SELECT CD1,N1 FROM DAT_ADDRESS group by CD1,N1 order by cast(CD1 as signed) asc";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$tmp.=$item["N1"];
+		}
+		$FieldParam[73]=$tmp;
+
+		$FieldParam[74]="";
+		$tmp="";
+		$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS group by N2,N3 order by cast(SORT as signed) asc";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=str_replace("\r", "", str_replace("\n", "", $item['N2'].$item['N3']));
+			$tmp.=$val;
+		}
+		$FieldParam[74]=$tmp;
+echo "<!--74:".$FieldParam[74]."-->";
 		$fp=$DOCUMENT_ROOT.$filename;
 		$str=@file_get_contents($fp);
 

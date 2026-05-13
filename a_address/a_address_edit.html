@@ -1,0 +1,99 @@
+<section class="content-header">
+
+  <h1>住所データ管理</h1>
+
+  <ol class="breadcrumb">
+    <li><i class="fa fa-dashboard"></i> Home</li>
+    <li><a href="/a_address/">住所データ管理</a></li>
+    <li>住所データ管理登録・編集</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+
+
+    <div class="col-xs-12">
+      <div class="box box-warning">
+
+        <div class="box-header">
+          <h3 class="box-title">登録・編集</h3>
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+
+          [S-ERR]
+          <div class="alert alert-warning alert-dismissible">
+            <div class="c-message mb20">
+              <p><i class="icon fa fa-warning"></i> 入力内容に不備がございますので、内容のご確認をお願いいたします。</p>
+            </div>
+            <div class="c-page-text">
+              <ul class="error-list">
+                [ERRMSG]
+              </ul>
+            </div>
+          </div>
+          [E-ERR]
+
+
+          <form method="post" action="./" enctype="multipart/form-data">
+            <input type="hidden" name="mode" value="saveconf">
+            <input type="hidden" name="key" value="[ID]">
+            <input type="hidden" name="sort" value="[SORT]">
+            <input type="hidden" name="word" value="[WORD]">
+            <input type="hidden" name="page" value="[PAGE]">
+            <input type="hidden" name="lid" value="[LID]">
+            <input type="hidden" name="ID" value="[ID]">
+
+            <table class="table table-bordered table_edit">
+              <tbody>
+                <tr>
+                  <th>CD1</th>
+                  <td><input type="text" class="txt_w35p form-control" name="CD1" value="[CD1]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>CD2</th>
+                  <td><input type="text" class="txt_w35p form-control" name="CD2" value="[CD2]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>N1</th>
+                  <td><input type="text" class="txt_w35p form-control" name="N1" value="[N1]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>N2</th>
+                  <td><input type="text" class="txt_w35p form-control" name="N2" value="[N2]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>N3</th>
+                  <td><input type="text" class="txt_w35p form-control" name="N3" value="[N3]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>PO</th>
+                  <td><input type="text" class="txt_w35p form-control" name="PO" value="[PO]"
+                      size="30"></td>
+                </tr>
+                <tr>
+                  <th>SORT</th>
+                  <td><input type="text" class="txt_w35p form-control" name="SORT" value="[SORT]"
+                      size="30"></td>
+                </tr>
+              </tbody>
+            </table>
+            <button name="submit" value="submit" type="submit" class="btn btn-block btn-default"><i
+                class="fa fa-floppy-o"></i> 保存</button>
+          </form>
+
+
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+
+
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->

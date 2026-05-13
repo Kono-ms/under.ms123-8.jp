@@ -9,7 +9,8 @@ define('DB_PASSWD', 'x7WYr3a9');
 define('DB_DBNAME', 'ms123_under');
 
 // Domain
-define('BASE_URL', 'https://under.ms123-8.jp');
+define('BASE_DOMAIN', 'under.ms123-8.jp');
+define('BASE_URL', 'https://' . BASE_DOMAIN);
 
 // Mail
 define('SENDER_EMAIL', 'info@ms123.jp');

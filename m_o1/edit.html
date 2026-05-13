@@ -9,6 +9,63 @@
   <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
   <link rel="icon" type="image/png" href="/icon-192x192.png">
   <!--template=/common/template/head.html-->
+  <script>
+    $(function () {
+
+      //都道府県の変更
+      $('.M1_MCHK02').change(function () {
+        prefchange();
+      });
+      function prefchange() {
+
+
+        let city_name_ul = "M1_MCHK03_ul";
+        let city_name = "M1_MCHK03";
+        let prefs = "";
+        let cityvals = "";
+
+        $('.M1_MCHK02:checked').each(function () {
+          let v = $(this).val();
+          if (prefs != "") {
+            prefs = prefs + ",";
+          }
+          prefs = prefs + v;
+        });
+        $('.M1_MCHK03:checked').each(function () {
+          let v = $(this).val();
+          if (cityvals != "") {
+            cityvals = cityvals + ",";
+          }
+          cityvals = cityvals + v;
+        });
+
+        prefs = prefs.replaceAll("M1_MCHK02:", "");
+        cityvals = cityvals.replaceAll("M1_MCHK03:", "");
+        console.log("prefs:" + prefs);
+        // console.log("city_name_ul:" + city_name_ul);
+        console.log("cityvals:" + cityvals);
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/city.php",
+          async: false,
+          data: {
+            prefs: prefs,
+            fieldname1: city_name,
+            cityvals: cityvals
+          }
+        }).done(function (data) {
+          // console.log("done:" + data);
+          $('#' + city_name_ul + '').empty(); //子要素削除
+          $('#' + city_name_ul + '').html(data);
+
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+      }
+
+      prefchange();
+    });
+  </script>
 </head>
 
 <body>
@@ -588,102 +645,102 @@
     <!--template=/common/template/footer.html-->
   </div>
   <script>
-  (function () {
-    var etc01 = document.getElementById('O1_ETC01');
-    var etc02 = document.getElementById('O1_ETC02');
-    var etc03 = document.getElementById('O1_ETC03');
-    var matchingRadio = document.getElementById('O1_ETC04_MATCHING');
-    var teianRadio = document.getElementById('O1_ETC04_TEIAN');
+    (function () {
+      var etc01 = document.getElementById('O1_ETC01');
+      var etc02 = document.getElementById('O1_ETC02');
+      var etc03 = document.getElementById('O1_ETC03');
+      var matchingRadio = document.getElementById('O1_ETC04_MATCHING');
+      var teianRadio = document.getElementById('O1_ETC04_TEIAN');
 
-    if (!etc01 || !etc02 || !etc03 || !matchingRadio || !teianRadio) {
-      return;
-    }
-
-    var entryIntent = "[ENTRY_INTENT]";
-    var submitButton = document.querySelector('input[type="submit"][name="submit"]');
-    var form = submitButton ? submitButton.form : null;
-    var lastChanged = null;
-
-    etc01.checked = "[O1_ETC01]" === "1";
-    etc02.checked = "[O1_ETC02]" === "1";
-    etc03.checked = "[O1_ETC03]" === "1";
-
-    if (entryIntent === "matching" && "[ID]" === "") {
-      etc01.checked = true;
-      etc02.checked = false;
-      etc03.checked = false;
-    } else if (entryIntent === "teian" && "[ID]" === "") {
-      etc01.checked = false;
-      etc02.checked = false;
-      etc03.checked = false;
-    }
-
-    function updatePropertyType() {
-      var isMatching = etc01.checked || (etc02.checked && etc03.checked);
-      matchingRadio.checked = isMatching;
-      teianRadio.checked = !isMatching;
-      return isMatching;
-    }
-
-    function getIntentLabel() {
-      if (entryIntent === "matching") {
-        return "マッチング物件";
-      }
-      if (entryIntent === "teian") {
-        return "提案物件";
-      }
-      return "";
-    }
-
-    function confirmIfIntentMismatch() {
-      var isMatching = updatePropertyType();
-      if (!entryIntent) {
-        return true;
-      }
-      var isMismatch = (entryIntent === "matching" && !isMatching) || (entryIntent === "teian" && isMatching);
-      if (!isMismatch) {
-        return true;
-      }
-      var nextType = isMatching ? "マッチング物件" : "提案物件";
-      var ok = window.confirm("現在のフラグ条件では物件種別が「" + nextType + "」になります。よろしいですか？");
-      if (ok) {
-        return true;
+      if (!etc01 || !etc02 || !etc03 || !matchingRadio || !teianRadio) {
+        return;
       }
 
-      if (lastChanged && lastChanged.type === "checkbox") {
-        lastChanged.checked = !lastChanged.checked;
-        updatePropertyType();
+      var entryIntent = "[ENTRY_INTENT]";
+      var submitButton = document.querySelector('input[type="submit"][name="submit"]');
+      var form = submitButton ? submitButton.form : null;
+      var lastChanged = null;
+
+      etc01.checked = "[O1_ETC01]" === "1";
+      etc02.checked = "[O1_ETC02]" === "1";
+      etc03.checked = "[O1_ETC03]" === "1";
+
+      if (entryIntent === "matching" && "[ID]" === "") {
+        etc01.checked = true;
+        etc02.checked = false;
+        etc03.checked = false;
+      } else if (entryIntent === "teian" && "[ID]" === "") {
+        etc01.checked = false;
+        etc02.checked = false;
+        etc03.checked = false;
       }
-      return false;
-    }
 
-    function onFlagChanged(event) {
-      lastChanged = event.target;
-      confirmIfIntentMismatch();
-    }
+      function updatePropertyType() {
+        var isMatching = etc01.checked || (etc02.checked && etc03.checked);
+        matchingRadio.checked = isMatching;
+        teianRadio.checked = !isMatching;
+        return isMatching;
+      }
 
-    etc01.addEventListener('change', onFlagChanged);
-    etc02.addEventListener('change', onFlagChanged);
-    etc03.addEventListener('change', onFlagChanged);
-
-    if (form && submitButton) {
-      submitButton.onclick = function () {
-        if (!confirmIfIntentMismatch()) {
-          return false;
+      function getIntentLabel() {
+        if (entryIntent === "matching") {
+          return "マッチング物件";
         }
-        var intentLabel = getIntentLabel();
-        var suffix = intentLabel ? "\\n（遷移元: " + intentLabel + "登録）" : "";
-        var ok = window.confirm("保存してもよろしいですか？" + suffix);
+        if (entryIntent === "teian") {
+          return "提案物件";
+        }
+        return "";
+      }
+
+      function confirmIfIntentMismatch() {
+        var isMatching = updatePropertyType();
+        if (!entryIntent) {
+          return true;
+        }
+        var isMismatch = (entryIntent === "matching" && !isMatching) || (entryIntent === "teian" && isMatching);
+        if (!isMismatch) {
+          return true;
+        }
+        var nextType = isMatching ? "マッチング物件" : "提案物件";
+        var ok = window.confirm("現在のフラグ条件では物件種別が「" + nextType + "」になります。よろしいですか？");
         if (ok) {
-          form.submit();
+          return true;
+        }
+
+        if (lastChanged && lastChanged.type === "checkbox") {
+          lastChanged.checked = !lastChanged.checked;
+          updatePropertyType();
         }
         return false;
-      };
-    }
+      }
 
-    updatePropertyType();
-  })();
-</script>
+      function onFlagChanged(event) {
+        lastChanged = event.target;
+        confirmIfIntentMismatch();
+      }
+
+      etc01.addEventListener('change', onFlagChanged);
+      etc02.addEventListener('change', onFlagChanged);
+      etc03.addEventListener('change', onFlagChanged);
+
+      if (form && submitButton) {
+        submitButton.onclick = function () {
+          if (!confirmIfIntentMismatch()) {
+            return false;
+          }
+          var intentLabel = getIntentLabel();
+          var suffix = intentLabel ? "\\n（遷移元: " + intentLabel + "登録）" : "";
+          var ok = window.confirm("保存してもよろしいですか？" + suffix);
+          if (ok) {
+            form.submit();
+          }
+          return false;
+        };
+      }
+
+      updatePropertyType();
+    })();
+  </script>
 </body>
 
 </html>

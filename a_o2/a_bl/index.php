@@ -7,7 +7,7 @@ require './config.php';
 set_time_limit(7200);
 
 //データベース接続
-//ConnDB();
+ConnDB();
 //メイン処理
 Main();
 
@@ -129,31 +129,6 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 	$htmldisp = "disp.html";
 	$htmlerr = "edit.html";
 	$htmllist = "list.html";
-
-	$FieldParam[73]="";
-	$tmp="";
-	$StrSQL="SELECT CD1,N1 FROM DAT_ADDRESS group by CD1,N1 order by cast(CD1 as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$tmp.=$item["N1"];
-	}
-	$FieldParam[73]=$tmp;
-
-	$FieldParam[74]="";
-	$tmp="";
-	$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS group by N2,N3 order by cast(SORT as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$val=str_replace("\r", "", str_replace("\n", "", $item['N2'].$item['N3']));
-		$tmp.=$val;
-	}
-	$FieldParam[74]=$tmp;
 
 	if ($mode!="list"){
 
@@ -508,19 +483,15 @@ function RequestData($obj,$a,$b,$key,$mode)
 			$FieldValue[$i]=htmlspecialchars(str_replace("\\","",($_POST[$FieldName[$i]] ?? '')));
 		}
 		if ($FieldAtt[$i]==4 && $mode=="save") {
-			// $exts = explode("[/\\.]", $_FILES["EP_".$FieldName[$i]]['name']);
-			// $n = count($exts) - 1;
-			// $extention = $exts[$n];
-			// if ($extention=="jpeg") {
-			// 	$extention="jpg";
-			// } 
-			$file = pathinfo($_FILES["EP_".$FieldName[$i]]['name'] ?? '');
-			$extention=$file['extension'] ?? '';
-			
+			$exts = explode("[/\\.]", $_FILES["EP_".$FieldName[$i]]['name']);
+			$n = count($exts) - 1;
+			$extention = $exts[$n];
+			if ($extention=="jpeg") {
+				$extention="jpg";
+			} 
+
 			if ($extention!="" && !!isset($extention)) {
-				//特殊文字削除
-				$filename=$FieldName[$i]."-".date("YmdHis");
-				$filename = preg_replace("/[^ぁ-んァ-ンーa-zA-Z0-9一-龠０-９\-\r]+/u",'A' ,$filename).".".$extention;
+				$filename=$FieldName[$i]."-".date("YmdHis").".".$extention;
 				$FieldValue[$i]=$filepath1.$filename;
 			} else {
 				if ($FieldValue[$i]=="" || !isset($FieldValue[$i])) {
@@ -533,23 +504,11 @@ function RequestData($obj,$a,$b,$key,$mode)
 				$FieldValue[$i]=$filepath1.$filename;
 			}
 			if ($filename!="s.gif" && ($extention!="" && !!isset($extention))) {
-				// 2021.08.18 yamamoto エラーなのにアップロードされる問題の対応
-				if(ErrorCheck() == '') {
-					move_uploaded_file($_FILES["EP_".$FieldName[$i]]["tmp_name"], "data/".$filename);
-					pic_resize("data/".$filename, 800,800);
-				}
+				move_uploaded_file($_FILES["EP_".$FieldName[$i]]["tmp_name"], "data/".$filename);
+				pic_resize("data/".$filename, 800,800);
 			} 
 		} 
 	}
-
-	// 物件種別の自動振り分け
-	// 条件: 「媒介受付済み又は売主直情報」がON または
-	//       「他社ポータルサイト未公開」かつ「レインズ未公開」がON の場合はマッチング物件
-	$flagEtc01 = ($FieldValue[96] ?? '') === '1';
-	$flagEtc02 = ($FieldValue[97] ?? '') === '1';
-	$flagEtc03 = ($FieldValue[98] ?? '') === '1';
-	$isMatching = $flagEtc01 || ($flagEtc02 && $flagEtc03);
-	$FieldValue[99] = $isMatching ? 'マッチング物件' : '提案物件';
 
 	return $function_ret;
 } 
@@ -647,10 +606,10 @@ function DeleteData($key)
 } 
 
 //=========================================================================================================
-//名前 
-//機能\ 
-//引数 
-//戻値 
+//名前 タブ区切りデータのエクスポート処理
+//機能 タブ区切りテキストデータ（UTF-8→ShiftJIS）のエクスポート処理
+//引数 なし
+//戻値 なし
 //=========================================================================================================
 function ExportData()
 {
@@ -662,33 +621,26 @@ function ExportData()
 	$rs=mysqli_query(ConnDB(),$StrSQL);
 	$item=mysqli_num_rows($rs);
 	if($item<>0) {
-		header("Content-Type: application/octet-stream");
-		header("Content-Disposition: attachment; filename=member".date('Ymd').".txt");
-
-		$str="";
-		for ($j=0; $j<=$FieldMax; $j=$j+1){
-			$StrSQL=$StrSQL."`".$FieldName[$j]."`";
-			if ($str!=""){
-				$str=$str."\t";
-			} 
-			$str=$str.$FieldName[$j];
-		}
-		$str=$str."\r\n";
-		$csv_data = $str;
-		$csv_data = mb_convert_encoding($csv_data, "SJIS-win", "UTF-8");
-		echo($csv_data);
+		$str="ID	FIELD01	FIELD02	FIELD03	FIELD04	FIELD05	FIELD06	FIELD07	FIELD08	FIELD09	FIELD10"."\r\n";
+		$csv_data .= $str;
 		while ($item = mysqli_fetch_assoc($rs)) {
 			$str="";
 			for ($i=0; $i<=$FieldMax; $i=$i+1){
 				if ($i!=0){
 					$str=$str."\t";
 				}
-				$str=$str.str_replace("\r\n", "[rn]", str_replace("\r", "[r]", str_replace("\n", "[n]", str_replace("\t", "[t]", $item[$FieldName[$i]]))));
+				$str=$str.$item[$FieldName[$i]];
 			}
-			$csv_data = $str."\r\n";
-			$csv_data = mb_convert_encoding($csv_data, "SJIS-win", "UTF-8");
-			echo($csv_data);
+
+			$str=str_replace("\r\n","",$str);
+			$str=str_replace("\r","",$str);
+			$str=str_replace("\n","",$str)."\r\n";
+			$csv_data .= $str;
 		} 
+		$csv_data = mb_convert_encoding($csv_data, "SJIS-win", "UTF-8");
+		header("Content-Type: application/octet-stream");
+		header("Content-Disposition: attachment; filename=data.csv");
+		echo($csv_data);
 	} 
 
 	return $function_ret;
@@ -707,60 +659,49 @@ function ImportData($obj,$a,$b,$key,$mode)
 	$fp = fopen($_FILES['importfile']['tmp_name'], "r");
 	$txt = fgets($fp);
 
-	$cnt=0;
-	$cols=explode("\t",$txt);
-	for ($i=0; $i<=count($cols); $i=$i+1){
-		if($cols[$i]<>""){
-			$cnt++;
-		}
-	}
-	$tmp="";
-	for ($j=0; $j<$cnt; $j=$j+1){
-		if ($tmp!=""){
-			$tmp=$tmp.",";
-		} 
-		$tmp=$tmp."`".trim($cols[$j])."`";
-		$fn[$j]=trim($cols[$j]);
-	}
-	$StrSQLI="INSERT INTO ".$TableName." (".$tmp.") values ([VALS]);";
-
+	// SQLインジェクション対策
 	while (!feof($fp)) {
 		$txt = fgets($fp);
 		$txt=str_replace("\"","",$txt);
 		$cols=explode("\t",$txt);
 		if($cols[0]<>""){
-			$StrSQL="SELECT * FROM ".$TableName." where ID='".$cols[0]."';";
+			$StrSQL="SELECT * FROM ".$TableName." where ID='".mysqli_real_escape_string(ConnDB(),$cols[0])."';";
 			$rs=mysqli_query(ConnDB(),$StrSQL);
 			$item=mysqli_num_rows($rs);
 			if($item==0) {
-				$tmp="";
-				for ($j=0; $j<$cnt; $j=$j+1){
-					if ($tmp!=""){
-						$tmp=$tmp.",";
+				$StrSQL="INSERT INTO ".$TableName." (";
+				for ($j=1; $j<=$FieldMax; $j++){
+					if ($j!=1){
+						$StrSQL.=",";
 					} 
-					$tmp=$tmp."'".trim(str_replace("[rn]","\r\n",str_replace("[r]","\r",str_replace("[n]","\n",str_replace("[t]","\t",str_replace("'","''",$cols[$j]))))))."'";
+					$StrSQL.="`".$FieldName[$j]."`";
 				}
-				$StrSQL=str_replace("[VALS]", $tmp, $StrSQLI);
-				$StrSQL = mb_convert_encoding($StrSQL, "UTF-8", "SJIS-win");
+				$StrSQL.=") values (";
+				for ($j=1; $j<=$FieldMax; $j++){
+					if ($j!=1){
+						$StrSQL.=",";
+					} 
+					$StrSQL.="'".str_replace("'","''",$cols[$j])."'";
+				}
+				$StrSQL.=")";
 				if (!(mysqli_query(ConnDB(),$StrSQL))) {
 					die;
 				}
 			} else {
 				if ($cols[1]!="delete"){
-					$tmp="";
-					for ($j=1; $j<$cnt; $j=$j+1){
-						if ($tmp!=""){
-							$tmp=$tmp.",";
+					$StrSQL="UPDATE ".$TableName." SET ";
+					for ($j=1; $j<=$FieldMax; $j++) {
+						if ($j!=1){
+							$StrSQL.=",";
 						} 
-						$tmp=$tmp."`".$fn[$j]."`='".trim(str_replace("[rn]","\r\n",str_replace("[r]","\r",str_replace("[n]","\n",str_replace("[t]","\t",str_replace("'","''",$cols[$j]))))))."'";
+						$StrSQL.="`".$FieldName[$j]."`='".str_replace("'","''",$cols[$j])."'";
 					}
-					$StrSQL="UPDATE ".$TableName." SET ".$tmp." WHERE ".$FieldName[$FieldKey]."='".$cols[0]."';";
-					$StrSQL = mb_convert_encoding($StrSQL, "UTF-8", "SJIS-win");
+					$StrSQL.=" WHERE ".$FieldName[$FieldKey]."='".$cols[0]."'";
 					if (!(mysqli_query(ConnDB(),$StrSQL))) {
 						die;
 					}
 				} else {
-					$StrSQL="DELETE FROM ".$TableName." WHERE ID='".$cols[0]."';";
+					$StrSQL="DELETE FROM ".$TableName." WHERE ID='".$cols[0]."'";
 					if (!(mysqli_query(ConnDB(),$StrSQL))) {
 						die;
 					}
