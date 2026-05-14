@@ -112,7 +112,7 @@ function Main()
 						$rid = $_POST['MID'];
 					}
 
-					$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03) values (";
+					$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03, ETC10) values (";
 					$StrSQL.="'".$aid."',";
 					$StrSQL.="'".$rid."',";
 					$StrSQL.="'ENABLE:公開中',";
@@ -120,7 +120,8 @@ function Main()
 					$StrSQL.="'".$comment."',";
 					$StrSQL.="'".$item['max_id']."',";
 					$StrSQL.="'".$_GET['etc02']."',";
-					$StrSQL.="'".$_GET['etc03']."'";
+					$StrSQL.="'".$_GET['etc03']."',";
+					$StrSQL.="'".$_GET['etc10']."'";
 					$StrSQL.=")";
 					if (!(mysqli_query(ConnDB(),$StrSQL))) {
 						die;
@@ -383,7 +384,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
 		$str=str_replace("[SIDE]",$_GET['side'],$str);
 		$str=str_replace("[RID]",$_GET['rid'],$str);
-
+$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		if ($mode=="new"){
 			$str=DispParam($str, "NEWDATA");
 			$str=DispParamNone($str, "EDITDATA");
@@ -519,7 +520,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str=str_replace("[TOKEN]",$token,$str);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-
+$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
 
@@ -644,7 +645,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str = MakeHTML($str,1,$lid);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-
+$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str=str_replace("[PAGING]",$pagestr,$str);
 		$str=str_replace("[SORT]",$sort,$str);
 		$str=str_replace("[WORD]",$word,$str);
@@ -660,7 +661,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str=str_replace("[TOKEN]",$token,$str);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-
+$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
 

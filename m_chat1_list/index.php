@@ -86,7 +86,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 	// SQLインジェクション対策
 	// 2020.12.23 yamamoto ETC02を案件IDとし、案件ごとにグループ化
 	// $StrSQL="SELECT AID,ETC02, max(NEWDATE) as ldate from DAT_MESSAGE where AID = '".$_GET['word']."' and ETC02 is not null and ETC02 != '' group by AID,ETC02 order by ldate desc;";
-	$StrSQL="SELECT AID,ETC02,ETC03, max(NEWDATE) as ldate from DAT_MESSAGE where AID = '".$_GET['word']."' group by AID,ETC02,ETC03 order by ldate desc;";
+	$StrSQL="SELECT AID,ETC02,ETC03,ETC10, max(NEWDATE) as ldate from DAT_MESSAGE where AID = '".$_GET['word']."' group by AID,ETC02,ETC03,ETC10 order by ldate desc;";
 	$rs=mysqli_query(ConnDB(),$StrSQL);
 	$item=mysqli_num_rows($rs);
 
@@ -155,6 +155,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 			$str=str_replace("[TITLE]",$TITLE,$str);
 			$str=str_replace("[ETC02]",$item['ETC02'],$str);
 			$str=str_replace("[ETC03]",$item['ETC03'],$str);
+			$str=str_replace("[ETC10]",$item['ETC10'],$str);
 
 			/*
 			$tid=str_replace("-", "", str_replace($_SESSION['MID'], "", $item['AID']));

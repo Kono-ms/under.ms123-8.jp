@@ -371,14 +371,19 @@ function GetTopMessageListHtml()
 		}
 
 		$partner_m2_name = '';
-		$StrSQL_M2="SELECT M2_DVAL01, M2_DVAL02 FROM DAT_M2 where MID='".$partner_mid."';";
+		$StrSQL_M2="SELECT M2_DVAL01, M2_DVAL02,M2_ETC02 FROM DAT_M2 where MID='".$partner_mid."';";
 		$rs_m2=mysqli_query(ConnDB(),$StrSQL_M2);
 		if($rs_m2){
 			$item_m2 = mysqli_fetch_assoc($rs_m2);
 			if($item_m2){
 				$sei = isset($item_m2['M2_DVAL01']) ? trim($item_m2['M2_DVAL01']) : '';
 				$mei = isset($item_m2['M2_DVAL02']) ? trim($item_m2['M2_DVAL02']) : '';
+				$auth = isset($item_m2['M2_ETC02']) ? trim($item_m2['M2_ETC02']) : '';
 				$partner_m2_name = trim($sei.' '.$mei);
+				if($auth!=""){
+					//顧客認証が紐づいている場合、メッセージ相手の名前の後ろに顧客認証名を表示
+					$partner_m2_name.="(".$auth.")"; 
+				}
 			}
 		}
 

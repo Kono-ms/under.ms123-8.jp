@@ -129,7 +129,7 @@ function Main()
 
 
 				// 2020.12.23 yamamoto 案件ID(ETC02)追加
-				$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03) values (";
+				$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03, ETC10) values (";
 				$StrSQL.="'".$word."',";
 				$StrSQL.="'".$rid."',";
 				$StrSQL.="'ENABLE:公開中',";
@@ -137,7 +137,8 @@ function Main()
 				$StrSQL.="'".str_replace("'","''",htmlspecialchars($_POST['COMMENT'])).$file_msg."',";
 				$StrSQL.="'".$contact_newid."',";
 				$StrSQL.="'".$_GET['etc02']."',";
-				$StrSQL.="'".$_GET['etc03']."'";
+				$StrSQL.="'".$_GET['etc03']."',";
+				$StrSQL.="'".$_GET['etc10']."'";
 				$StrSQL.=")";
 				if (!(mysqli_query(ConnDB(),$StrSQL))) {
 					die;
@@ -318,6 +319,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$mid1,$mid2)
 	$str=str_replace("[TITLE]",$TITLE,$str);
 	$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 	$str=str_replace("[ETC03]",$_GET['etc03'],$str);
+	$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 
 	$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;

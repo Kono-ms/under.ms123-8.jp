@@ -91,7 +91,10 @@ function Main()
 	
 				SaveData($key);
 
-				$_SESSION['MNAME'] = $FieldValue[5];
+				$_SESSION['MNAME'] = trim($FieldValue[5]) . trim($FieldValue[6]);
+				if ($_SESSION['MNAME'] == "") {
+					$_SESSION['MNAME'] = "ユーザー名未設定";
+				}
 
 // 要調整
 /*
@@ -296,7 +299,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 			}
 			$strtmp=$strtmp."</ul>";
 			$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);
-			if (($filename==$htmlerr || $mode=="new" || $mode=="edit1" || $mode=="edit2" || $mode=="edit3" || $mode=="edit4" || $mode=="edit5" || $mode=="edit6" || $mode=="edit7" || $mode=="edit8") && $FieldValue[$i]!="") {
+			if (($filename==$htmlerr || $mode=="new" || $mode=="edit" || $mode=="edit1" || $mode=="edit2" || $mode=="edit3" || $mode=="edit4" || $mode=="edit5" || $mode=="edit6" || $mode=="edit7" || $mode=="edit8") && $FieldValue[$i]!="") {
 				$tmp=explode("\t",$FieldValue[$i]);
 				for ($j=0; $j<count($tmp); $j=$j+1) {
 					$str=str_replace("\"".$tmp[$j]."\"","\"".$tmp[$j]."\" checked",$str);
@@ -385,7 +388,7 @@ function RequestData($obj,$a,$b,$key,$mode)
 		if ($FieldAtt[$i]==3) {
 			if (isset($_POST[$FieldName[$i]])) {
 				$postVal = $_POST[$FieldName[$i]];
-				if(is_string($postVal) && strstr($postVal,"\t") !== false) {
+				if(is_string($postVal)) {
 					$FieldValue[$i]=htmlspecialchars($postVal);
 				} else {
 					$FieldValue[$i]="";
@@ -398,6 +401,8 @@ function RequestData($obj,$a,$b,$key,$mode)
 						}
 					}
 				}
+			} elseif ($FieldName[$i]=="M2_MSEL04") {
+				$FieldValue[$i]="";
 			}
 		} else {
 			if (isset($_POST[$FieldName[$i]])) {

@@ -130,31 +130,6 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 	$htmlerr = "edit.html";
 	$htmllist = "list.html";
 
-	$FieldParam[73]="";
-	$tmp="";
-	$StrSQL="SELECT CD1,N1 FROM DAT_ADDRESS group by CD1,N1 order by cast(CD1 as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$tmp.=$item["N1"];
-	}
-	$FieldParam[73]=$tmp;
-
-	$FieldParam[74]="";
-	$tmp="";
-	$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS group by N2,N3 order by cast(SORT as signed) asc";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		if($tmp!=""){
-			$tmp.="::";
-		}
-		$val=str_replace("\r", "", str_replace("\n", "", $item['N2'].$item['N3']));
-		$tmp.=$val;
-	}
-	$FieldParam[74]=$tmp;
-
 	if ($mode!="list"){
 
 		switch ($mode){
@@ -218,6 +193,73 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				break;
 		} 
 
+		$FieldParam[73]="";
+		$tmp="";
+		$StrSQL="SELECT CD1,N1 FROM DAT_ADDRESS group by CD1,N1 order by cast(CD1 as signed) asc";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$tmp.=$item["N1"];
+		}
+		$FieldParam[73]=$tmp;
+
+		$FieldParam[74]="";
+		$tmp="";
+		$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS WHERE N1 = '".str_replace("O1_MRDO01:","",$FieldValue[73])."' group by N2,N3 order by cast(SORT as signed) asc";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=str_replace("\r", "", str_replace("\n", "", $item['N2'].$item['N3']));
+			$tmp.=$val;
+		}
+		$FieldParam[74]=$tmp;
+
+		$StrSQL="SELECT CD1 FROM DAT_ADDRESS WHERE N1='".str_replace("O1_MRDO01:","",$FieldValue[73])."'";
+		$rs=mysqli_query(ConnDB(),$StrSQL);
+		$item = mysqli_fetch_assoc($rs);
+		$cd1=$item["CD1"];
+
+
+		//沿線
+		$FieldParam[76]="";
+		$FieldParam[78]="";
+		$FieldParam[80]="";
+		$tmp="";
+		$StrSQL="SELECT CD2, N2 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' group by CD2, N2 order by CD2";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=$item['N2'];
+			$tmp.=$val;
+		}
+		$FieldParam[76]=$tmp;
+		$FieldParam[78]=$tmp;
+		$FieldParam[80]=$tmp;
+
+		//最寄り駅
+		$FieldParam[75]="";
+		$FieldParam[79]="";
+		$FieldParam[81]="";
+		$tmp="";
+		$StrSQL="SELECT CD4, N3 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."'  group by CD4, N3 order by CD4";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=$item['N3']."駅";
+			$tmp.=$val;
+		}
+		$FieldParam[75]=$tmp;
+		$FieldParam[79]=$tmp;
+		$FieldParam[81]=$tmp;
+		
 		$fp=$DOCUMENT_ROOT.$filename;
 		$str=@file_get_contents($fp);
 
@@ -274,7 +316,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				$tmp=explode("::",$FieldParam[$i]);
 				$strtmp=$strtmp."<ul>";
 				for ($j=0; $j<count($tmp); $j=$j+1) {
-					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"radio\" name=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
+					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"radio\" name=\"".$FieldName[$i]."\" class=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
 				}
 				$strtmp=$strtmp."</ul>";
 				$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);
@@ -288,7 +330,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				$tmp=explode("::",$FieldParam[$i]);
 				$strtmp=$strtmp."<ul class='mlist25p'>";
 				for ($j=0; $j<count($tmp); $j=$j+1) {
-					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"checkbox\" name=\"".$FieldName[$i]."[]\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
+					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"checkbox\" name=\"".$FieldName[$i]."[]\" class=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
 				}
 				$strtmp=$strtmp."</ul>";
 				$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);

@@ -465,7 +465,7 @@ function RequestData($obj,$a,$b,$key,$mode)
 		if ($FieldAtt[$i]==3) {
 			if (isset($_POST[$FieldName[$i]])) {
 				$postVal = $_POST[$FieldName[$i]];
-				if(is_string($postVal) && strstr($postVal,"\t") !== false) {
+				if(is_string($postVal)) {
 					$FieldValue[$i]=htmlspecialchars($postVal);
 				} else {
 					$FieldValue[$i]="";
@@ -478,6 +478,8 @@ function RequestData($obj,$a,$b,$key,$mode)
 						}
 					}
 				}
+			} elseif ($FieldName[$i]=="M2_MSEL04") {
+				$FieldValue[$i]="";
 			}
 		} else {
 			$FieldValue[$i]=htmlspecialchars(str_replace("\\","",($_POST[$FieldName[$i]] ?? '')));

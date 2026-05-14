@@ -482,6 +482,11 @@ section {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
 }
 
+.c-head__logo--password {
+  background: transparent;
+  box-shadow: none;
+}
+
 .c-head__ttl {
   font-size: 2.4rem;
   font-weight: 700

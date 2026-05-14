@@ -223,7 +223,8 @@ function SendMail()
 
 	mb_language("Japanese");
 	mb_internal_encoding("UTF-8");
-
+echo "<!--mailto:".$FieldValue[2]."-->";
+echo "<!--MailBody:".$MailBody."-->";
 	mb_send_mail($FieldValue[2], $subject, $MailBody, "From:".mb_encode_mimeheader(mb_convert_encoding(SENDER_NAME,"ISO-2022-JP","AUTO"))."<".SENDER_EMAIL.">"); 
 	mb_send_mail(SENDER_EMAIL, $subject, $MailBody, "From:".mb_encode_mimeheader(mb_convert_encoding(SENDER_NAME,"ISO-2022-JP","AUTO"))."<".SENDER_EMAIL.">"); 
 }
@@ -466,7 +467,7 @@ function RequestData($obj,$a,$b,$key,$mode)
 		if ($FieldAtt[$i]==3) {
 			if (isset($_POST[$FieldName[$i]])) {
 				$postVal = $_POST[$FieldName[$i]];
-				if(is_string($postVal) && strstr($postVal,"\t") !== false) {
+				if(is_string($postVal)) {
 					$FieldValue[$i]=htmlspecialchars($postVal);
 				} else {
 					$FieldValue[$i]="";

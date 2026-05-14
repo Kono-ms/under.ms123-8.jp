@@ -2,14 +2,17 @@
 
 // 環境設定
 
+// MYSQLの暗号化鍵
+define('DB_ENC_KEY', 'C5DEEC2665C6FDE92824546D6A130F1887122EA35F175FC396E8C030B5B2678A');
+
 // DB
-define('DB_HOST', 'mysql203.xbiz.ne.jp');
-define('DB_USERNAME', 'ms123_under');
-define('DB_PASSWD', 'x7WYr3a9');
-define('DB_DBNAME', 'ms123_under');
+define('DB_HOST', 'localhost');
+define('DB_USERNAME', 'under_sqluser');
+define('DB_PASSWD', 'under4618');
+define('DB_DBNAME', 'under_sql');
 
 // Domain
-define('BASE_DOMAIN', 'under.ms123-8.jp');
+define('BASE_DOMAIN', 'under-jp.com');
 define('BASE_URL', 'https://' . BASE_DOMAIN);
 
 // Mail

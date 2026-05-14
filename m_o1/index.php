@@ -86,6 +86,15 @@ function Main()
 
 				SaveData($key);
 
+				if($key==""){
+					$StrSQL="SELECT ID FROM DAT_O1 where MID='".$_SESSION['MID']."' order by ID;";
+					$rs=mysqli_query(ConnDB(),$StrSQL);
+					$item = mysqli_fetch_assoc($rs);
+					$key=$item["ID"];
+				}
+
+
+
 				$StrSQL="DELETE FROM DAT_MATCH where MID1='".$_SESSION['MID']."';";
 				if (!(mysqli_query(ConnDB(),$StrSQL))) {
 					die;
@@ -118,6 +127,24 @@ function Main()
 						CulcMatching($cid1s[$i], $cid2s[$j], 0);
 					}
 				}
+
+				// 物件種別「提案物件」で物件が登録された場合、登録完了ページを挟まずに以下のページに遷移するようにお願いします
+				// https://under.ms123-8.jp/m_teian2/?mode=disp&key=1
+				if(strpos($FieldValue[99],"提案物件")!==false){
+					$url = BASE_URL . "/m_teian2/?mode=disp&key=".$key;
+					// header("Location: {$url}");
+					
+					$filename="../common/template/submit_form.html";
+					$fp=$DOCUMENT_ROOT.$filename;
+					$strSubmit_form=@file_get_contents($fp);
+					$msg="";
+					$strSubmit_form=str_replace("[URL]",$url,$strSubmit_form);
+					$strSubmit_form=str_replace("[MSG]",$msg,$strSubmit_form);
+					print $strSubmit_form;
+
+					exit;
+				}
+
 
 				$mode="list";
 				if ($page==""){
@@ -201,7 +228,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$entryIntent)
 	$htmldisp = "disp.html";
 	$htmlerr = "edit.html";
 	$htmllist = "list.html";
-echo "<!--mode:".$mode."-->";
+
 	if ($mode!="list"){
 		switch ($mode){
 			case "new":
@@ -281,7 +308,7 @@ echo "<!--mode:".$mode."-->";
 
 		$FieldParam[74]="";
 		$tmp="";
-		$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS group by N2,N3 order by cast(SORT as signed) asc";
+		$StrSQL="SELECT N2,N3 FROM DAT_ADDRESS WHERE N1 = '".str_replace("O1_MRDO01:","",$FieldValue[73])."' group by N2,N3 order by cast(SORT as signed) asc";
 		$rs=mysqli_query(ConnDB(), $StrSQL);
 		while ($item = mysqli_fetch_assoc($rs)) {
 			if($tmp!=""){
@@ -291,7 +318,50 @@ echo "<!--mode:".$mode."-->";
 			$tmp.=$val;
 		}
 		$FieldParam[74]=$tmp;
-echo "<!--74:".$FieldParam[74]."-->";
+
+		$StrSQL="SELECT CD1 FROM DAT_ADDRESS WHERE N1='".str_replace("O1_MRDO01:","",$FieldValue[73])."'";
+		$rs=mysqli_query(ConnDB(),$StrSQL);
+		$item = mysqli_fetch_assoc($rs);
+		$cd1=$item["CD1"];
+
+
+		//沿線
+		$FieldParam[76]="";
+		$FieldParam[78]="";
+		$FieldParam[80]="";
+		$tmp="";
+		$StrSQL="SELECT CD2, N2 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' group by CD2, N2 order by CD2";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=$item['N2'];
+			$tmp.=$val;
+		}
+		$FieldParam[76]=$tmp;
+		$FieldParam[78]=$tmp;
+		$FieldParam[80]=$tmp;
+
+		//最寄り駅
+		$FieldParam[75]="";
+		$FieldParam[79]="";
+		$FieldParam[81]="";
+		$tmp="";
+		//$StrSQL="SELECT CD4, N3 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' AND N2 = '".str_replace("O1_MRDO04:","",$FieldValue[76])."' group by CD4, N3 order by CD4";
+		$StrSQL="SELECT CD4, N3 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' group by CD4, N3 order by CD4";
+		$rs=mysqli_query(ConnDB(), $StrSQL);
+		while ($item = mysqli_fetch_assoc($rs)) {
+			if($tmp!=""){
+				$tmp.="::";
+			}
+			$val=$item['N3']."駅";
+			$tmp.=$val;
+		}
+		$FieldParam[75]=$tmp;
+		$FieldParam[79]=$tmp;
+		$FieldParam[81]=$tmp;
+
 		$fp=$DOCUMENT_ROOT.$filename;
 		$str=@file_get_contents($fp);
 
@@ -696,6 +766,7 @@ function SaveData($key)
 		$StrSQL=$StrSQL." WHERE ".$FieldName[$FieldKey]."='".$key."'";
 	}
 	if (!(mysqli_query(ConnDB(),$StrSQL))) {
+		var_dump($StrSQL);
 		die;
 	}
 

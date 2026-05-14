@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>顧客認証用CSV取り込み｜WEBSITE-NAME</title>
+
+  <!--AdminLTE-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/html_a/AdminLTE/css/skins/_all-skins.min.css">
+
+  <!--template=/common/template/head.html-->
+</head>
+
+<body>
+  <div class="wrap sub">
+    <!--template=/common/template/header.html-->
+
+
+
+    <!-- 以上共通 -->
+    <div class="breadcrumb">
+      <div class="l-container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="/">トップ</a></li>
+          <li class="breadcrumb__item">顧客認証用CSV取り込み</li>
+        </ol>
+      </div>
+    </div>
+
+
+    <section class="subpage-head">
+      <div class="l-container">
+
+
+
+
+
+        <div class="mb10">
+          <a href="./?mode=export&key=[ID]&lid=[LID]&sort=[SORT]&word=[WORD]&page=[PAGE]"
+            class="btn btn-block btn-default"><i class="fa fa-download "></i> CSVテンプレートエクスポート</a>
+        </div>
+
+        <div>
+          <form method="post" action="./" enctype="multipart/form-data">
+            <input type="hidden" name="mode" value="import">
+            <input type="hidden" name="sort" value="[SORT]">
+            <input type="hidden" name="page" value="1">
+            <input name="importfile" id="lefile" type="file" style="width:300px">
+
+            <script>
+              $('input[id=lefile]').change(function () {
+                $('#photoCover').val($(this).val());
+              });
+            </script>
+            <input type="submit" value="インポートする">
+          </form>
+
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="m-dashboard">
+      <div class="l-container">
+        <div class="box m-box">
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-order table-m-dashboard">
+                <thead>
+                  <tr>
+                    <th class="td-w--auto">顧客認証ID</th>
+                    <th class="td-w--price">顧客認証名</th>
+                    <th class="td-w--auto">メールアドレス</th>
+                    <th class="td-w--auto">取り込み日時</th>
+                    <!-- <th class="td-w--micro">編集</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--<meta LIST-START>-->
+                  <tr>
+                    <td class="td-w--auto">[D-AUTH_ID]</td>
+                    <td class="td-w--price">[D-AUTH_NAME]</td>
+                    <!-- <td class="td-w--auto">[EMAIL_DEC]</td> -->
+                    <td class="td-w--auto">[D-EMAIL]</td>
+                    <td class="td-w--auto">[D-IMP_DATETIME]</td>
+                    <!-- <td class="td-w--micro">
+                      <div class="m-search__btn-wrap">
+                        <div class="m-search__btn"><a
+                            href="./?mode=edit&key=[ID]&lid=[LID]&sort=[SORT]&word=[WORD]&page=[PAGE]">編集</a>
+                        </div>
+                        <div class="m-search__btn m-search__btn--border"><a
+                            href="./?mode=delete&key=[ID]&lid=[LID]&sort=[SORT]&word=[WORD]&page=[PAGE]&token=[TOKEN]"
+                            onclick="var ok=confirm('削除してもよろしいですか？');if (ok) this.form.submit(); return false;">削除</a>
+                        </div>
+                      </div>
+                    </td> -->
+                  </tr>
+                  <!--<meta LIST-END>-->
+                </tbody>
+              </table>
+            </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+        </div><!-- /.box -->
+        <div class="pagination">
+          <div class="pagination__list">
+            [PAGING]
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 以下共通 -->
+
+
+
+    <!--template=/common/template/footer.html-->
+  </div>
+</body>
+
+</html>

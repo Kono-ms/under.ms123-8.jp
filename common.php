@@ -598,7 +598,7 @@ function DispM1($item, $str)
   $M1FieldAtt[72]="1";
   $M1FieldAtt[73]="1";
   $M1FieldAtt[74]="1";
-  $M1FieldAtt[75]="2";
+  $M1FieldAtt[75]="3";
   $M1FieldAtt[76]="2";
   $M1FieldAtt[77]="2";
   $M1FieldAtt[78]="2";
@@ -1497,6 +1497,30 @@ function DispO1($item, $str)
         $str=str_replace("<img src=\"[".$Param."-".$O1FieldName[$i]."]\" width=\"200\">","<a href=\"[".$Param."-".$O1FieldName[$i]."]\" target=\"_blank\">".$filename."</a>",$str);
       }
 		} 
+
+    switch($O1FieldName[$i]){
+      case "O1_ETC01":
+        $val="";
+        if($item[$O1FieldName[$i]]=="1"){
+           $val="媒介受付済み又は売主直情報";
+        }
+        $str=str_replace("[".$Param."-".$O1FieldName[$i]."_NAME]",$val,$str);
+        break;
+      case "O1_ETC02":
+        $val="";
+        if($item[$O1FieldName[$i]]=="1"){
+           $val="他社ポータルサイト未公開";
+        }
+        $str=str_replace("[".$Param."-".$O1FieldName[$i]."_NAME]",$val,$str);
+        break;
+      case "O1_ETC03":
+        $val="";
+        if($item[$O1FieldName[$i]]=="1"){
+           $val="レインズ未公開";
+        }
+        $str=str_replace("[".$Param."-".$O1FieldName[$i]."_NAME]",$val,$str);
+        break;
+    }
 		// HTMLエスケープ処理（一覧表示系）
 		$str=str_replace("[".$Param."-".$O1FieldName[$i]."]",htmlspecialchars($item[$O1FieldName[$i]]),$str);
 		$str=str_replace("[D-".$Param."-".$O1FieldName[$i]."]",str_replace("\r\n","<br>",str_replace($O1FieldName[$i].":","",htmlspecialchars($item[$O1FieldName[$i]]))),$str);

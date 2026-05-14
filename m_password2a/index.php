@@ -154,10 +154,22 @@ function DispData($mode,$pass1,$pass2,$pass3,$errmsg,$email,$date)
 		$item = mysqli_fetch_assoc($rs);
 		$mid2="M2".sprintf("%05d", str_replace("M2", "", $item['MID'])+1);
 
-		$StrSQL ="INSERT INTO DAT_M2 (MID,EMAIL,PASS,M2_DFIL01,M2_DFIL02,M2_DFIL03,M2_DFIL04,M2_DFIL05,M2_DFIL06,M2_DFIL07,M2_DFIL08,M2_DFIL09,M2_DFIL10,ENABLE,NEWDATE,EDITDATE) VALUES (";
+
+		// ・顧客情報保存時に顧客認証テーブルのメアドが存在していた場合、顧客認証名を保存する
+		$StrSQL="SELECT AUTH_NAME,convert(AES_DECRYPT(UNHEX(EMAIL), '".DB_ENC_KEY."') USING utf8) as email_dec from DAT_MEMBER_AUTH  ";
+		$StrSQL.=" WHERE convert(AES_DECRYPT(UNHEX(EMAIL), '".DB_ENC_KEY."') USING utf8) LIKE '%".$email."%' order by id desc";
+		// echo "<!--DAT_MEMBER_AUTH:".$StrSQL."-->";
+		$rs=mysqli_query(ConnDB(),$StrSQL);
+		$item = mysqli_fetch_assoc($rs);
+		if($item["AUTH_NAME"]!=""){
+			$M2_ETC02=$item["AUTH_NAME"];
+		}
+
+		$StrSQL ="INSERT INTO DAT_M2 (MID,EMAIL,PASS,M2_ETC02,M2_DFIL01,M2_DFIL02,M2_DFIL03,M2_DFIL04,M2_DFIL05,M2_DFIL06,M2_DFIL07,M2_DFIL08,M2_DFIL09,M2_DFIL10,ENABLE,NEWDATE,EDITDATE) VALUES (";
 		$StrSQL.=" '".$mid2."',"; 
 		$StrSQL.=" '".$email."',"; 
 		$StrSQL.=" '".pwd_hash($pass2)."',"; 
+		$StrSQL.=" '".$M2_ETC02."',"; 
 		$StrSQL.=" '/a_m2/data/s.gif',"; 
 		$StrSQL.=" '/a_m2/data/s.gif',"; 
 		$StrSQL.=" '/a_m2/data/s.gif',"; 

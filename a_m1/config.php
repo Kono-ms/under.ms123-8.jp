@@ -405,7 +405,7 @@
   $FieldAtt[72]="1";
   $FieldAtt[73]="1";
   $FieldAtt[74]="1";
-  $FieldAtt[75]="2";
+  $FieldAtt[75]="3";
   $FieldAtt[76]="2";
   $FieldAtt[77]="2";
   $FieldAtt[78]="2";

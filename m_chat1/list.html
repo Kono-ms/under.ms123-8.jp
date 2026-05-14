@@ -24,27 +24,27 @@
 
       // モーダルの起動ボタン
       $('#popup_btn').on('click', function () {
-        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]&contact_id=' + contact_id);
         $('#mask_mcontact').show();
         $('#popup_mcontact').fadeIn();
       });
       $('#popup_btn2').on('click', function () {
-        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=2&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=2&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]&contact_id=' + contact_id);
         $('#mask_mcontact').show();
         $('#popup_mcontact').fadeIn();
       });
       $('#popup_btn3').on('click', function () {
-        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=3&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=3&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]&contact_id=' + contact_id);
         $('#mask_mcontact').show();
         $('#popup_mcontact').fadeIn();
       });
       $('#popup_btn4').on('click', function () {
-        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=4&etc02=[ETC02]&etc03=[ETC03]&contact_id=&side=1&rid=[MID1]');
+        $('.ifrm_mcontact').attr('src', '/m_mcontact/?mode=edit&word=[MID2]&frame=on&contact_status=4&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]&contact_id=&side=1&rid=[MID1]');
         $('#mask_mcontact').show();
         $('#popup_mcontact').fadeIn();
       });
       $('#popup_title_btn').on('click', function () {
-        $('.ifrm_mcontact').attr('src', '/m_mtitle/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&contact_id=' + contact_id);
+        $('.ifrm_mcontact').attr('src', '/m_mtitle/?mode=edit&word=[MID2]&frame=on&contact_status=1&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]&contact_id=' + contact_id);
         $('#mask_mcontact').show();
         $('#popup_mcontact').fadeIn();
       });
@@ -100,7 +100,7 @@
           data: { mid1: mid1, mid2: mid2, etc02: etc02, etc03: etc03, newdate: newdate }
         }).done(function (data) {
           if (data != "0") {
-            location.href = 'https://mbase.ms123.jp/m_chat1/?mode=list&word=[MID1]-[MID2]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]';
+            location.href = 'https://mbase.ms123.jp/m_chat1/?mode=list&word=[MID1]-[MID2]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]';
             // location.reload(); //リロード
           }
         }).fail(function () {
@@ -144,12 +144,12 @@
 
           <!--チャット本文-->
           <iframe class="ifrm" frameborder="none" data-chat-iframe
-            src="/m_chat1/chatinner.php?aid=[AID]&t=[T]&etc02=[ETC02]&etc03=[ETC03]"></iframe>
+            src="/m_chat1/chatinner.php?aid=[AID]&t=[T]&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]"></iframe>
 
           <!--チャットフッター-->
           <div class="chat-footer" data-chat-footer>
             <form method="post" enctype="multipart/form-data"
-              action="./?mode=list&word=[AID]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]">
+              action="./?mode=list&word=[AID]&mid1=[MID1]&mid2=[MID2]&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]">
 
               <input type="hidden" name="mode" value="send">
               <input type="hidden" name="word" value="[AID]">
@@ -173,7 +173,8 @@
                 <!--チャット　選択ファイル名-->
                 <span class="chat__file-name" id="file_upload_name_file1"></span>
                 <!--チャット　選択ファイル削除ボタン-->
-                <a href="javascript:file_undo('file1');" class="chat__file-del" style="display:none;" id="file1_delete">削除</a>
+                <a href="javascript:file_undo('file1');" class="chat__file-del" style="display:none;"
+                  id="file1_delete">削除</a>
                 <!--チャット　送信ボタンとポップアップボタン-->
                 <div class="chat__submit">
                   <input type="submit" name="submit" value="送信">

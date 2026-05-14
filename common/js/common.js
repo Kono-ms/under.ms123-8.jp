@@ -38,12 +38,6 @@ $(function () {
  var headerHight = 90; //ヘッダの高さ
  $('a[href^=#]').click(function(){
      var href= $(this).attr("href");
-      var $targetModal = $(href);
-      var isModalTrigger = href !== "#" && $targetModal.hasClass('teian-search-modal');
-      var isModalClose = $(this).closest('.teian-search-modal').length > 0;
-      if (isModalTrigger || isModalClose) {
-        return true;
-      }
        var target = $(href == "#" || href == "" ? 'html' : href);
         var position = target.offset().top-headerHight; //ヘッダの高さ分位置をずらす
      $("html, body").animate({scrollTop:position}, 550, "swing");

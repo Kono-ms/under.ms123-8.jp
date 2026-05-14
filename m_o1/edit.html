@@ -13,58 +13,231 @@
     $(function () {
 
       //都道府県の変更
-      $('.M1_MCHK02').change(function () {
+      $('[name="O1_MRDO01"]').change(function () {
         prefchange();
       });
       function prefchange() {
+        let city_name = "O1_MRDO02";
+        let pref = $('[name="O1_MRDO01"]').val();
+        let cityval = $('[name="O1_MRDO02"]').val();
 
-
-        let city_name_ul = "M1_MCHK03_ul";
-        let city_name = "M1_MCHK03";
-        let prefs = "";
-        let cityvals = "";
-
-        $('.M1_MCHK02:checked').each(function () {
-          let v = $(this).val();
-          if (prefs != "") {
-            prefs = prefs + ",";
-          }
-          prefs = prefs + v;
-        });
-        $('.M1_MCHK03:checked').each(function () {
-          let v = $(this).val();
-          if (cityvals != "") {
-            cityvals = cityvals + ",";
-          }
-          cityvals = cityvals + v;
-        });
-
-        prefs = prefs.replaceAll("M1_MCHK02:", "");
-        cityvals = cityvals.replaceAll("M1_MCHK03:", "");
-        console.log("prefs:" + prefs);
-        // console.log("city_name_ul:" + city_name_ul);
-        console.log("cityvals:" + cityvals);
+        pref = pref.replaceAll("O1_MRDO01:", "");
+        cityval = cityval.replaceAll("O1_MRDO02:", "");
+        console.log("pref" + pref);
+        // console.log("cityval:" + cityval);
+        //市区町村切り替え
         $.ajax({
           type: "POST",
-          url: "[BASE_URL]/city.php",
+          url: "[BASE_URL]/city_select.php",
           async: false,
           data: {
-            prefs: prefs,
+            pref: pref,
             fieldname1: city_name,
-            cityvals: cityvals
+            cityval: cityval
           }
         }).done(function (data) {
           // console.log("done:" + data);
-          $('#' + city_name_ul + '').empty(); //子要素削除
-          $('#' + city_name_ul + '').html(data);
+          $('[name="O1_MRDO02"]').empty(); //子要素削除
+          $('[name="O1_MRDO02"]').html(data);
 
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+
+
+        //沿線切り替え
+        let line_ul = "O1_MRDO04_ul";
+        let line_name = "O1_MRDO04";
+        let lineval = $('input[name="O1_MRDO04"]:checked').val();
+        if (lineval != undefined) {
+          lineval = lineval.replaceAll("O1_MRDO04:", "");
+        }
+
+        let line_ul2 = "O1_MRDO06_ul";
+        let line_name2 = "O1_MRDO06";
+        let lineval2 = $('input[name="O1_MRDO06"]:checked').val();
+        if (lineval2 != undefined) {
+          lineval2 = lineval2.replaceAll("O1_MRDO06:", "");
+        }
+        let line_ul3 = "O1_MRDO08_ul";
+        let line_name3 = "O1_MRDO08";
+        let lineval3 = $('input[name="O1_MRDO08"]:checked').val();
+        if (lineval3 != undefined) {
+          lineval3 = lineval3.replaceAll("O1_MRDO08:", "");
+        }
+
+        // console.log("lineval:" + lineval);
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/line_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: line_name,
+            lineval: lineval
+          }
+        }).done(function (data) {
+          // console.log("line_radio_done:" + data);
+          $('#' + line_ul).empty(); //子要素削除
+          $('#' + line_ul).html(data);
+
+          linechange();
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/line_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: line_name2,
+            lineval: lineval2
+          }
+        }).done(function (data) {
+          // console.log("line_radio_done:" + data);
+          $('#' + line_ul2).empty(); //子要素削除
+          $('#' + line_ul2).html(data);
+
+          linechange();
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/line_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: line_name3,
+            lineval: lineval3
+          }
+        }).done(function (data) {
+          // console.log("line_radio_done:" + data);
+          $('#' + line_ul3).empty(); //子要素削除
+          $('#' + line_ul3).html(data);
+
+          linechange();
         }).fail(function (data) {
           console.log("error:" + data);
         });
       }
 
       prefchange();
+
+
+      //沿線の変更
+      $('body').on('change', '.O1_MRDO04', function () {
+        linechange();
+      });
+      $('body').on('change', '.O1_MRDO06', function () {
+        linechange();
+      });
+      $('body').on('change', '.O1_MRDO08', function () {
+        linechange();
+      });
+      function linechange() {
+        let pref = $('[name="O1_MRDO01"]').val();
+        pref = pref.replaceAll("O1_MRDO01:", "");
+
+        //沿線切り替え
+        let station_ul = "O1_MRDO03_ul";
+        let station_name = "O1_MRDO03";
+        let lineval = $('input[name="O1_MRDO04"]:checked').val();
+        if (lineval != undefined) {
+          lineval = lineval.replaceAll("O1_MRDO04:", "");
+        }
+        let stationval = $('input[name="O1_MRDO03"]:checked').val();
+        if (stationval != undefined) {
+          stationval = stationval.replaceAll("O1_MRDO03:", "");
+        }
+
+        let station_ul2 = "O1_MRDO07_ul";
+        let station_name2 = "O1_MRDO07";
+        let lineval2 = $('input[name="O1_MRDO06"]:checked').val();
+        if (lineval2 != undefined) {
+          lineval2 = lineval2.replaceAll("O1_MRDO06:", "");
+        }
+        let stationval2 = $('input[name="O1_MRDO07"]:checked').val();
+        if (stationval2 != undefined) {
+          stationval2 = stationval2.replaceAll("O1_MRDO07:", "");
+        }
+
+        let station_ul3 = "O1_MRDO09_ul";
+        let station_name3 = "O1_MRDO09";
+        let lineval3 = $('input[name="O1_MRDO08"]:checked').val();
+        if (lineval3 != undefined) {
+          lineval3 = lineval3.replaceAll("O1_MRDO08:", "");
+        }
+        let stationval3 = $('input[name="O1_MRDO09"]:checked').val();
+        if (stationval3 != undefined) {
+          stationval3 = stationval3.replaceAll("O1_MRDO09:", "");
+        }
+
+        // console.log("lineval:" + lineval);
+        // console.log("stationval:" + stationval);
+        // console.log("stationval3:" + stationval3);
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/station_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: station_name,
+            lineval: lineval,
+            stationval: stationval
+          }
+        }).done(function (data) {
+          // console.log("station_radio_done:" + data);
+          $('#' + station_ul).empty(); //子要素削除
+          $('#' + station_ul).html(data);
+
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/station_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: station_name2,
+            lineval: lineval2,
+            stationval: stationval2
+          }
+        }).done(function (data) {
+          // console.log("station_radio_done:" + data);
+          $('#' + station_ul2).empty(); //子要素削除
+          $('#' + station_ul2).html(data);
+
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+
+        $.ajax({
+          type: "POST",
+          url: "[BASE_URL]/station_radio.php",
+          async: false,
+          data: {
+            pref: pref,
+            fieldname1: station_name3,
+            lineval: lineval3,
+            stationval: stationval3
+          }
+        }).done(function (data) {
+          // console.log("station_radio_done:" + data);
+          $('#' + station_ul3).empty(); //子要素削除
+          $('#' + station_ul3).html(data);
+
+        }).fail(function (data) {
+          console.log("error:" + data);
+        });
+      }
     });
+
   </script>
 </head>
 
@@ -239,7 +412,6 @@
               <div class="formset__ttl">所在地</div>
               <div class="formset__input">
                 <select name="O1_MRDO01" class="input_select form-control">[OPT-O1_MRDO01]</select>
-                <!-- TODO: 市区町村セレクトを実装予定 -->
                 <select name="O1_MRDO02" class="input_select form-control">[OPT-O1_MRDO02]</select>
                 <input type="text" name="O1_DVAL02" value="[O1_DVAL02]" size="90" placeholder="番地・建物名など">
               </div>
@@ -247,15 +419,41 @@
             <div class="formset__item">
               <div class="formset__ttl">沿線</div>
               <div class="formset__input">
-                <ul>[OPT-O1_MRDO04]</ul>
+                <ul id="O1_MRDO04_ul">[OPT-O1_MRDO04]</ul>
               </div>
             </div>
             <div class="formset__item">
               <div class="formset__ttl">最寄り駅</div>
               <div class="formset__input">
-                <ul>[OPT-O1_MRDO03]</ul>
+                <ul id="O1_MRDO03_ul">[OPT-O1_MRDO03]</ul>
               </div>
             </div>
+
+            <div class="formset__item">
+              <div class="formset__ttl">沿線</div>
+              <div class="formset__input">
+                <ul id="O1_MRDO06_ul">[OPT-O1_MRDO06]</ul>
+              </div>
+            </div>
+            <div class="formset__item">
+              <div class="formset__ttl">最寄り駅</div>
+              <div class="formset__input">
+                <ul id="O1_MRDO07_ul">[OPT-O1_MRDO07]</ul>
+              </div>
+            </div>
+            <div class="formset__item">
+              <div class="formset__ttl">沿線</div>
+              <div class="formset__input">
+                <ul id="O1_MRDO08_ul">[OPT-O1_MRDO08]</ul>
+              </div>
+            </div>
+            <div class="formset__item">
+              <div class="formset__ttl">最寄り駅</div>
+              <div class="formset__input">
+                <ul id="O1_MRDO09_ul">[OPT-O1_MRDO09]</ul>
+              </div>
+            </div>
+
             <div class="formset__item">
               <div class="formset__ttl">最寄駅までの距離</div>
               <div class="formset__input"><input type="text" name="O1_DVAL03" value="[O1_DVAL03]" size="90"
@@ -630,7 +828,7 @@
           <!--
           <div class="formset">
             ～ O1_DTXT16〜30, O1_DSEL01〜10, O1_DRDO01〜10, O1_DCHK01〜10 ～
-            ～ O1_MSEL02〜10, O1_MRDO06〜10, O1_MCHK01〜10 ～
+            ～ O1_MSEL02〜10, 10, O1_MCHK01〜10 ～
           </div>
 -->
 
