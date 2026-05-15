@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>金額を提示する｜WEBSITE-NAME</title>
   <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="/icon-192x192.png">
   <!--template=/common/template/head.html-->
   <script>
     $(document).ready(function () {
@@ -26,7 +26,7 @@
         if (location.search.indexOf('side=2') != -1) {
           page_name = 'm_chat2';
         }
-        parent.document.location.href = '/' + page_name + '/?mode=list&word=[MID]-[MIDT]&mid1=[MID]&mid2=[MIDT]&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]';
+        parent.document.location.href = '/' + page_name + '/?mode=list&word=[MID]-[MIDT]&mid1=[MID]&mid2=[MIDT]&etc02=[ETC02]&etc03=[ETC03]';
         //$('.ifrm', parent.document)[0].contentDocument.location.reload();
         //close_popup();
       }

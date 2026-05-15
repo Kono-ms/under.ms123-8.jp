@@ -1,307 +1,372 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UNDER 不動産会社向けサービス｜UNDER</title>
-  <meta name="description" content="UNDER 不動産会社向けサービスのページ。UNDERは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
-  <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <!--template=/common/template/head.html-->
-  <!-- ogp -->
-  <meta property="og:type" content="article" />
-  <meta property="og:TITLE" content="UNDER 不動産会社向けサービス｜UNDER" />
-  <meta property="og:description" content="UNDER 不動産会社向けサービスのページ。UNDERは不動産会社と投資ユーザーを結ぶ新たなマッチングサービスです。不動産会社が求める投資ユーザーと、投資ユーザーが求める不動産会社、双方の希望条件を基にマッチング率を算出することでご自身に合った相手を見つけることをサポートします。" />
-  <meta property="og:image" content="[BASE_URL]/common/images/ogp-top.png">
-  <meta property="og:image:alt" content="UNDERの共有用画像">
-  <meta property="og:url" content="[BASE_URL]/register1/" />
-  <meta property="og:site_name" content="UNDER" />
-  <!-- facebook -->
-  <meta property="article:publisher" content="https://www.facebook.com/FB-URL/">
-  <meta property="fb:app_id" content="FB-APPID" />
-  <!-- twitter card -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@TW-NAME" />
-  <link rel="stylesheet" href="/common/css/about2.css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNDER 不動産会社向けサービス</title>
+<meta name="description" content="収益不動産の流通を、水面下で。本物志向で。UNDERは、厳選された投資家にだけ物件情報を届ける非公開型マッチングプラットフォームです。">
+<link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/icon-192x192.png">
+<!--template=/common/template/head.html--> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 投資家向けページと完全に同一のカラーパレット（明快でクリーンなトーン） */
+    --c-primary: #16332B; 
+    --c-accent: #2563EB; 
+    --c-base: #F8FAFC; 
+    --c-white: #FFFFFF;
+    --c-text-main: #333333;
+    --c-text-sub: #555555;
+    --c-border: #E2E8F0;
+    
+    --font-en: 'Inter', sans-serif;
+    --font-ja: 'Noto Sans JP', sans-serif;
+    --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Reset & Typography */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-ja); color: var(--c-text-main); background: var(--c-white); line-height: 1.8; font-size: 15px; letter-spacing: 0.03em; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease); }
+  ul, ol { list-style: none; }
+  
+  h1, h2, h3 { font-family: var(--font-ja); font-weight: 700; color: var(--c-primary); }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.4; }
+  h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.5; text-align: center; margin-bottom: 40px; }
+  h3 { font-size: 18px; line-height: 1.5; margin-bottom: 12px; }
+  .en-label { font-family: var(--font-en); font-size: 13px; font-weight: 600; color: var(--c-primary); display: block; text-align: center; margin-bottom: 16px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .lead-text { font-size: 16px; color: var(--c-text-sub); text-align: center; max-width: 760px; margin: 0 auto 56px; line-height: 2; }
+
+  /* Layout */
+  .l-container { max-width: 1080px; margin: 0 auto; padding: 0 4%; position: relative; z-index: 2; }
+  .l-section { padding: 100px 0; }
+  .l-section--gray { background: var(--c-base); }
+
+  /* Buttons */
+  .c-btn-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .c-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 240px; height: 56px; padding: 0 32px; font-size: 15px; font-weight: 600; border-radius: 4px; transition: all 0.3s var(--ease); cursor: pointer; }
+  .c-btn--primary { background: var(--c-primary); color: var(--c-white); border: 1px solid var(--c-primary); }
+  .c-btn--primary:hover { background: #1f473c; transform: translateY(-2px); box-shadow: 0 8px 16px rgba(22, 51, 43, 0.15); }
+  .c-btn--secondary { background: var(--c-white); color: var(--c-primary); border: 1px solid var(--c-primary); }
+  .c-btn--secondary:hover { background: var(--c-base); }
+
+  /* Cards */
+  .c-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .c-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .c-card { background: var(--c-white); padding: 40px 24px; border: 1px solid var(--c-border); border-radius: 8px; transition: box-shadow 0.3s var(--ease); text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .c-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .c-card__icon { width: 56px; height: 56px; background: var(--c-base); color: var(--c-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .c-card p { font-size: 14px; color: var(--c-text-sub); text-align: left; width: 100%; }
+
+  /* Table */
+  .c-table { width: 100%; border-collapse: collapse; background: var(--c-white); border: 1px solid var(--c-border); border-radius: 8px; overflow: hidden; }
+  .c-table th, .c-table td { padding: 24px 32px; border-bottom: 1px solid var(--c-border); text-align: left; vertical-align: middle; }
+  .c-table tr:last-child th, .c-table tr:last-child td { border-bottom: none; }
+  .c-table th { width: 22%; font-weight: 700; background: var(--c-base); color: var(--c-primary); }
+  .c-table td { width: 39%; font-size: 15px; }
+  .c-table td.is-under { background: rgba(22, 51, 43, 0.03); font-weight: 700; color: var(--c-primary); }
+  .c-table__label { display: block; font-size: 12px; color: var(--c-text-sub); margin-bottom: 4px; font-weight: normal; }
+
+  /* Flow (Step) */
+  .c-flow { display: flex; gap: 24px; }
+  .c-flow__item { flex: 1; background: var(--c-white); padding: 32px 24px; border: 1px solid var(--c-border); border-radius: 8px; position: relative; }
+  .c-flow__num { font-family: var(--font-en); font-size: 24px; font-weight: 700; color: var(--c-primary); display: block; margin-bottom: 16px; opacity: 0.2; }
+
+  /* FAQ */
+  .c-faq details { background: var(--c-white); border: 1px solid var(--c-border); margin-bottom: 16px; border-radius: 8px; }
+  .c-faq summary { padding: 24px 32px; font-size: 16px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--c-primary); }
+  .c-faq summary::-webkit-details-marker { display: none; }
+  .c-faq summary::after { content: '+'; font-size: 24px; font-weight: 400; transition: transform 0.3s; }
+  .c-faq details[open] summary::after { transform: rotate(45deg); }
+  .c-faq__answer { padding: 0 32px 24px; font-size: 15px; color: var(--c-text-sub); border-top: 1px dashed var(--c-border); margin-top: 16px; padding-top: 16px; }
+
+  /* Hero */
+  .p-hero { position: relative; padding: 160px 0 120px; background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat; }
+  .p-hero::before { content: ''; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); }
+  .p-hero__box { position: relative; z-index: 2; text-align: center; max-width: 800px; margin: 0 auto; }
+
+  @media (max-width: 768px) {
+    .l-section { padding: 64px 0; }
+    .c-grid-4, .c-grid-3, .c-flow { grid-template-columns: 1fr; flex-direction: column; }
+    .c-btn { width: 100%; min-width: auto; }
+    .c-table th, .c-table td { display: block; width: 100%; padding: 16px; }
+    .c-table th { border-bottom: none; padding-bottom: 4px; }
+  }
+</style>
 </head>
-
 <body>
-  <div id="about2" class="wrap sub">
-    <!--template=/common/template/header.html-->
+<div id="about2" class="wrap sub">
+  <!--template=/common/template/header.html--> 
 
-    <section class="p-hero">
-      <div class="l-container">
-        <div class="p-hero__box">
-          <span class="en-label">For Brokers</span>
-          <h1>収益不動産の流通を、<span>水面下で。本物志向で。</span></h1>
-          <p class="about_top_txt">
+  <section class="p-hero">
+    <div class="l-container">
+      <div class="p-hero__box">
+        <span class="en-label">For Brokers</span>
+        <h1 style="margin-bottom: 24px;">収益不動産の流通を、<br>水面下で。本物志向で。</h1>
+        <p style="font-size: 16px; color: var(--c-text-main); margin-bottom: 40px; line-height: 2;">
           UNDERは、厳選された投資家にだけ物件情報を届ける<br>非公開型マッチングプラットフォームです。<br>情報を広く晒さず、質の高い反響と成約につなげます。
         </p>
-          <div class="c-btn-wrap">
-            <a href="/register1/" class="c-btn c-btn--primary">会員登録</a>
-            <a href="/contact/" class="c-btn c-btn--secondary">お問い合わせ</a>
-          </div>
+        <div class="c-btn-wrap">
+          <a href="#request" class="c-btn c-btn--primary">資料請求</a>
+          <a href="#contact" class="c-btn c-btn--secondary">お問い合わせ</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section l-section--gray">
-      <div class="l-container">
-        <span class="en-label">仲介会社様の課題に対して</span>
-        <h2>掲載して広げるほど、<br>売りにくくなる物件がある。</h2>
-        <p class="lead-text">収益不動産では、売主意向や販売事情により広く公開せずに動かしたい物件が存在します。<br>一方で、一般的なポータル型だけでは、情報拡散や反響対応の負荷が課題になりがちです。</p>
-
-        <div class="c-card_box">
-          <div class="c-card c-card_item01">
-            <h3>広く公開できない物件がある</h3>
-            <p>売主都合や流通事情により、クローズドで扱いたい案件があります。</p>
-          </div>
-          <div class="c-card c-card_item01">
-            <h3>情報が拡散しやすい</h3>
-            <p>一般公開すると、価格変更や条件変更の動きも含め市場に情報が広がりやすくなります。</p>
-          </div>
-          <div class="c-card c-card_item01">
-            <h3>鮮度が落ちやすい</h3>
-            <p>公開期間が長くなるほど、案件の印象や情報価値が落ちやすくなります。</p>
-          </div>
-          <div class="c-card c-card_item02">
-            <h3>反響の質にばらつきがある</h3>
-            <p>投資初心者を含む幅広い反響対応に、営業工数が取られやすくなります。</p>
-          </div>
-          <div class="c-card c-card_item02">
-            <h3>大量反響でも成約に直結しにくい</h3>
-            <p>件数は多くても、検討の深い顧客に効率よく届いているとは限りません。</p>
-          </div>
+  <section class="l-section l-section--gray">
+    <div class="l-container">
+      <span class="en-label">仲介会社様の課題に対して</span>
+      <h2>掲載して広げるほど、<br>売りにくくなる物件がある。</h2>
+      <p class="lead-text">収益不動産では、売主意向や販売事情により広く公開せずに動かしたい物件が存在します。<br>一方で、一般的なポータル型だけでは、情報拡散や反響対応の負荷が課題になりがちです。</p>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;">
+        <div class="c-card" style="width: calc(33.333% - 16px); min-width: 280px; box-shadow: none; border: none; background: transparent;">
+          <h3 style="font-size: 16px; text-align: center;">広く公開できない物件がある</h3>
+          <p>売主都合や流通事情により、クローズドで扱いたい案件があります。</p>
+        </div>
+        <div class="c-card" style="width: calc(33.333% - 16px); min-width: 280px; box-shadow: none; border: none; background: transparent;">
+          <h3 style="font-size: 16px; text-align: center;">情報が拡散しやすい</h3>
+          <p>一般公開すると、価格変更や条件変更の動きも含め市場に情報が広がりやすくなります。</p>
+        </div>
+        <div class="c-card" style="width: calc(33.333% - 16px); min-width: 280px; box-shadow: none; border: none; background: transparent;">
+          <h3 style="font-size: 16px; text-align: center;">鮮度が落ちやすい</h3>
+          <p>公開期間が長くなるほど、案件の印象や情報価値が落ちやすくなります。</p>
+        </div>
+        <div class="c-card" style="width: calc(50% - 12px); min-width: 280px; max-width: 400px; box-shadow: none; border: none; background: transparent;">
+          <h3 style="font-size: 16px; text-align: center;">反響の質にばらつきがある</h3>
+          <p>投資初心者を含む幅広い反響対応に、営業工数が取られやすくなります。</p>
+        </div>
+        <div class="c-card" style="width: calc(50% - 12px); min-width: 280px; max-width: 400px; box-shadow: none; border: none; background: transparent;">
+          <h3 style="font-size: 16px; text-align: center;">大量反響でも成約に直結しにくい</h3>
+          <p>件数は多くても、検討の深い顧客に効率よく届いているとは限りません。</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section">
-      <div class="l-container">
-        <span class="en-label">UNDERが解決すること</span>
-        <h2>UNDERが解決すること</h2>
-        <p class="lead-text">UNDERは、「誰にでも見せる」のではなく「届けたい相手にだけ届ける」ための設計で、<br>収益不動産の流通を再構築します。</p>
-
-        <div class="c-grid-4">
-          <div class="c-card">
-            <div class="c-card__icon">
-              <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 5h12M9 3v2m0 0v2"></path>
-              </svg>
-            </div>
-            <h3>条件一致した会員にだけ届ける</h3>
-            <p>会員ごとの条件に応じて、必要な相手にだけ物件情報を配信できます。</p>
+  <section class="l-section">
+    <div class="l-container">
+      <span class="en-label">UNDERが解決すること</span>
+      <h2>UNDERが解決すること</h2>
+      <p class="lead-text">UNDERは、「誰にでも見せる」のではなく「届けたい相手にだけ届ける」ための設計で、<br>収益不動産の流通を再構築します。</p>
+      
+      <div class="c-grid-4">
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 5h12M9 3v2m0 0v2"></path></svg>
           </div>
-          <div class="c-card">
-            <div class="c-card__icon">
-              <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-              </svg>
-            </div>
-            <h3>水面下で流通できる</h3>
-            <p>不特定多数への公開を避けながら、秘匿性を保って販売機会をつくれます。</p>
+          <h3 style="font-size: 16px;">条件一致した会員にだけ届ける</h3>
+          <p>会員ごとの条件に応じて、必要な相手にだけ物件情報を配信できます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
           </div>
-          <div class="c-card">
-            <div class="c-card__icon">
-              <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <h3>高属性会員に届く</h3>
-            <p>富裕層、高属性サラリーマン、買取業者など、購買意欲と判断力のある層に届きます。</p>
+          <h3 style="font-size: 16px;">水面下で流通できる</h3>
+          <p>不特定多数への公開を避けながら、秘匿性を保って販売機会をつくれます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
           </div>
-          <div class="c-card">
-            <div class="c-card__icon">
-              <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-              </svg>
-            </div>
-            <h3>反響の質が資産になる</h3>
-            <p>質の高い反響リストは蓄積するほど価値を持ち、将来の営業資産として活用できます。</p>
+          <h3 style="font-size: 16px;">高属性会員に届く</h3>
+          <p>富裕層、高属性サラリーマン、買取業者など、購買意欲と判断力のある層に届きます。</p>
+        </div>
+        <div class="c-card">
+          <div class="c-card__icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
           </div>
+          <h3 style="font-size: 16px;">反響の質が資産になる</h3>
+          <p>質の高い反響リストは蓄積するほど価値を持ち、将来の営業資産として活用できます。</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section l-section--gray">
-      <div class="l-container">
-        <h2>大手ポータルとの違い</h2>
+  <section class="l-section l-section--gray">
+    <div class="l-container">
+      <h2>大手ポータルとの違い</h2>
+      
+      <table class="c-table">
+        <tbody>
+          <tr>
+            <th>情報の届け方</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>不特定多数への一斉公開</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>条件に合う会員へ限定配信</td>
+          </tr>
+          <tr>
+            <th>公開範囲</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>誰でも閲覧可能</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>非公開型で水面下流通</td>
+          </tr>
+          <tr>
+            <th>情報鮮度</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>公開中に鮮度が低下しやすい</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>秘匿性を保ちながら鮮度を維持しやすい</td>
+          </tr>
+          <tr>
+            <th>反響の質</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>幅広い層から反響が来る</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>高属性会員中心の反響</td>
+          </tr>
+          <tr>
+            <th>成約までのスピード</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>反響後の見極めに時間がかかる</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>判断の早い相手につながりやすい</td>
+          </tr>
+          <tr>
+            <th>営業負担</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>掲載準備や追客負担が重い</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>届け方を選べ、運用効率を高めやすい</td>
+          </tr>
+          <tr>
+            <th>営業資産化</th>
+            <td><span class="c-table__label">一般的なポータルサイト</span>単発反響で終わりやすい</td>
+            <td class="is-under"><span class="c-table__label">UNDER</span>質の高い反響リストを蓄積できる</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-        <table class="c-table">
-          <tbody>
-            <tr>
-              <th>情報の届け方</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>不特定多数への一斉公開</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>条件に合う会員へ限定配信</td>
-            </tr>
-            <tr>
-              <th>公開範囲</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>誰でも閲覧可能</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>非公開型で水面下流通</td>
-            </tr>
-            <tr>
-              <th>情報鮮度</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>公開中に鮮度が低下しやすい</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>秘匿性を保ちながら鮮度を維持しやすい</td>
-            </tr>
-            <tr>
-              <th>反響の質</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>幅広い層から反響が来る</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>高属性会員中心の反響</td>
-            </tr>
-            <tr>
-              <th>成約までのスピード</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>反響後の見極めに時間がかかる</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>判断の早い相手につながりやすい</td>
-            </tr>
-            <tr>
-              <th>営業負担</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>掲載準備や追客負担が重い</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>届け方を選べ、運用効率を高めやすい</td>
-            </tr>
-            <tr>
-              <th>営業資産化</th>
-              <td><span class="c-table__label">一般的なポータルサイト</span>単発反響で終わりやすい</td>
-              <td class="is-under"><span class="c-table__label">UNDER</span>質の高い反響リストを蓄積できる</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="l-section">
-      <div class="l-container">
-        <h2>3つの情報提供方法</h2>
-        <p class="lead-text">案件や状況に応じて、最適な方法で投資家に物件情報を届けられます。</p>
-
-        <div class="c-grid-3">
-          <div class="c-card">
-            <span class="offer_txt">マイページ掲載型</span>
-            <h3>マッチング物件</h3>
-            <p>条件に合う会員のマイページへ、物件情報を掲載して届けます。</p>
-          </div>
-          <div class="c-card">
-            <span class="offer_txt">チャット提案型</span>
-            <h3>オウカガイ</h3>
-            <p>掲載しづらい物件でも、限定的な提案として会員へ直接届けられます。</p>
-          </div>
-          <div class="c-card">
-            <span class="offer_txt">メール配信型</span>
-            <h3>提案メール</h3>
-            <p>営業メールを活かしながら、スピーディーに情報提供できます。</p>
-          </div>
+  <section class="l-section">
+    <div class="l-container">
+      <h2>3つの情報提供方法</h2>
+      <p class="lead-text">案件や状況に応じて、最適な方法で投資家に物件情報を届けられます。</p>
+      
+      <div class="c-grid-3">
+        <div class="c-card">
+          <span style="font-size: 13px; color: var(--c-primary); font-weight: 700; margin-bottom: 12px;">マイページ掲載型</span>
+          <h3>マッチング物件</h3>
+          <p>条件に合う会員のマイページへ、物件情報を掲載して届けます。</p>
+        </div>
+        <div class="c-card">
+          <span style="font-size: 13px; color: var(--c-primary); font-weight: 700; margin-bottom: 12px;">チャット提案型</span>
+          <h3>オウカガイ</h3>
+          <p>掲載しづらい物件でも、限定的な提案として会員へ直接届けられます。</p>
+        </div>
+        <div class="c-card">
+          <span style="font-size: 13px; color: var(--c-primary); font-weight: 700; margin-bottom: 12px;">メール配信型</span>
+          <h3>提案メール</h3>
+          <p>営業メールを活かしながら、スピーディーに情報提供できます。</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section points_wrap">
-      <div class="l-container">
-        <div class="points_box">
-          <h2>数ではなく、質で成果をつくる。</h2>
-          <p class="points_txt">
+  <section class="l-section" style="background: var(--c-primary); color: var(--c-white);">
+    <div class="l-container">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <h2 style="color: var(--c-white);">数ではなく、質で成果をつくる。</h2>
+        <p style="color: #E2E8F0; margin-bottom: 48px; line-height: 2;">
           UNDERの会員は、富裕層・高属性サラリーマン・買取業者などを中心とした真剣な買い手層です。<br>反響件数を増やすことよりも、反響率・成約率・継続的な営業価値を重視します。
         </p>
-          <ul>
-            <li><span>✔</span> 高属性会員に限定</li>
-            <li><span>✔</span> 判断が早く、商談化しやすい</li>
-            <li><span>✔</span> 反響リストが営業資産になる</li>
-          </ul>
+        <ul style="border: 1px solid rgba(255,255,255,0.2); padding: 48px; border-radius: 8px; text-align: left; display: inline-block; width: 100%; max-width: 480px; color: var(--c-white);">
+          <li style="margin-bottom: 24px; padding-left: 32px; position: relative;"><span style="position:absolute; left:0; color:var(--c-white);">✔</span> 高属性会員に限定</li>
+          <li style="margin-bottom: 24px; padding-left: 32px; position: relative;"><span style="position:absolute; left:0; color:var(--c-white);">✔</span> 判断が早く、商談化しやすい</li>
+          <li style="padding-left: 32px; position: relative;"><span style="position:absolute; left:0; color:var(--c-white);">✔</span> 反響リストが営業資産になる</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-section l-section--gray">
+    <div class="l-container">
+      <h2>登録負担を軽くする仕組み</h2>
+      <p class="lead-text">「登録が面倒だから使われない」という課題に対して、<br>UNDERは物件登録負担の軽減にも取り組みます。</p>
+      
+      <div class="c-flow">
+        <div class="c-flow__item">
+          <span class="c-flow__num">STEP 1</span>
+          <h3 style="font-size: 16px; margin-bottom: 8px;">マイソクを送る</h3>
+          <p style="color: var(--c-text-sub); font-size: 14px;">PDF資料をアップロードまたは共有します。</p>
+        </div>
+        <div class="c-flow__item">
+          <span class="c-flow__num">STEP 2</span>
+          <h3 style="font-size: 16px; margin-bottom: 8px;">AIが主要項目を抽出</h3>
+          <p style="color: var(--c-text-sub); font-size: 14px;">物件名、価格、利回り、所在地などを自動で読み取ります。</p>
+        </div>
+        <div class="c-flow__item">
+          <span class="c-flow__num">STEP 3</span>
+          <h3 style="font-size: 16px; margin-bottom: 8px;">確認して登録完了</h3>
+          <p style="color: var(--c-text-sub); font-size: 14px;">必要事項を確認するだけで、登録作業を大幅に簡略化できます。</p>
         </div>
       </div>
-    </section>
+      <p style="font-size: 13px; color: var(--c-text-sub); text-align: right; margin-top: 24px;">※AI-OCRによる登録支援は、運用負担軽減のための機能構想を含みます。</p>
+    </div>
+  </section>
 
-    <section class="l-section l-section--gray">
-      <div class="l-container">
-        <h2>登録負担を軽くする仕組み</h2>
-        <p class="lead-text">「登録が面倒だから使われない」という課題に対して、<br class="pc_disp">UNDERは物件登録負担の軽減にも取り組みます。</p>
-
-        <div class="c-flow">
-          <div class="c-flow__item">
-            <span class="c-flow__num">STEP 1</span>
-            <h3>マイソクを送る</h3>
-            <p class="about_nagare_txt">PDF資料をアップロードまたは共有します。</p>
-          </div>
-          <div class="c-flow__item">
-            <span class="c-flow__num">STEP 2</span>
-            <h3>AIが主要項目を抽出</h3>
-            <p class="about_nagare_txt">物件名、価格、利回り、所在地などを自動で読み取ります。</p>
-          </div>
-          <div class="c-flow__item">
-            <span class="c-flow__num">STEP 3</span>
-            <h3>確認して登録完了</h3>
-            <p class="about_nagare_txt">必要事項を確認するだけで、登録作業を大幅に簡略化できます。</p>
-          </div>
+  <section class="l-section">
+    <div class="l-container">
+      <h2>導入の流れ</h2>
+      
+      <div class="c-grid-4">
+        <div class="c-card" style="box-shadow: none; border-color: var(--c-border); padding: 32px 24px;">
+          <span style="font-family: var(--font-en); font-weight: 700; color: var(--c-primary); margin-bottom: 12px; display: block; opacity: 0.2;">STEP 1</span>
+          <h3 style="font-size: 16px;">お問い合わせ</h3>
+          <p style="font-size: 14px;">まずはサービス概要や活用イメージをご相談ください。</p>
         </div>
-        <p class="about_r_txt">※AI-OCRによる登録支援は、運用負担軽減のための機能構想を含みます。</p>
-      </div>
-    </section>
-
-    <section class="l-section">
-      <div class="l-container">
-        <h2>導入の流れ</h2>
-
-        <div class="c-grid-4">
-          <div class="c-card c-flow__item">
-            <span class="c-flow__num">STEP 1</span>
-            <h3>お問い合わせ</h3>
-            <p class="about_nagare_txt">まずはサービス概要や活用イメージをご相談ください。</p>
-          </div>
-          <div class="c-card c-flow__item">
-            <span class="c-flow__num">STEP 2</span>
-            <h3>ご説明・ヒアリング</h3>
-            <p class="about_nagare_txt">取り扱い案件や運用方針に合わせてご案内します。</p>
-          </div>
-          <div class="c-card c-flow__item">
-            <span class="c-flow__num">STEP 3</span>
-            <h3>利用開始準備</h3>
-            <p class="about_nagare_txt">掲載方法や提案方法、運用の流れを整理します。</p>
-          </div>
-          <div class="c-card c-flow__item">
-            <span class="c-flow__num">STEP 4</span>
-            <h3>配信・運用開始</h3>
-            <p class="about_nagare_txt">案件に応じた方法で、会員への情報提供を開始します。</p>
-          </div>
+        <div class="c-card" style="box-shadow: none; border-color: var(--c-border); padding: 32px 24px;">
+          <span style="font-family: var(--font-en); font-weight: 700; color: var(--c-primary); margin-bottom: 12px; display: block; opacity: 0.2;">STEP 2</span>
+          <h3 style="font-size: 16px;">ご説明・ヒアリング</h3>
+          <p style="font-size: 14px;">取り扱い案件や運用方針に合わせてご案内します。</p>
+        </div>
+        <div class="c-card" style="box-shadow: none; border-color: var(--c-border); padding: 32px 24px;">
+          <span style="font-family: var(--font-en); font-weight: 700; color: var(--c-primary); margin-bottom: 12px; display: block; opacity: 0.2;">STEP 3</span>
+          <h3 style="font-size: 16px;">利用開始準備</h3>
+          <p style="font-size: 14px;">掲載方法や提案方法、運用の流れを整理します。</p>
+        </div>
+        <div class="c-card" style="box-shadow: none; border-color: var(--c-border); padding: 32px 24px;">
+          <span style="font-family: var(--font-en); font-weight: 700; color: var(--c-primary); margin-bottom: 12px; display: block; opacity: 0.2;">STEP 4</span>
+          <h3 style="font-size: 16px;">配信・運用開始</h3>
+          <p style="font-size: 14px;">案件に応じた方法で、会員への情報提供を開始します。</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section l-section--gray">
-      <div class="l-container about_faq_box">
-        <h2>よくある質問</h2>
-        <div class="c-faq">
-          <details open>
-            <summary>どのような物件が向いていますか？</summary>
-            <div class="c-faq__answer">広く公開しづらい物件や、高属性の投資家へ効率よく届けたい物件に適しています。</div>
-          </details>
-          <details>
-            <summary>一般的なポータルとの併用は可能ですか？</summary>
-            <div class="c-faq__answer">運用方針に応じて使い分けが可能です。案件特性に合わせた活用をご検討いただけます。</div>
-          </details>
-          <details>
-            <summary>物件登録の負担は大きいですか？</summary>
-            <div class="c-faq__answer">入力負担を抑える前提で設計しており、登録しやすさの改善も重視しています。</div>
-          </details>
-          <details>
-            <summary>どのような投資家会員に届きますか？</summary>
-            <div class="c-faq__answer">富裕層、高属性サラリーマン、買取業者などを中心に、収益不動産の購入意欲が高い会員層を想定しています。</div>
-          </details>
-        </div>
+  <section class="l-section l-section--gray">
+    <div class="l-container" style="max-width: 800px;">
+      <h2>よくある質問</h2>
+      <div class="c-faq">
+        <details open>
+          <summary>どのような物件が向いていますか？</summary>
+          <div class="c-faq__answer">広く公開しづらい物件や、高属性の投資家へ効率よく届けたい物件に適しています。</div>
+        </details>
+        <details>
+          <summary>一般的なポータルとの併用は可能ですか？</summary>
+          <div class="c-faq__answer">運用方針に応じて使い分けが可能です。案件特性に合わせた活用をご検討いただけます。</div>
+        </details>
+        <details>
+          <summary>物件登録の負担は大きいですか？</summary>
+          <div class="c-faq__answer">入力負担を抑える前提で設計しており、登録しやすさの改善も重視しています。</div>
+        </details>
+        <details>
+          <summary>どのような投資家会員に届きますか？</summary>
+          <div class="c-faq__answer">富裕層、高属性サラリーマン、買取業者などを中心に、収益不動産の購入意欲が高い会員層を想定しています。</div>
+        </details>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="l-section">
-      <div class="l-container about_inquiry_box">
-        <h2>情報を広げず、成果は広げる。</h2>
-        <p class="lead-text">水面下流通と限定配信で、<br>反響の質と成約率を変えていく。</p>
-        <div class="c-btn-wrap">
-          <a href="/contact/" class="c-btn c-btn--primary">お問い合わせ</a>
-          <a href="#document" class="c-btn c-btn--secondary">サービス資料を見る</a>
-        </div>
+  <section class="l-section">
+    <div class="l-container" style="text-align: center;">
+      <h2 style="margin-bottom: 24px;">情報を広げず、<br>成果は広げる。</h2>
+      <p class="lead-text" style="margin-bottom: 40px;">水面下流通と限定配信で、<br>反響の質と成約率を変えていく。</p>
+      <div class="c-btn-wrap">
+        <a href="#contact" class="c-btn c-btn--primary">お問い合わせ</a>
+        <a href="#document" class="c-btn c-btn--secondary">サービス資料を見る</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!--template=/common/template/footer.html-->
-  </div>
+  <!--template=/common/template/footer.html--> 
+</div>
 </body>
 </html>

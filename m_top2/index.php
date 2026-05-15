@@ -184,169 +184,169 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$sel1)
 	$hid="";
 	// SQLインジェクション対策
 
-// 	$StrSQL=" SELECT ";
-//     $StrSQL.="  distinct MCONTACT.MAXID,DAT_MCONTACT.STATUS,MCONTACT.MIDT,MCONTACT.ETC02,MCONTACT.ETC03, ";
-// 	$StrSQL.="   DAT_M2.* ";
-// 	$StrSQL.="  FROM ";
-// 	$StrSQL.="    (SELECT MAX(ID) as MAXID,MID, MIDT, ETC02, ETC03 ";
-// 	$StrSQL.="     FROM DAT_MCONTACT ";
-// 	$StrSQL.="     WHERE ifnull(STATUS, '') != '' ";
-// 	$StrSQL.="     GROUP BY MID, MIDT, ETC02, ETC03 ) ";
-// 	$StrSQL.="    AS MCONTACT";
-// 	$StrSQL.="      INNER JOIN DAT_MCONTACT  ";
-// 	$StrSQL.="          ON MCONTACT.MAXID = DAT_MCONTACT.ID  ";
-// 	$StrSQL.="      INNER JOIN DAT_M2  ";
-// 	$StrSQL.="          ON MCONTACT.MIDT = DAT_M2.MID  ";
-// 	$StrSQL.="      INNER JOIN DAT_O2  ";
-// 	$StrSQL.="          ON MCONTACT.MIDT = DAT_O2.MID  ";
-// 	$StrSQL.="  WHERE ";
-// 	$StrSQL.="      DAT_MCONTACT.MID = '".$_SESSION['MID']."' ";
+	$StrSQL=" SELECT ";
+    $StrSQL.="  distinct MCONTACT.MAXID,DAT_MCONTACT.STATUS,MCONTACT.MIDT,MCONTACT.ETC02,MCONTACT.ETC03, ";
+	$StrSQL.="   DAT_M2.* ";
+	$StrSQL.="  FROM ";
+	$StrSQL.="    (SELECT MAX(ID) as MAXID,MID, MIDT, ETC02, ETC03 ";
+	$StrSQL.="     FROM DAT_MCONTACT ";
+	$StrSQL.="     WHERE ifnull(STATUS, '') != '' ";
+	$StrSQL.="     GROUP BY MID, MIDT, ETC02, ETC03 ) ";
+	$StrSQL.="    AS MCONTACT";
+	$StrSQL.="      INNER JOIN DAT_MCONTACT  ";
+	$StrSQL.="          ON MCONTACT.MAXID = DAT_MCONTACT.ID  ";
+	$StrSQL.="      INNER JOIN DAT_M2  ";
+	$StrSQL.="          ON MCONTACT.MIDT = DAT_M2.MID  ";
+	$StrSQL.="      INNER JOIN DAT_O2  ";
+	$StrSQL.="          ON MCONTACT.MIDT = DAT_O2.MID  ";
+	$StrSQL.="  WHERE ";
+	$StrSQL.="      DAT_MCONTACT.MID = '".$_SESSION['MID']."' ";
 	
 
-// 	if($word!=""){
+	if($word!=""){
 
-// 		$StrSQL.="  AND ( ";
+		$StrSQL.="  AND ( ";
 
-// 		$StrSQL.="     M2_DVAL01 like '%".$word."%'";
-// 		$StrSQL.="  OR O2_DVAL01 like '%".$word."%'";
-// 		$StrSQL.="  OR O2_DTXT01 like '%".$word."%'";
-// 		$StrSQL.="  OR O2_MSEL01 like '%".$word."%'";
-// 		$StrSQL.="  OR O2_MSEL02 like '%".$word."%'";
+		$StrSQL.="     M2_DVAL01 like '%".$word."%'";
+		$StrSQL.="  OR O2_DVAL01 like '%".$word."%'";
+		$StrSQL.="  OR O2_DTXT01 like '%".$word."%'";
+		$StrSQL.="  OR O2_MSEL01 like '%".$word."%'";
+		$StrSQL.="  OR O2_MSEL02 like '%".$word."%'";
 
-// 		$StrSQL.="  ) ";
-// 	}
+		$StrSQL.="  ) ";
+	}
 
-// 	if($sel1!=""){
-// 		$StrSQL.="  AND DAT_MCONTACT.STATUS = '".$sel1."'";
-// 	}
+	if($sel1!=""){
+		$StrSQL.="  AND DAT_MCONTACT.STATUS = '".$sel1."'";
+	}
 
-// 	$StrSQL.="  ORDER BY DAT_MCONTACT.NEWDATE DESC ";
-// // var_dump($StrSQL);
-// 	$rs=mysqli_query(ConnDB(),$StrSQL);
-// 	$item=mysqli_num_rows($rs);
-// 	if($item==0) {
-// 		$reccount=0;
-// 		$pagestr="";
-// 		$strMain="該当データがありません。";
-// 	} else {
-// 		//================================================================================================
-// 		//ページング処理
-// 		//================================================================================================
-// 		$reccount=mysqli_num_rows($rs);
-// 		$pagecount=intval(($reccount-1)/$PageSize+1);
-// 		mysqli_data_seek($rs, $PageSize*($page-1));
+	$StrSQL.="  ORDER BY DAT_MCONTACT.NEWDATE DESC ";
+// var_dump($StrSQL);
+	$rs=mysqli_query(ConnDB(),$StrSQL);
+	$item=mysqli_num_rows($rs);
+	if($item==0) {
+		$reccount=0;
+		$pagestr="";
+		$strMain="該当データがありません。";
+	} else {
+		//================================================================================================
+		//ページング処理
+		//================================================================================================
+		$reccount=mysqli_num_rows($rs);
+		$pagecount=intval(($reccount-1)/$PageSize+1);
+		mysqli_data_seek($rs, $PageSize*($page-1));
 
-// 		$str="";
-// 		$s=$page-5;
-// 		if ($s<1) {
-// 			$s=1;
-// 		} 
-// 		$e=$s+9;
-// 		if ($e>$pagecount) {
-// 			$e=$pagecount;
-// 		} 
-// 		for ($i=$s; $i<=$e; $i=$i+1) {
-// 			if ($i==intval($page)) {
-// 				$str=$str."<span class=\"current\">".$i."</span>";
-// 			} else {
-// 				$str=$str." <a href=\"".$aspname."?mode=list&lid=".$lid."&sort=".$sort."&word=".$word."&sel1=".$sel1."&page=".$i."\" class=\"inactive\">".$i."</a>";
-// 			} 
-// 		}
-// 		$pagestr=$str;
-
-
-
-// 		$sum_jyuryo=0;
-// 		$sum_tanka=0;
-// 		$sum_soryo=0;
-// 		$sum_kingk=0;
-// 		$CurrentRecord=1;
-// 		$strMain="";
-// 		while ($item = mysqli_fetch_assoc($rs)) {
-
-// 			$str=$strM;
-
-// 			$StrSQLO1="SELECT * FROM DAT_O1 where OID = '".$item['ETC03']."'";
-// 			$rsO1=mysqli_query(ConnDB(),$StrSQLO1);
-// 			$itemO1=mysqli_fetch_assoc($rsO1);
-
-// 			$StrSQLO2="SELECT * FROM DAT_O2 where MID = '".$item['MIDT']."'";
-// 			$rsO2=mysqli_query(ConnDB(),$StrSQLO2);
-// 			$itemO2=mysqli_fetch_assoc($rsO2);
-
-// 			$aid = $_SESSION['MID']."-".$item['MIDT'];
-// 			$status=str_replace("-", "", str_replace("STATUS:", "", $item['STATUS']));
-
-// 			$str=str_replace("[M2_DVAL01]",$item['M2_DVAL01'],$str);
-// 			$str=str_replace("[O2_DVAL01]",$itemO2['O2_DVAL01'],$str);
-// 			$str=str_replace("[O2_DTXT01]",str_replace("\r\n","<br>",htmlspecialchars($itemO2["O2_DTXT01"])),$str);
-// 			$str=str_replace("[O2_MSEL01]",str_replace("\r\n","<br>",str_replace("O2_MSEL01:","",htmlspecialchars($itemO2["O2_MSEL01"]))),$str);
-// 			$str=str_replace("[O2_MSEL02]",str_replace("\r\n","<br>",str_replace("O2_MSEL02:","",htmlspecialchars($itemO2["O2_MSEL02"]))),$str);
+		$str="";
+		$s=$page-5;
+		if ($s<1) {
+			$s=1;
+		} 
+		$e=$s+9;
+		if ($e>$pagecount) {
+			$e=$pagecount;
+		} 
+		for ($i=$s; $i<=$e; $i=$i+1) {
+			if ($i==intval($page)) {
+				$str=$str."<span class=\"current\">".$i."</span>";
+			} else {
+				$str=$str." <a href=\"".$aspname."?mode=list&lid=".$lid."&sort=".$sort."&word=".$word."&sel1=".$sel1."&page=".$i."\" class=\"inactive\">".$i."</a>";
+			} 
+		}
+		$pagestr=$str;
 
 
-// 			$str=str_replace("[O1_DVAL01]",$itemO1['O1_DVAL01'],$str); //案件
-// 			$str=str_replace("[O1_ID]",$itemO1['ID'],$str); //案件詳細
-// 			$str=str_replace("[O2_ID]",$itemO2['ID'],$str); //案件詳細
+
+		$sum_jyuryo=0;
+		$sum_tanka=0;
+		$sum_soryo=0;
+		$sum_kingk=0;
+		$CurrentRecord=1;
+		$strMain="";
+		while ($item = mysqli_fetch_assoc($rs)) {
+
+			$str=$strM;
+
+			$StrSQLO1="SELECT * FROM DAT_O1 where OID = '".$item['ETC03']."'";
+			$rsO1=mysqli_query(ConnDB(),$StrSQLO1);
+			$itemO1=mysqli_fetch_assoc($rsO1);
+
+			$StrSQLO2="SELECT * FROM DAT_O2 where MID = '".$item['MIDT']."'";
+			$rsO2=mysqli_query(ConnDB(),$StrSQLO2);
+			$itemO2=mysqli_fetch_assoc($rsO2);
+
+			$aid = $_SESSION['MID']."-".$item['MIDT'];
+			$status=str_replace("-", "", str_replace("STATUS:", "", $item['STATUS']));
+
+			$str=str_replace("[M2_DVAL01]",$item['M2_DVAL01'],$str);
+			$str=str_replace("[O2_DVAL01]",$itemO2['O2_DVAL01'],$str);
+			$str=str_replace("[O2_DTXT01]",str_replace("\r\n","<br>",htmlspecialchars($itemO2["O2_DTXT01"])),$str);
+			$str=str_replace("[O2_MSEL01]",str_replace("\r\n","<br>",str_replace("O2_MSEL01:","",htmlspecialchars($itemO2["O2_MSEL01"]))),$str);
+			$str=str_replace("[O2_MSEL02]",str_replace("\r\n","<br>",str_replace("O2_MSEL02:","",htmlspecialchars($itemO2["O2_MSEL02"]))),$str);
 
 
-// 			$strtmp="";
-// 			$strtmp=$strtmp."<option value=''>▼選択して下さい</option>";
-// 			$tmp=explode("::", FIRST_STATUS."::".STATUS_LIST);
-// 			for ($j=0; $j<count($tmp); $j=$j+1) {
-// 				$selected="";
-// 				if($tmp[$j]==$status){
-// 					$selected=" selected ";
-// 				}
-// 				$strtmp=$strtmp."<option value='STATUS:".$tmp[$j]."'".$selected.">".$tmp[$j]."</option>";
-// 			}
-// 			$str=str_replace("[OPT-STATUS]",$strtmp,$str);
+			$str=str_replace("[O1_DVAL01]",$itemO1['O1_DVAL01'],$str); //案件
+			$str=str_replace("[O1_ID]",$itemO1['ID'],$str); //案件詳細
+			$str=str_replace("[O2_ID]",$itemO2['ID'],$str); //案件詳細
+
+
+			$strtmp="";
+			$strtmp=$strtmp."<option value=''>▼選択して下さい</option>";
+			$tmp=explode("::", FIRST_STATUS."::".STATUS_LIST);
+			for ($j=0; $j<count($tmp); $j=$j+1) {
+				$selected="";
+				if($tmp[$j]==$status){
+					$selected=" selected ";
+				}
+				$strtmp=$strtmp."<option value='STATUS:".$tmp[$j]."'".$selected.">".$tmp[$j]."</option>";
+			}
+			$str=str_replace("[OPT-STATUS]",$strtmp,$str);
 			
 			
-// 			$str=str_replace("[ID]",$item['MAXID'],$str);
+			$str=str_replace("[ID]",$item['MAXID'],$str);
 	
 
 
-// 			$str=str_replace("[AID]",$aid,$str);
-// 			$str=str_replace("[MID1]",$_SESSION['MID'],$str);
-// 			$str=str_replace("[MID2]",$item['MIDT'],$str);
-// 			$str=str_replace("[ETC02]",$item['ETC02'],$str);
-// 			$str=str_replace("[ETC03]",$item['ETC03'],$str);
+			$str=str_replace("[AID]",$aid,$str);
+			$str=str_replace("[MID1]",$_SESSION['MID'],$str);
+			$str=str_replace("[MID2]",$item['MIDT'],$str);
+			$str=str_replace("[ETC02]",$item['ETC02'],$str);
+			$str=str_replace("[ETC03]",$item['ETC03'],$str);
 
 
-// 			//いいねしてきたO情報 
-// 			$StrSQL_iine="SELECT * FROM DAT_O1 INNER JOIN DAT_IINE ON DAT_O1.OID = DAT_IINE.OIDT ";
-// 			$StrSQL_iine.=" where DAT_IINE.MID = '".$item['MIDT']."' AND DAT_IINE.MIDT = '".$_SESSION['MID']."'";
-// 			$rs_iine=mysqli_query(ConnDB(),$StrSQL_iine);
-// 			$item_iine=mysqli_fetch_assoc($rs_iine);
-// // echo "<!--いいねしてきたO情報:".$StrSQL_iine."-->";
-// 			$str=str_replace("[O1_DVAL01]",str_replace("O1_DVAL01:","",$item_iine['O1_DVAL01']),$str);
-// 			$str=str_replace("[O1_DTXT01]",str_replace("O1_DTXT01:","",$item_iine['O1_DTXT01']),$str);
-// 			$str=str_replace("[O1_MSEL01]",str_replace("O1_MSEL01:","",$item_iine['O1_MSEL01']),$str);
-// 			$str=str_replace("[O1_MSEL02]",str_replace("O1_MSEL02:","",$item_iine['O1_MSEL02']),$str);
+			//いいねしてきたO情報 
+			$StrSQL_iine="SELECT * FROM DAT_O1 INNER JOIN DAT_IINE ON DAT_O1.OID = DAT_IINE.OIDT ";
+			$StrSQL_iine.=" where DAT_IINE.MID = '".$item['MIDT']."' AND DAT_IINE.MIDT = '".$_SESSION['MID']."'";
+			$rs_iine=mysqli_query(ConnDB(),$StrSQL_iine);
+			$item_iine=mysqli_fetch_assoc($rs_iine);
+// echo "<!--いいねしてきたO情報:".$StrSQL_iine."-->";
+			$str=str_replace("[O1_DVAL01]",str_replace("O1_DVAL01:","",$item_iine['O1_DVAL01']),$str);
+			$str=str_replace("[O1_DTXT01]",str_replace("O1_DTXT01:","",$item_iine['O1_DTXT01']),$str);
+			$str=str_replace("[O1_MSEL01]",str_replace("O1_MSEL01:","",$item_iine['O1_MSEL01']),$str);
+			$str=str_replace("[O1_MSEL02]",str_replace("O1_MSEL02:","",$item_iine['O1_MSEL02']),$str);
 	        
 
 
 
-// 			$StrSQL="SELECT ID FROM DAT_MESSAGE where AID='".$aid."' and RID<>'".$_SESSION['MID']."' and ETC02 = '".$item['ETC02']."' and ifnull(ETC03,'') = '".$item['ETC03']."' and (NOREAD is null or NOREAD='');";
-// 			// var_dump($StrSQL);
-// 			$rs2=mysqli_query(ConnDB(),$StrSQL);
-// 			$item2=mysqli_num_rows($rs2);
-// 			if($item2>0){
-// 				$str=str_replace("[TOP_MIDOKU]",$item2,$str);
-// 				$str=DispParam($str, "TOP_MIDOKU");
-// 			} else {
-// 				$str=DispParamNone($str, "TOP_MIDOKU");
-// 			}
+			$StrSQL="SELECT ID FROM DAT_MESSAGE where AID='".$aid."' and RID<>'".$_SESSION['MID']."' and ETC02 = '".$item['ETC02']."' and ifnull(ETC03,'') = '".$item['ETC03']."' and (NOREAD is null or NOREAD='');";
+			// var_dump($StrSQL);
+			$rs2=mysqli_query(ConnDB(),$StrSQL);
+			$item2=mysqli_num_rows($rs2);
+			if($item2>0){
+				$str=str_replace("[TOP_MIDOKU]",$item2,$str);
+				$str=DispParam($str, "TOP_MIDOKU");
+			} else {
+				$str=DispParamNone($str, "TOP_MIDOKU");
+			}
 
-// 			$strMain=$strMain.$str.chr(13);
+			$strMain=$strMain.$str.chr(13);
 
-// 			$CurrentRecord=$CurrentRecord+1; //CurrentRecordの更新
+			$CurrentRecord=$CurrentRecord+1; //CurrentRecordの更新
 
-// 			if ($CurrentRecord>$PageSize){
-// 				break;
-// 			}
-// 		} 
-// 	} 
+			if ($CurrentRecord>$PageSize){
+				break;
+			}
+		} 
+	} 
 
 	
 	$str=$strU.$strMain.$strD;
@@ -354,160 +354,8 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$sel1)
 	$str = MakeHTML($str,0,$lid);
 
 
-	//希望条件マッチ物件
-	// ①物件種別がマッチング物件
-	// ②o2の物件価格の範囲にNo41で登録した物件の物件価格が収まっている
-	// ③o2の利回りの範囲にNo41で登録した物件の利回りが収まっている
-	// ④o2とNo41で登録した物件を比較して、エリア、路線、駅のいずれかで共通選択肢を持つ
-	$filename="match_item.html";
-	$fp=$DOCUMENT_ROOT.$filename;
-	$strM_item=@file_get_contents($fp);
-
-	$StrSQL="SELECT * FROM DAT_M2 where MID='".$_SESSION["MID"]."' order by id desc";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-	$itemM2 = mysqli_fetch_assoc($rs);
-
-	$StrSQL="SELECT * FROM DAT_O2 where MID='".$_SESSION["MID"]."' order by id desc";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-	$itemO2 = mysqli_fetch_assoc($rs);
-
-	$price1=str_replace(",","",str_replace("万円","0000",str_replace("億","",$itemO2["O2_DVAL01"])));
-	$price2=str_replace(",","",str_replace("万円","0000",str_replace("億","",$itemO2["O2_DVAL02"])));
-	$ritu1=str_replace(",","",str_replace("%","",$itemO2["O2_DVAL29"]));
-	$ritu2=str_replace(",","",str_replace("%","",$itemO2["O2_DVAL30"]));
-
-	$pref=str_replace("M2_MSEL01:","",$itemM2["M2_MSEL01"]);
-	$city=$itemM2["M2_DVAL06"];
-	$address=$itemM2["M2_DVAL07"];
-
-	$line=str_replace("O2_MRDO03:","",$itemO2["O2_MRDO03"]);
-	$station=str_replace("O2_MRDO04:","",$itemO2["O2_MRDO04"]);
-
-	$tmp="";
-	$MATCH_LIST="";
-	$StrSQL="SELECT * FROM DAT_O1 ";
-	$StrSQL.=" WHERE O1_ETC04='マッチング物件' ";
-
-	$StrSQL.=" AND cast(replace(replace(replace(O1_DVAL01,'億',''),'万円','0000'),',','') as signed) BETWEEN cast('".$price1."' as signed) ";
-	$StrSQL.="                                                                                      AND cast('".$price2."' as signed)  ";
-
-	$StrSQL.=" AND   cast(replace(replace(O1_DVAL29,'%',''),',','') as float) BETWEEN cast('".$ritu1."' as float) ";
-	$StrSQL.="                         AND cast('".$ritu2."' as float) ";
-
-	$StrSQL.=" AND  ( ";
-	$StrSQL.="           ( replace(O1_MRDO01,'O1_MRDO01:','') LIKE '%".$pref."%' OR replace(O1_MRDO02,'O1_MRDO02:','') LIKE '%".$city."%' OR O1_DVAL02 LIKE '%".$address."%')";
-	$StrSQL.="        OR ( replace(O1_MRDO04,'O1_MRDO04:','') LIKE '%".$line."%')";
-	$StrSQL.="        OR ( replace(O1_MRDO03,'O1_MRDO03:','') LIKE '%".$station1."%' )";
-	$StrSQL.="      ) ";
-	echo "<!--希望条件マッチ物件:".$StrSQL."-->";
-	$rs=mysqli_query(ConnDB(), $StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		$tmp=$strM_item;
-		$tmp=DispO1($item,$tmp);
-
-		$mid1=$item["MID"];
-		$StrSQL="SELECT * FROM DAT_M1 where MID='".$mid1."' order by id desc";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemM1 = mysqli_fetch_assoc($rs);
-		$tmp=DispM1($itemM1,$tmp);
-
-		
-		$mid2=$_SESSION["MID"];
-		$oid=$item["OID"];
-		$aid=$mid1."-".$mid2;
-
-		$StrSQL_max="SELECT ifnull(max(ETC02), 0) as max_id FROM DAT_MESSAGE where AID = '".$aid."'";
-		$rs_max=mysqli_query(ConnDB(),$StrSQL_max);
-		$item_max = mysqli_fetch_assoc($rs_max);
-		$next_id = intval($item_max['max_id']) + 1;
-
-		$tmp=str_replace("[AID]",$aid,$tmp);
-		$tmp=str_replace("[MID1]",$mid1,$tmp);
-		$tmp=str_replace("[MID2]",$mid2,$tmp);
-		$tmp=str_replace("[ETC02]",$next_id,$tmp);
-		$tmp=str_replace("[ETC03]",$oid,$tmp);
-
-		$MATCH_LIST.=$tmp;
-	}
-	$str=str_replace("[MATCH_LIST]",$MATCH_LIST,$str);
 
 
-	//メッセージ一覧(お問い合わせ・資料請求)
-	$filename="msg_item.html";
-	$fp=$DOCUMENT_ROOT.$filename;
-	$strM_msg_item=@file_get_contents($fp);
-
-	$tmp="";
-	$MSG_LIST1="";
-	$mid2=$_SESSION["MID"];
-	$StrSQL="SELECT AID,ETC02,ETC03,ETC10, max(NEWDATE) as ldate from DAT_MESSAGE where AID LIKE '%".$mid2."' AND ifnull(ETC10,'')='' group by AID,ETC02,ETC03,ETC10 order by ldate desc;";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		$tmp=$strM_msg_item;
-
-		$oid=$item["ETC03"];
-
-		$StrSQL="SELECT * FROM DAT_O1 where OID='".$oid."' order by id desc";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemO1 = mysqli_fetch_assoc($rs);
-		$mid1=$itemO1["MID"];
-
-		$StrSQL="SELECT * FROM DAT_M1 where MID='".$mid1."' order by id desc";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemM1 = mysqli_fetch_assoc($rs);
-
-		$tmp=DispO1($itemO1,$tmp);
-		$tmp=DispM1($itemM1,$tmp);
-
-		$aid=$mid1."-".$mid2;
-		$tmp=str_replace("[AID]",$aid,$tmp);
-		$tmp=str_replace("[MID1]",$mid1,$tmp);
-		$tmp=str_replace("[MID2]",$mid2,$tmp);
-		$tmp=str_replace("[ETC02]",$item["ETC02"],$tmp);
-		$tmp=str_replace("[ETC03]",$oid,$tmp);
-		$tmp=str_replace("[ETC10]",$item["ETC10"],$tmp);
-
-		$MSG_LIST1.=$tmp;
-
-	}
-	$str=str_replace("[MSG_LIST1]",$MSG_LIST1,$str);
-
-	//不動産会社からのオウカガイ一覧
-	$tmp="";
-	$MSG_LIST2="";
-	$mid2=$_SESSION["MID"];
-	$StrSQL="SELECT AID,ETC02,ETC03,ETC10, max(NEWDATE) as ldate from DAT_MESSAGE where AID LIKE '%".$mid2."' AND ifnull(ETC10,'')='ETC10:オウカガイ' group by AID,ETC02,ETC03,ETC10 order by ldate desc;";
-	$rs=mysqli_query(ConnDB(),$StrSQL);
-	while ($item = mysqli_fetch_assoc($rs)) {
-		$tmp=$strM_msg_item;
-
-		$oid=$item["ETC03"];
-
-		$StrSQL="SELECT * FROM DAT_O1 where OID='".$oid."' order by id desc";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemO1 = mysqli_fetch_assoc($rs);
-		$mid1=$itemO1["MID"];
-
-		$StrSQL="SELECT * FROM DAT_M1 where MID='".$mid1."' order by id desc";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemM1 = mysqli_fetch_assoc($rs);
-
-		$tmp=DispO1($itemO1,$tmp);
-		$tmp=DispM1($itemM1,$tmp);
-
-		$aid=$mid1."-".$mid2;
-		$tmp=str_replace("[AID]",$aid,$tmp);
-		$tmp=str_replace("[MID1]",$mid1,$tmp);
-		$tmp=str_replace("[MID2]",$mid2,$tmp);
-		$tmp=str_replace("[ETC02]",$item["ETC02"],$tmp);
-		$tmp=str_replace("[ETC03]",$oid,$tmp);
-		$tmp=str_replace("[ETC10]",$item["ETC10"],$tmp);
-
-		$MSG_LIST2.=$tmp;
-
-	}
-	$str=str_replace("[MSG_LIST2]",$MSG_LIST2,$str);
-	
 	// ステータス
 	$tmp="";
 	$sel=explode("::", FIRST_STATUS."::".STATUS_LIST);

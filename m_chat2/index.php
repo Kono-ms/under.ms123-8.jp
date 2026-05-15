@@ -84,15 +84,14 @@ function Main()
 		$rs_mcontact=mysqli_query(ConnDB(),$StrSQL_mcontact);
 		$item_mcontact = mysqli_fetch_assoc($rs_mcontact);
 		if($item_mcontact['STATUS'] != 'STATUS:承認') {
-			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC02, ETC03, ETC10) values (";
+			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC02, ETC03) values (";
 			$StrSQL.="'".$word."',";
 			$StrSQL.="'".$rid."',";
 			$StrSQL.="'ENABLE:公開中',";
 			$StrSQL.="'".date("Y/m/d H:i:s")."',";
 			$StrSQL.="'[" . str_replace('STATUS:', '', $item_mcontact['STATUS']) . "]を承諾しました。',";
 			$StrSQL.="'".$_GET['etc02']."',";
-			$StrSQL.="'".$_GET['etc03']."',";
-			$StrSQL.="'".$_GET['etc10']."'";
+			$StrSQL.="'".$_GET['etc03']."'";
 			$StrSQL.=")";
 			if (!(mysqli_query(ConnDB(),$StrSQL))) {
 				die;
@@ -124,15 +123,14 @@ function Main()
 		$rs_mcontact=mysqli_query(ConnDB(),$StrSQL_mcontact);
 		$item_mcontact = mysqli_fetch_assoc($rs_mcontact);
 		if($item_mcontact['STATUS'] != 'STATUS:否認') {
-			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC02, ETC03, ETC10) values (";
+			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC02, ETC03) values (";
 			$StrSQL.="'".$word."',";
 			$StrSQL.="'".$rid."',";
 			$StrSQL.="'ENABLE:公開中',";
 			$StrSQL.="'".date("Y/m/d H:i:s")."',";
 			$StrSQL.="'[" . str_replace('STATUS:', '', $item_mcontact['STATUS']) . "]を否認しました。',";
 			$StrSQL.="'".$_GET['etc02']."',";
-			$StrSQL.="'".$_GET['etc03']."',";
-			$StrSQL.="'".$_GET['etc10']."'";
+			$StrSQL.="'".$_GET['etc03']."'";
 			$StrSQL.=")";
 			if (!(mysqli_query(ConnDB(),$StrSQL))) {
 				die;
@@ -154,21 +152,6 @@ function Main()
 			$mode="list";
 		} // すでに回答済みでないかどうか
 	}
-
-	//お問い合わせ・資料請求
-	if($_GET["param"]=="contact"){
-		$StrSQL="SELECT * FROM DAT_MESSAGE where AID='".$word."' and RID ='".$_SESSION['MID']."' and ETC02='".$_GET['etc02']."' and ifnull(ETC03,'')='".$_GET['etc03']."' order by ID desc;";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$item = mysqli_fetch_assoc($rs);
-		if($item["ID"]==""){
-			//メッセージ未送信の場合
-			$mode="send";
-			$_POST['COMMENT']="[メッセージが解放されました。]";
-		}
-
-	}
-
-
 
 	if ($mode=="send"){
 
@@ -225,7 +208,7 @@ function Main()
 
 
 
-				$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03, ETC10) values (";
+				$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03) values (";
 				$StrSQL.="'".$word."',";
 				$StrSQL.="'".$rid."',";
 				$StrSQL.="'ENABLE:公開中',";
@@ -233,8 +216,7 @@ function Main()
 				$StrSQL.="'".str_replace("'","''",htmlspecialchars($_POST['COMMENT'])).$file_msg."',";
 				$StrSQL.="'".$contact_newid."',";
 				$StrSQL.="'".$_GET['etc02']."',";
-				$StrSQL.="'".$_GET['etc03']."',";
-				$StrSQL.="'".$_GET['etc10']."'";
+				$StrSQL.="'".$_GET['etc03']."'";
 				$StrSQL.=")";
 				if (!(mysqli_query(ConnDB(),$StrSQL))) {
 					die;
@@ -466,7 +448,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token,$mid1,$mid2)
 	$str=str_replace("[TITLE]",$TITLE,$str);
 	$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 	$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-	$str=str_replace("[ETC10]",$_GET['etc10'],$str);
+	
 	$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
 

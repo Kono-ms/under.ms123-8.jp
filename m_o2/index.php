@@ -265,48 +265,6 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				break;
 		}
 
-		$StrSQL="SELECT * FROM DAT_M2 where MID='".$_SESSION['MID']."'";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$itemM2 = mysqli_fetch_assoc($rs);
-		
-
-		$pref=str_replace("M2_MSEL01:","",$itemM2["M2_MSEL01"]);
-		$StrSQL="SELECT CD1 FROM DAT_ADDRESS WHERE N1='".str_replace("M2_MSEL01:","",$itemM2["M2_MSEL01"])."'";
-		$rs=mysqli_query(ConnDB(),$StrSQL);
-		$item = mysqli_fetch_assoc($rs);
-		$cd1=$item["CD1"];
-
-		//沿線
-		$FieldParam[75]="";
-		$tmp="";
-		$StrSQL="SELECT CD2, N2 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' group by CD2, N2 order by CD2";
-		$rs=mysqli_query(ConnDB(), $StrSQL);
-		while ($item = mysqli_fetch_assoc($rs)) {
-			if($tmp!=""){
-				$tmp.="::";
-			}
-			$val=$item['N2'];
-			$tmp.=$val;
-		}
-		$FieldParam[75]=$tmp;
-
-
-		//最寄り駅
-		$FieldParam[76]="";
-		$tmp="";
-		//$StrSQL="SELECT CD4, N3 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' AND N2 = '".str_replace("O1_MRDO04:","",$FieldValue[76])."' group by CD4, N3 order by CD4";
-		$StrSQL="SELECT CD4, N3 FROM DAT_ROSEN WHERE PREFCD = '".$cd1."' group by CD4, N3 order by CD4";
-		$rs=mysqli_query(ConnDB(), $StrSQL);
-		while ($item = mysqli_fetch_assoc($rs)) {
-			if($tmp!=""){
-				$tmp.="::";
-			}
-			$val=$item['N3']."駅";
-			$tmp.=$val;
-		}
-		$FieldParam[76]=$tmp;
-
-		
 		$fp=$DOCUMENT_ROOT.$filename;
 		$str=@file_get_contents($fp);
 
@@ -364,7 +322,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 				$tmp=explode("::",$FieldParam[$i]);
 				$strtmp=$strtmp."<ul>";
 				for ($j=0; $j<count($tmp); $j=$j+1) {
-					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"radio\" name=\"".$FieldName[$i]."\" class=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
+					$strtmp=$strtmp."<li><input id=\"".$FieldName[$i].$j."\" type=\"radio\" name=\"".$FieldName[$i]."\" value=\"".$FieldName[$i].":".$tmp[$j]."\"><label for=\"".$FieldName[$i].$j."\">".$tmp[$j]."</label></li>";
 				}
 				$strtmp=$strtmp."</ul>";
 				$str=str_replace("[OPT-".$FieldName[$i]."]",$strtmp,$str);
@@ -415,7 +373,6 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str=str_replace("[PAGE]",$page,$str);
 		$str=str_replace("[KEY]",$key,$str);
 		$str=str_replace("[LID]",$lid,$str);
-		$str=str_replace("[M2_PREF]",$pref,$str);
 
 		// CSRFトークン生成
 		if($token==""){

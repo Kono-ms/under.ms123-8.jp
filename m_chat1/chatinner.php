@@ -146,7 +146,6 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 	$str=str_replace("[AID]",$word,$str);
 	$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 	$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-	$str=str_replace("[ETC10]",$_GET['etc10'],$str);
 	$str=str_replace("[UID]",$uid,$str);
 	$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;

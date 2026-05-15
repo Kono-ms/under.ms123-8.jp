@@ -153,7 +153,7 @@ function Main()
 			if($_GET['COMMENT2']!=""){
 				$comment.= 'ユーザーへの連絡' .$_GET['COMMENT2']. "\n";
 			}
-			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC10) values (";
+			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03) values (";
 			$StrSQL.="'".$aid."',";
 			$StrSQL.="'".$mid1."',";
 			$StrSQL.="'ENABLE:公開中',";
@@ -161,8 +161,7 @@ function Main()
 			$StrSQL.="'".str_replace("'","''",htmlspecialchars($comment))."',";
 			$StrSQL.="'".$contact_newid."',";
 			$StrSQL.="'".$_GET['etc02']."',";
-			$StrSQL.="'".$_GET['etc03']."',";
-			$StrSQL.="'".$_GET['etc10']."'";
+			$StrSQL.="'".$_GET['etc03']."'";
 			$StrSQL.=")";
 			if (!(mysqli_query(ConnDB(),$StrSQL))) {
 				die;
@@ -223,7 +222,7 @@ function Main()
 				$comment.= 'サポーターへの連絡事項：' .$_GET['COMMENT1']. "\n";
 			}
 			
-			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03, ETC10) values (";
+			$StrSQL="INSERT INTO DAT_MESSAGE (AID, RID, ENABLE, NEWDATE, COMMENT, ETC01, ETC02, ETC03) values (";
 			$StrSQL.="'".$aid."',";
 			$StrSQL.="'".$mid2."',";
 			$StrSQL.="'ENABLE:公開中',";
@@ -231,8 +230,7 @@ function Main()
 			$StrSQL.="'".str_replace("'","''",htmlspecialchars($comment))."',";
 			$StrSQL.="'".$contact_newid."',";
 			$StrSQL.="'".$_GET['etc02']."',";
-			$StrSQL.="'".$_GET['etc03']."',";
-			$StrSQL.="'".$_GET['etc10']."'";
+			$StrSQL.="'".$_GET['etc03']."'";
 			$StrSQL.=")";
 			if (!(mysqli_query(ConnDB(),$StrSQL))) {
 				die;

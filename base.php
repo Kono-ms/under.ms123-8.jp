@@ -112,42 +112,14 @@ function MakeHTML($str, $mode, $lid)
 		$str = str_replace("[L-M-ID]", "", $str);
 		$str = str_replace("[L-MID]", "", $str);
 		$str = str_replace("[L-MNAME]", "", $str);
-		$str = str_replace("[L-MCOMPANY]", "会社名未設定", $str);
 	} else {
 		$str = str_replace("[LOGINM-S]", "", $str);
 		$str = str_replace("[LOGINM-E]", "", $str);
 		$str = str_replace("[LOGOUTM-S]", "<!--", $str);
 		$str = str_replace("[LOGOUTM-E]", "-->", $str);
-		$loginMName = $_SESSION['MNAME'];
-		if ($_SESSION['MATT'] == "2") {
-			$StrSQL = "SELECT M2_DVAL01, M2_DVAL02 FROM DAT_M2 where MID='" . $_SESSION['MID'] . "' and ENABLE='ENABLE:公開中' order by ID desc LIMIT 1";
-			$rs = mysqli_query(ConnDB(), $StrSQL);
-			if ($rs && mysqli_num_rows($rs) > 0) {
-				$item = mysqli_fetch_assoc($rs);
-				$loginMName = trim($item['M2_DVAL01']) . trim($item['M2_DVAL02']);
-			}
-			if ($loginMName == "") {
-				$loginMName = "ユーザー名未設定";
-			}
-		}
-
 		$str = str_replace("[L-M-ID]", $_SESSION['M-ID'], $str);
 		$str = str_replace("[L-MID]", $_SESSION['MID'], $str);
-		$str = str_replace("[L-MNAME]", htmlspecialchars($loginMName, ENT_QUOTES, 'UTF-8'), $str);
-
-		$loginCompanyName = trim($_SESSION['MNAME']);
-		if ($_SESSION['MATT'] == "1" && $_SESSION['MID'] != "") {
-			$StrSQL = "SELECT M1_DVAL01 FROM DAT_M1 where MID='" . mysqli_real_escape_string(ConnDB(), $_SESSION['MID']) . "' LIMIT 0,1;";
-			$rs = mysqli_query(ConnDB(), $StrSQL);
-			if ($rs && mysqli_num_rows($rs) > 0) {
-				$item = mysqli_fetch_assoc($rs);
-				$loginCompanyName = trim($item['M1_DVAL01']);
-			}
-		}
-		if ($loginCompanyName == "") {
-			$loginCompanyName = "会社名未設定";
-		}
-		$str = str_replace("[L-MCOMPANY]", htmlspecialchars($loginCompanyName, ENT_QUOTES, 'UTF-8'), $str);
+		$str = str_replace("[L-MNAME]", $_SESSION['MNAME'], $str);
 
 		$StrSQL = "SELECT ID FROM DAT_MESSAGE where AID like '%" . $_SESSION['MID'] . "%' and RID<>'" . $_SESSION['MID'] . "' and (NOREAD is null or NOREAD='') ";
 		//2020/12/28 gaosan ADD START
@@ -489,12 +461,12 @@ function GetMailTemplate($mailname)
 		$maildata['BODY'] = str_replace("[BASE_URL]", BASE_URL, $maildata['BODY']);
 		$maildata['BODY'] = str_replace("[SENDER_EMAIL]", SENDER_EMAIL, $maildata['BODY']);
 		$maildata['BODY'] = str_replace("[SENDER_NAME]", SENDER_NAME, $maildata['BODY']);
-		$maildata['BODY'] = str_replace("[WEBSITE_NAME]", "UNDER", $maildata['BODY']);
+		$maildata['BODY'] = str_replace("[WEBSITE_NAME]", WEBSITE_NAME, $maildata['BODY']);
 		$maildata['BODY'] = str_replace("[COMPANY_NAME]", COMPANY_NAME, $maildata['BODY']);
 		$maildata['BODY'] = str_replace("[M1_CAPTION]", M1_CAPTION, $maildata['BODY']);
 		$maildata['BODY'] = str_replace("[M2_CAPTION]", M2_CAPTION, $maildata['BODY']);
 
-		$maildata['TITLE'] = str_replace("[WEBSITE_NAME]", "UNDER", $maildata['TITLE']);
+		$maildata['TITLE'] = str_replace("[WEBSITE_NAME]", WEBSITE_NAME, $maildata['TITLE']);
 		$maildata['TITLE'] = str_replace("[O1_CAPTION]", O1_CAPTION, $maildata['TITLE']);
 		$maildata['TITLE'] = str_replace("[O2_CAPTION]", O2_CAPTION, $maildata['TITLE']);
 		$maildata['TITLE'] = str_replace("[M1_CAPTION]", M1_CAPTION, $maildata['TITLE']);
@@ -535,12 +507,12 @@ function GetMailTemplateStatus($mailname, $status)
 	$maildata['BODY'] = str_replace("[BASE_URL]", BASE_URL, $maildata['BODY']);
 	$maildata['BODY'] = str_replace("[SENDER_EMAIL]", SENDER_EMAIL, $maildata['BODY']);
 	$maildata['BODY'] = str_replace("[SENDER_NAME]", SENDER_NAME, $maildata['BODY']);
-	$maildata['BODY'] = str_replace("[WEBSITE_NAME]", "UNDER", $maildata['BODY']);
+	$maildata['BODY'] = str_replace("[WEBSITE_NAME]", WEBSITE_NAME, $maildata['BODY']);
 	$maildata['BODY'] = str_replace("[COMPANY_NAME]", COMPANY_NAME, $maildata['BODY']);
 	$maildata['BODY'] = str_replace("[M1_CAPTION]", M1_CAPTION, $maildata['BODY']);
 	$maildata['BODY'] = str_replace("[M2_CAPTION]", M2_CAPTION, $maildata['BODY']);
 
-	$maildata['TITLE'] = str_replace("[WEBSITE_NAME]", "UNDER", $maildata['TITLE']);
+	$maildata['TITLE'] = str_replace("[WEBSITE_NAME]", WEBSITE_NAME, $maildata['TITLE']);
 	$maildata['TITLE'] = str_replace("[O1_CAPTION]", O1_CAPTION, $maildata['TITLE']);
 	$maildata['TITLE'] = str_replace("[O2_CAPTION]", O2_CAPTION, $maildata['TITLE']);
 	$maildata['TITLE'] = str_replace("[M1_CAPTION]", M1_CAPTION, $maildata['TITLE']);

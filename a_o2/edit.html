@@ -154,13 +154,13 @@
                                 <tr>
                                     <th>沿線から選ぶ：路線</th>
                                     <td>
-                                        <ul id="O2_MRDO03_ul">[OPT-O2_MRDO03]</ul>
+                                        <ul>[OPT-O2_MRDO03]</ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>沿線から選ぶ：駅</th>
                                     <td>
-                                        <ul id="O2_MRDO04_ul">[OPT-O2_MRDO04]</ul>
+                                        <ul>[OPT-O2_MRDO04]</ul>
                                     </td>
                                 </tr>
                                 <tr>
@@ -186,52 +186,3 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
-
-<script src="/html_a/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script>
-    $(function () {
-        //沿線の変更
-        $('body').on('change', '.O2_MRDO03', function () {
-            linechange();
-        });
-
-        function linechange() {
-            let pref = '[M2_PREF]';
-
-            //沿線切り替え
-            let station_ul = "O2_MRDO04_ul";
-            let station_name = "O2_MRDO04";
-            let lineval = $('input[name="O2_MRDO03"]:checked').val();
-            if (lineval != undefined) {
-                lineval = lineval.replaceAll("O2_MRDO03:", "");
-            }
-            let stationval = $('input[name="O2_MRDO04"]:checked').val();
-            if (stationval != undefined) {
-                stationval = stationval.replaceAll("O2_MRDO04:", "");
-            }
-
-            // console.log("lineval:" + lineval);
-            // console.log("stationval:" + stationval);
-
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/station_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: station_name,
-                    lineval: lineval,
-                    stationval: stationval
-                }
-            }).done(function (data) {
-                // console.log("station_radio_done:" + data);
-                $('#' + station_ul).empty(); //子要素削除
-                $('#' + station_ul).html(data);
-
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-        }
-        linechange();
-    });
-</script>

@@ -144,28 +144,23 @@
                                     <td>
                                         <div>
                                             <input type="hidden" name="O1_ETC01" value="0">
-                                            <label><input id="AO1_ETC01" type="checkbox" name="O1_ETC01" value="1">
-                                                媒介受付済み又は売主直情報</label>
+                                            <label><input id="AO1_ETC01" type="checkbox" name="O1_ETC01" value="1"> 媒介受付済み又は売主直情報</label>
                                         </div>
                                         <div>
                                             <input type="hidden" name="O1_ETC02" value="0">
-                                            <label><input id="AO1_ETC02" type="checkbox" name="O1_ETC02" value="1">
-                                                他社ポータルサイト未公開</label>
+                                            <label><input id="AO1_ETC02" type="checkbox" name="O1_ETC02" value="1"> 他社ポータルサイト未公開</label>
                                         </div>
                                         <div>
                                             <input type="hidden" name="O1_ETC03" value="0">
-                                            <label><input id="AO1_ETC03" type="checkbox" name="O1_ETC03" value="1">
-                                                レインズ未公開</label>
+                                            <label><input id="AO1_ETC03" type="checkbox" name="O1_ETC03" value="1"> レインズ未公開</label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>物件種別</th>
                                     <td>
-                                        <label><input id="AO1_ETC04_MATCHING" type="radio" name="O1_ETC04"
-                                                value="マッチング物件"> マッチング物件</label>
-                                        <label style="margin-left: 12px;"><input id="AO1_ETC04_TEIAN" type="radio"
-                                                name="O1_ETC04" value="提案物件"> 提案物件</label>
+                                        <label><input id="AO1_ETC04_MATCHING" type="radio" name="O1_ETC04" value="マッチング物件"> マッチング物件</label>
+                                        <label style="margin-left: 12px;"><input id="AO1_ETC04_TEIAN" type="radio" name="O1_ETC04" value="提案物件"> 提案物件</label>
                                     </td>
                                 </tr>
                             </tbody>
@@ -196,39 +191,13 @@
                                 <tr>
                                     <th>沿線</th>
                                     <td>
-                                        <ul id="O1_MRDO04_ul">[OPT-O1_MRDO04]</ul>
+                                        <ul>[OPT-O1_MRDO04]</ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>最寄り駅</th>
                                     <td>
-                                        <ul id="O1_MRDO03_ul">[OPT-O1_MRDO03]</ul>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th>沿線2</th>
-                                    <td>
-                                        <ul id="O1_MRDO06_ul">[OPT-O1_MRDO06]</ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>最寄り駅2</th>
-                                    <td>
-                                        <ul id="O1_MRDO07_ul">[OPT-O1_MRDO07]</ul>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th>沿線3</th>
-                                    <td>
-                                        <ul id="O1_MRDO08_ul">[OPT-O1_MRDO08]</ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>最寄り駅3</th>
-                                    <td>
-                                        <ul id="O1_MRDO09_ul">[OPT-O1_MRDO09]</ul>
+                                        <ul>[OPT-O1_MRDO03]</ul>
                                     </td>
                                 </tr>
                                 <tr>
@@ -604,8 +573,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
-
-<script src="/html_a/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script>
     (function () {
         var etc01 = document.getElementById('AO1_ETC01');
@@ -633,235 +600,5 @@
         etc03.addEventListener('change', updatePropertyType);
 
         updatePropertyType();
-
-
-
-        //都道府県の変更
-        $('[name="O1_MRDO01"]').change(function () {
-            prefchange();
-        });
-        function prefchange() {
-            let city_name = "O1_MRDO02";
-            let pref = $('[name="O1_MRDO01"]').val();
-            let cityval = $('[name="O1_MRDO02"]').val();
-
-            pref = pref.replaceAll("O1_MRDO01:", "");
-            cityval = cityval.replaceAll("O1_MRDO02:", "");
-            // console.log("pref" + pref);
-            // console.log("cityval:" + cityval);
-            //市区町村切り替え
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/city_select.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: city_name,
-                    cityval: cityval
-                }
-            }).done(function (data) {
-                // console.log("done:" + data);
-                $('[name="O1_MRDO02"]').empty(); //子要素削除
-                $('[name="O1_MRDO02"]').html(data);
-
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-
-
-            //沿線切り替え
-            let line_ul = "O1_MRDO04_ul";
-            let line_name = "O1_MRDO04";
-            let lineval = $('input[name="O1_MRDO04"]:checked').val();
-            if (lineval != undefined) {
-                lineval = lineval.replaceAll("O1_MRDO04:", "");
-            }
-
-            let line_ul2 = "O1_MRDO06_ul";
-            let line_name2 = "O1_MRDO06";
-            let lineval2 = $('input[name="O1_MRDO06"]:checked').val();
-            if (lineval2 != undefined) {
-                lineval2 = lineval2.replaceAll("O1_MRDO06:", "");
-            }
-            let line_ul3 = "O1_MRDO08_ul";
-            let line_name3 = "O1_MRDO08";
-            let lineval3 = $('input[name="O1_MRDO08"]:checked').val();
-            if (lineval3 != undefined) {
-                lineval3 = lineval3.replaceAll("O1_MRDO08:", "");
-            }
-
-            // console.log("lineval:" + lineval);
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/line_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: line_name,
-                    lineval: lineval
-                }
-            }).done(function (data) {
-                // console.log("line_radio_done:" + data);
-                $('#' + line_ul).empty(); //子要素削除
-                $('#' + line_ul).html(data);
-
-                linechange();
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/line_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: line_name2,
-                    lineval: lineval2
-                }
-            }).done(function (data) {
-                // console.log("line_radio_done:" + data);
-                $('#' + line_ul2).empty(); //子要素削除
-                $('#' + line_ul2).html(data);
-
-                linechange();
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/line_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: line_name3,
-                    lineval: lineval3
-                }
-            }).done(function (data) {
-                // console.log("line_radio_done:" + data);
-                $('#' + line_ul3).empty(); //子要素削除
-                $('#' + line_ul3).html(data);
-
-                linechange();
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-        }
-
-        prefchange();
-
-
-        //沿線の変更
-        $('body').on('change', '.O1_MRDO04', function () {
-            linechange();
-        });
-        $('body').on('change', '.O1_MRDO06', function () {
-            linechange();
-        });
-        $('body').on('change', '.O1_MRDO08', function () {
-            linechange();
-        });
-        function linechange() {
-            let pref = $('[name="O1_MRDO01"]').val();
-            pref = pref.replaceAll("O1_MRDO01:", "");
-
-            //沿線切り替え
-            let station_ul = "O1_MRDO03_ul";
-            let station_name = "O1_MRDO03";
-            let lineval = $('input[name="O1_MRDO04"]:checked').val();
-            if (lineval != undefined) {
-                lineval = lineval.replaceAll("O1_MRDO04:", "");
-            }
-            let stationval = $('input[name="O1_MRDO03"]:checked').val();
-            if (stationval != undefined) {
-                stationval = stationval.replaceAll("O1_MRDO03:", "");
-            }
-
-            let station_ul2 = "O1_MRDO07_ul";
-            let station_name2 = "O1_MRDO07";
-            let lineval2 = $('input[name="O1_MRDO06"]:checked').val();
-            if (lineval2 != undefined) {
-                lineval2 = lineval2.replaceAll("O1_MRDO06:", "");
-            }
-            let stationval2 = $('input[name="O1_MRDO07"]:checked').val();
-            if (stationval2 != undefined) {
-                stationval2 = stationval2.replaceAll("O1_MRDO07:", "");
-            }
-
-            let station_ul3 = "O1_MRDO09_ul";
-            let station_name3 = "O1_MRDO09";
-            let lineval3 = $('input[name="O1_MRDO08"]:checked').val();
-            if (lineval3 != undefined) {
-                lineval3 = lineval3.replaceAll("O1_MRDO08:", "");
-            }
-            let stationval3 = $('input[name="O1_MRDO09"]:checked').val();
-            if (stationval3 != undefined) {
-                stationval3 = stationval3.replaceAll("O1_MRDO09:", "");
-            }
-
-            // console.log("lineval:" + lineval);
-            // console.log("stationval:" + stationval);
-            // console.log("stationval2:" + stationval2);
-            // console.log("stationval3:" + stationval3);
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/station_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: station_name,
-                    lineval: lineval,
-                    stationval: stationval
-                }
-            }).done(function (data) {
-                // console.log("station_radio_done:" + data);
-                $('#' + station_ul).empty(); //子要素削除
-                $('#' + station_ul).html(data);
-
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/station_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: station_name2,
-                    lineval: lineval2,
-                    stationval: stationval2
-                }
-            }).done(function (data) {
-                // console.log("station_radio_done:" + data);
-                $('#' + station_ul2).empty(); //子要素削除
-                $('#' + station_ul2).html(data);
-
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "[BASE_URL]/station_radio.php",
-                async: false,
-                data: {
-                    pref: pref,
-                    fieldname1: station_name3,
-                    lineval: lineval3,
-                    stationval: stationval3
-                }
-            }).done(function (data) {
-                // console.log("station_radio_done:" + data);
-                $('#' + station_ul3).empty(); //子要素削除
-                $('#' + station_ul3).html(data);
-
-            }).fail(function (data) {
-                console.log("error:" + data);
-            });
-        }
-
-
     })();
 </script>

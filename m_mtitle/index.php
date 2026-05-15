@@ -236,7 +236,7 @@ function DispData($mode,$sort,$word,$key,$page,$lid,$token)
 		$str = MakeHTML($str,1,$lid);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-$str=str_replace("[ETC10]",$_GET['etc10'],$str);
+
 		if ($mode=="new"){
 			$str=DispParam($str, "NEWDATA");
 			$str=DispParamNone($str, "EDITDATA");
@@ -371,7 +371,7 @@ $str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str=str_replace("[TITLE]",$TITLE,$str);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-$str=str_replace("[ETC10]",$_GET['etc10'],$str);
+
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
 
@@ -496,7 +496,7 @@ $str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str = MakeHTML($str,1,$lid);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-$str=str_replace("[ETC10]",$_GET['etc10'],$str);
+
 		$str=str_replace("[PAGING]",$pagestr,$str);
 		$str=str_replace("[SORT]",$sort,$str);
 		$str=str_replace("[WORD]",$word,$str);
@@ -512,7 +512,7 @@ $str=str_replace("[ETC10]",$_GET['etc10'],$str);
 		$str=str_replace("[TOKEN]",$token,$str);
 		$str=str_replace("[ETC02]",$_GET['etc02'],$str);
 		$str=str_replace("[ETC03]",$_GET['etc03'],$str);
-$str=str_replace("[ETC10]",$_GET['etc10'],$str);
+
 		$str=str_replace("[BASE_URL]",BASE_URL,$str);
 	print $str;
 

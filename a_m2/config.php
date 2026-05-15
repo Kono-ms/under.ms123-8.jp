@@ -393,7 +393,7 @@
   $FieldAtt[65]="1";
   $FieldAtt[66]="1";
   $FieldAtt[67]="1";
-  $FieldAtt[68]="3";
+  $FieldAtt[68]="1";
   $FieldAtt[69]="1";
   $FieldAtt[70]="1";
   $FieldAtt[71]="1";

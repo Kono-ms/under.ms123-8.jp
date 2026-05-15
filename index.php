@@ -80,32 +80,27 @@ function Main()
 	}
 	$str=str_replace("[LIST_2]", $strMain, $str);
 
-	// カテゴリ別に記事一覧を生成（投資豆知識 / はじめての不動産投資）
-	$pressCategories = array(
-		"[PRESS_TIPS]"   => "CCATE:豆知識",
-		"[PRESS_COLUMN]" => "CCATE:記事",
-	);
-	foreach ($pressCategories as $placeholder => $ccate) {
-		$press = "";
-		$StrSQL = "SELECT DAT_INFO.* FROM DAT_INFO join DAT_CCATE on DAT_INFO.CCATE = concat('CCATE:', DAT_CCATE.CNAME) where DAT_INFO.ETC12='ETC12:公開中' AND DAT_CCATE.ETC01 like '%ETC01:公開用%' AND DAT_INFO.CCATE='".$ccate."' order by DAT_INFO.DATE desc, DAT_INFO.ID desc limit 0,4";
-		$rs = mysqli_query(ConnDB(), $StrSQL);
-		while ($item = mysqli_fetch_assoc($rs)) {
-			$press .= "<div class='knowledge__item'>
+	$press="";
+	// 公開先：公開用
+	$StrSQL="SELECT DAT_INFO.* FROM DAT_INFO join DAT_CCATE on DAT_INFO.CCATE = concat('CCATE:', DAT_CCATE.CNAME) where DAT_INFO.ETC12='ETC12:公開中' AND DAT_CCATE.ETC01 like '%ETC01:公開用%' order by DAT_INFO.ID desc limit 0,4";
+	$rs=mysqli_query(ConnDB(),$StrSQL);
+	while ($item = mysqli_fetch_assoc($rs)) {
+		// $press.="<div class='knowledge__item'> <a href='/info/".sprintf("%04d", $item['ID'])."/'><div class='knowledge__img'><img src='".$item['PIC']."' alt=''></div><div class='knowledge__desc'><h3 class='knowledge__ttl'>".$item['TITLE']."</h3><p class='knowledge__txt'>".mb_substr(strip_tags($item['COMMENT']),0,60,"UTF-8")."… <span class='knowledge__txt--more'>続きを読む</span></p></div></a> </div>";
+		$press.="<div class='knowledge__item'>
 <a href='/info/".$item['URL']."/'>
 <div class='knowledge__img'><img src='".$item['PIC']."' alt=''></div>
 <div class='knowledge__desc'>
-<p class='knowledge__date'>".str_replace("/", ".", $item['DATE'])."</p>
+<p class='knowledge__date'>2026.01.01</p>
 <h3 class='knowledge__ttl'>".$item['TITLE']."</h3>
 <p class='knowledge__txt'>".mb_substr(strip_tags($item['COMMENT']),0,60,"UTF-8")."…</p>
 </div>
 </a>
 </div>";
-		}
-		if ($press != "") {
-			$str = str_replace($placeholder, $press, $str);
-		} else {
-			$str = str_replace($placeholder, "公開までしばらくおちください", $str);
-		}
+	}
+	if($press!=""){
+		$str=str_replace("[PRESS1]", $press, $str);
+	} else {
+		$str=str_replace("[PRESS1]", "公開までしばらくおちください", $str);
 	}
 
 	$news="";

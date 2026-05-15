@@ -59,7 +59,7 @@ function DispData($id,$pass,$token)
 		$val=json_decode($response, true);
 		$email=$val['email'][0]['email'];
 		$lineid=$val['user']['identifier'];
-		$StrSQL="SELECT ID, MID, M2_DVAL01, M2_DVAL02 from DAT_M2 where SOCIALID='".trim($lineid)."' and ENABLE='ENABLE:公開中';";
+		$StrSQL="SELECT ID, MID, M2_DVAL01 from DAT_M1 where SOCIALID='".trim($lineid)."' and ENABLE='ENABLE:公開中';";
 		$rs=mysqli_query(ConnDB(),$StrSQL);
 		$item=mysqli_num_rows($rs);
 		if($item>0){
@@ -68,10 +68,7 @@ function DispData($id,$pass,$token)
 			$_SESSION['MATT'] = "2";
 			$_SESSION['M-ID'] = $item['ID'];
 			$_SESSION['MID'] = $item['MID'];
-			$_SESSION['MNAME'] = trim($item['M2_DVAL01']) . trim($item['M2_DVAL02']);
-			if ($_SESSION['MNAME'] == "") {
-				$_SESSION['MNAME'] = "ユーザー名未設定";
-			}
+			$_SESSION['MNAME'] = $item['M2_DVAL01'];
 //			$url = $_SESSION['REFERER'];
 			$url=BASE_URL . "/m_top2/";
 			header("Location: {$url}");
@@ -95,10 +92,7 @@ function DispData($id,$pass,$token)
 			$_SESSION['MATT'] = "2";
 			$_SESSION['M-ID'] = $item['ID'];
 			$_SESSION['MID'] = $item['MID'];
-			$_SESSION['MNAME'] = trim($item['M2_DVAL01']) . trim($item['M2_DVAL02']);
-			if ($_SESSION['MNAME'] == "") {
-				$_SESSION['MNAME'] = "ユーザー名未設定";
-			}
+			$_SESSION['MNAME'] = $item['M2_DVAL01'];
 			$url=BASE_URL . "/m_top2/";
 			header("Location: {$url}");
 			exit;

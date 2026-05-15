@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,56 +20,55 @@
 	</div>
 	<script>
 		window.chatAutoLoaderClearID = 0;
-		$(function () {
-
+		$(function(){
+			
 			let reqURL = '/m_chat1/chatinner2.php';
-			let reqParam = paramToJSON('aid=[AID]&etc02=[ETC02]&etc03=[ETC03]&etc10=[ETC10]' + '&uid=[UID]');
-
-			window.chatAutoLoaderClearID = setInterval(function () {
-
+			let reqParam = paramToJSON('aid=[AID]&etc02=[ETC02]&etc03=[ETC03]' + '&uid=[UID]');
+			
+			window.chatAutoLoaderClearID = setInterval(function(){
+				
 				$.ajax({
-					type: 'get',
-					url: reqURL,
-					data: reqParam,
-					dataType: 'html',
-					cache: false,
-				})
-					.done(function (posts) {
+						type: 'get',
+						url: reqURL,
+						data: reqParam,
+						dataType: 'html',
+						cache: false,
+					})
+					.done(function(posts) {
 						$('[data-chat-posts]').append(posts);// チャットの更新
 						console.log(posts);
 						console.log('チャットの読み込みに成功しました');
 					})
-					.fail(function () {
+					.fail(function() {
 						console.log('チャットの読み込み中にエラーが発生しました');
 					})
-					.always(function () {
+					.always(function() {
 						autoScrollPageEnd();// 自動スクロール
 						console.log('チャットの読み込みが完了しました');
 					});
-
-			}, 1000);// 1秒ごとに実行
+				
+			},1000);// 1秒ごとに実行
 		});
-
+		
 		// ページがロード完了時にも自動スクロール
-		$(window).on('load', function () {
+		$(window).on('load',function(){
 			autoScrollPageEnd();
 		});
-
+		
 		// 自動スクロール
-		function autoScrollPageEnd() {
+		function autoScrollPageEnd(){
 			let p = $('#end').offset().top;
 			$(window).scrollTop(p);
 		}
-		function paramToJSON(p) {
+		function paramToJSON(p){
 			let list = p.split('&');
 			let obj = {};
-			list.forEach(function (elm) {
+			list.forEach(function(elm){
 				let val = elm.split('=');
-				obj[val[0]] = val[1];
+				obj[val[0]]=val[1];
 			});
 			return obj;
 		}
 	</script>
 </body>
-
 </html>

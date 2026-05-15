@@ -6,116 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>オウカガイを送る｜WEBSITE-NAME</title>
-  <meta name="description" content="オウカガイを送る" />
+  <meta name="description"
+    content="オウカガイを送る" />
   <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon-180x180.png">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="/icon-192x192.png">
   <!--template=/common/template/head.html-->
-  <script src="/js/tinymce_v4.9.11/tinymce.min.js"></script>
-
-  <script>
-    tinymce.init({
-      selector: "#editor",
-      language: "ja",
-      plugins: "textcolor table lists link image jbimages preview code media imagetools",
-      menubar: "false",
-      toolbar: ['code | undo redo | bold italic | forecolor backcolor | fontsizeselect ',
-        'numlist bullist | table | link | jbimages | alignleft aligncenter alignright alignjustify | outdent indent | media'],
-      paste_as_text: true,
-      fontsize_formats: '10px 12px 14px 16px 18px 20px 24px 34px',
-      entity_encoding: 'raw',
-      //width: 700,
-      height: 600,
-      relative_urls: false,
-      branding: false,
-      imagetools_cors_hosts: ['mydomain.com', 'otherdomain.com'],
-      imagetools_credentials_hosts: ['mydomain.com', 'otherdomain.com'],
-    });
-    $(function () {
-
-      //都道府県の変更
-      $('[name="find_pref"]').change(function () {
-        prefchange();
-      });
-      function prefchange() {
-        let city_name = "O1_MRDO02";
-        let pref = $('[name="find_pref"]').val();
-
-        //沿線切り替え
-        let line_ul = "find_line_ul";
-        let line_name = "find_line";
-        let lineval = $('input[name="find_line"]:checked').val();
-        if (lineval != undefined) {
-          lineval = lineval.replaceAll("find_line:", "");
-        }
-        // console.log("lineval:" + lineval);
-        $.ajax({
-          type: "POST",
-          url: "[BASE_URL]/line_radio.php",
-          async: false,
-          data: {
-            pref: pref,
-            fieldname1: line_name,
-            lineval: lineval
-          }
-        }).done(function (data) {
-          // console.log("line_radio_done:" + data);
-          $('#' + line_ul).empty(); //子要素削除
-          $('#' + line_ul).html(data);
-
-          linechange();
-        }).fail(function (data) {
-          console.log("error:" + data);
-        });
-      }
-      prefchange();
-
-
-      //沿線の変更
-      $('body').on('change', '.find_line', function () {
-        linechange();
-      });
-
-      function linechange() {
-        let pref = $('[name="find_pref"]').val();
-        pref = pref.replaceAll("find_pref:", "");
-
-        //沿線切り替え
-        let station_ul = "find_station_ul";
-        let station_name = "find_station";
-        let lineval = $('input[name="find_line"]:checked').val();
-        if (lineval != undefined) {
-          lineval = lineval.replaceAll("find_line:", "");
-        }
-        let stationval = $('input[name="find_station"]:checked').val();
-        if (stationval != undefined) {
-          stationval = stationval.replaceAll("find_station:", "");
-        }
-
-        // console.log("linechange_lineval:" + lineval);
-        // console.log("linechange_stationval:" + stationval);
-        $.ajax({
-          type: "POST",
-          url: "[BASE_URL]/station_radio.php",
-          async: false,
-          data: {
-            pref: pref,
-            fieldname1: station_name,
-            lineval: lineval,
-            stationval: stationval
-          }
-        }).done(function (data) {
-          // console.log("station_radio_done:" + data);
-          $('#' + station_ul).empty(); //子要素削除
-          $('#' + station_ul).html(data);
-
-        }).fail(function (data) {
-          console.log("error:" + data);
-        });
-      }
-    });
-
-  </script>
-
 </head>
 
 <body>
@@ -134,117 +29,91 @@
     <div class="common-layout">
       <div class="common-layout__wrap is-block is-small">
 
-        <div class="teian-head">
-          <div class="teian-head__spacer"></div>
-          <div class="teian-head__ttl">
-            <h2 class="teian-head__ttl-text">
-              <span class="teian-head__ttl-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24"
-                  height="24" viewBox="0 0 24 24">
-                  <defs>
-                    <clipPath id="clip-path">
-                      <path id="path891" d="M0-682.665H24v24H0Z" transform="translate(0 682.665)" />
-                    </clipPath>
-                  </defs>
-                  <g id="messenger" transform="translate(0 -0.002)">
-                    <g id="g885" transform="translate(0 0.002)">
-                      <g id="g887">
-                        <g id="g889" clip-path="url(#clip-path)">
-                          <g id="g895" transform="translate(0.938 0.938)">
-                            <path id="path897"
-                              d="M-303.6,0a11.063,11.063,0,0,0-11.063,11.063,11.01,11.01,0,0,0,1.677,5.856l-1.677,5.206,5.206-1.677a11.01,11.01,0,0,0,5.856,1.677,11.063,11.063,0,0,0,11.063-11.063A11.063,11.063,0,0,0-303.6,0Z"
-                              transform="translate(314.666)" fill="none" stroke="#122823" stroke-linecap="round"
-                              stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" />
-                          </g>
-                          <g id="g899" transform="translate(10.828 10.828)">
-                            <path id="path901"
-                              d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172"
-                              transform="translate(66.667 33.333)" fill="#122823" />
-                          </g>
-                          <g id="g903" transform="translate(15.516 10.828)">
-                            <path id="path905"
-                              d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172"
-                              transform="translate(66.667 33.333)" fill="#122823" />
-                          </g>
-                          <g id="g907" transform="translate(6.141 10.828)">
-                            <path id="path909"
-                              d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172"
-                              transform="translate(66.667 33.333)" fill="#122823" />
-                          </g>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
+    <div class="teian-head">
+      <div class="teian-head__spacer"></div>
+      <div class="teian-head__ttl">
+        <h2 class="teian-head__ttl-text">
+          <span class="teian-head__ttl-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="path891" d="M0-682.665H24v24H0Z" transform="translate(0 682.665)"/>
+    </clipPath>
+  </defs>
+  <g id="messenger" transform="translate(0 -0.002)">
+    <g id="g885" transform="translate(0 0.002)">
+      <g id="g887">
+        <g id="g889" clip-path="url(#clip-path)">
+          <g id="g895" transform="translate(0.938 0.938)">
+            <path id="path897" d="M-303.6,0a11.063,11.063,0,0,0-11.063,11.063,11.01,11.01,0,0,0,1.677,5.856l-1.677,5.206,5.206-1.677a11.01,11.01,0,0,0,5.856,1.677,11.063,11.063,0,0,0,11.063-11.063A11.063,11.063,0,0,0-303.6,0Z" transform="translate(314.666)" fill="none" stroke="#122823" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+          </g>
+          <g id="g899" transform="translate(10.828 10.828)">
+            <path id="path901" d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172" transform="translate(66.667 33.333)" fill="#122823"/>
+          </g>
+          <g id="g903" transform="translate(15.516 10.828)">
+            <path id="path905" d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172" transform="translate(66.667 33.333)" fill="#122823"/>
+          </g>
+          <g id="g907" transform="translate(6.141 10.828)">
+            <path id="path909" d="M-64.323-32.161a1.172,1.172,0,0,1-1.172,1.172,1.172,1.172,0,0,1-1.172-1.172,1.172,1.172,0,0,1,1.172-1.172,1.172,1.172,0,0,1,1.172,1.172" transform="translate(66.667 33.333)" fill="#122823"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
 
-              </span>
-              <span class="teian-head__ttl-lead">オウカガイする</span>
-            </h2>
-            <p class="teian-head__ttl-desc">この物件でオウカガイします</p>
+          </span>
+          <span class="teian-head__ttl-lead">オウカガイする</span>
+        </h2>
+        <p class="teian-head__ttl-desc">この物件でオウカガイします</p>
+      </div>
+      <div class="teian-head__btn">
+        <a href="">
+          <span class="teian-head__btn-lead">登録物件一覧</span>
+          <span class="teian-head__btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="5.206" height="8.411" viewBox="0 0 5.206 8.411">
+              <path id="arrow" d="M7.5,12l4-3.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="teian-body">
+      <div class="teian-item">
+        <div class="teian-item__wrap">
+          <div class="teian-item__thumb">
+            <span class="teian-item__thumb-cat">一棟マンション</span>
+            <figure class="teian-item__thumb-frame"></figure>
           </div>
-          <div class="teian-head__btn">
-            <a href="">
-              <span class="teian-head__btn-lead">登録物件一覧</span>
-              <span class="teian-head__btn-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="5.206" height="8.411" viewBox="0 0 5.206 8.411">
-                  <path id="arrow" d="M7.5,12l4-3.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none"
-                    stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="teian-body">
-
-          <!--検索条件を変更のform start-->
-          <form name="form1" method="get" action="/m_teian1/">
-            <input type="hidden" name="mode" value="disp">
-            <input type="hidden" name="key" value="[KEY]">
-
-            <table>
-              <tr>
-                <th>希望物件価格</th>
-                <td><input type="number" name="find_price1" value="[find_price1]">～<input type="number"
-                    name="find_price2" value="[find_price2]"> </td>
-              </tr>
-              <tr>
-                <th>希望利回り</th>
-                <td><input type="text" name="find_ritu1" value="[find_ritu1]">～<input type="text" name="find_ritu2"
-                    value="[find_ritu2]"> </td>
-              </tr>
-              <tr>
-                <th>希望エリア</th>
-                <td><select name="find_pref">[OPT-PREF]</select></td>
-              </tr>
-              <tr>
-                <th>路線</th>
-                <td>
-                  <ul id="find_line_ul">[OPT-LINE]</ul>
-                </td>
-              </tr>
-              <tr>
-                <th>駅</th>
-                <td>
-                  <ul id="find_station_ul">[OPT-STATION]</ul>
-                </td>
-              </tr>
-            </table>
-            <input type="submit" value="絞り込む" />
-          </form>
-          <!--検索条件を変更のform end-->
-
-          <form name="form1" method="post" action="/m_teian1/">
-            <input type="hidden" name="mode" value="teian">
-            <input type="hidden" name="key" value="[KEY]">
-            <div class="teian-step__message">
-              <div class="teian-step__head">
-                <h3 class="teian-step__head-lead">メッセージの入力</h3>
+          <div class="teian-item__detail">
+            <h3 class="teian-item__head">【LPP×フルローン可能性有】３路線３駅利用可×平坦×高稼働　</h3>
+            <div class="teian-item__data">
+              <div class="teian-item__data-add">
+                <p class="teian-item__data-add-lead">千葉県松戸市大谷口</p>
+                <p class="teian-item__data-add-lead">ＪＲ常磐線 北小金駅 歩5分</p>
               </div>
-              <div class="teian-step__message-editor">
-                <textarea id="editor" name="COMMENT" placeholder="送信するメッセージを入力してください"></textarea>
+              <div class="teian-item__data-list">
+                <p class="teian-item__data-add-item">建：262.13㎡<br>土：174.22㎡</p>
+                <p class="teian-item__data-add-item">1985年1月 築<br>3階建／14戸</p>
               </div>
             </div>
-
+            <div class="teian-item__price">
+              <div class="teian-item__price-item">
+                <span class="teian-item__price-label">価格</span>
+                <span class="teian-item__price-num">8,500<small>万円</small></span>
+              </div>
+              <div class="teian-item__price-item is-col02">
+                <span class="teian-item__price-label">利回り</span>
+                <span class="teian-item__price-num">7.01<small>％</small></span>
+              </div>
+            </div>
+            <div class="teian-item__date">
+              <p class="teian-item__date-lead">登録日時：2025.10.10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          <form action="/">
             <div class="teian-step">
               <div class="teian-step__list">
                 <div class="teian-step__head">
@@ -254,30 +123,275 @@
                 <div class="teian-step__search">
                   <p class="teian-step__search-ttl">現在の検索条件：</p>
                   <div class="teian-step__search-label">
-                    [SEARCH_STR]
+                    <span class="teian-step__search-label-item">会社経営者</span>
+                    <span class="teian-step__search-label-item">医療業</span>
                   </div>
-
                   <div class="teian-step__search-select">
                     <a href="#teianSearchModal">
                       <span class="teian-step__search-select-lead">検索条件を変更</span>
                       <span class="teian-step__search-select-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="5.206" height="8.411" viewBox="0 0 5.206 8.411">
-                          <path id="arrow" d="M7.5,12l4-3.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none"
-                            stroke="#717e7b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                          <path id="arrow" d="M7.5,12l4-3.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#717e7b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
                         </svg>
                       </span>
                     </a>
                   </div>
-
-
                 </div>
-
-                [ITEM_LIST]
-
-
-
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="teian-step__item">
+                  <div class="teian-step__item-check">
+                    <input type="checkbox" name="" value="">
+                  </div>
+                  <div class="teian-step__item-detail">
+                    <div class="teian-step__item-detail-name">
+                      <p class="teian-step__item-detail-name-lead">田中 太郎</p>
+                      <p class="teian-step__item-detail-name-area">東京都</p>
+                    </div>
+                    <div class="teian-step__item-detail-cate">
+                      <p class="teian-step__item-detail-cate-lead">投資物件種別：1 棟マンション（RC 造／重量鉄骨）</p>
+                    </div>
+                    <div class="teian-step__item-detail-data">
+                      <div class="teian-step__item-detail-data-item">
+                        <span class="teian-step__item-detail-data-item-label">利回り</span>
+                        <span class="teian-step__item-detail-data-item-num"><strong>7</strong><small>％</small>以上</span>
+                      </div>
+                      <div class="teian-step__item-detail-data-item is-col02">
+                        <span class="teian-step__item-detail-data-item-label">築年数</span>
+                        <span class="teian-step__item-detail-data-item-lead">指定なし</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="teian-step__item-status">
+                    <div class="teian-step__item-status-label">
+                      <span class="teian-step__item-status-label-item">メッセージ中</span>
+                      <span class="teian-step__item-status-label-item status01">お気に入り</span>
+                      <span class="teian-step__item-status-label-item status02">お気に入り登録済</span>
+                    </div>
+                    <div class="teian-step__item-status-more">
+                      <a href="#">
+                        <span class="teian-step__item-status-more-lead">希望条件詳細</span>
+                        <span class="teian-step__item-status-more-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="6.206" height="10.412" viewBox="0 0 6.206 10.412">
+                            <path id="arrow" d="M7.5,14l5-4.5L7.5,5" transform="translate(-6.794 -4.294)" fill="none" stroke="#64a8ac" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
-
+              <div class="teian-step__message">
+                <div class="teian-step__head">
+                  <h3 class="teian-step__head-lead">メッセージの入力</h3>
+                </div>
+                <div class="teian-step__message-editor">
+                  <textarea placeholder="送信するメッセージを入力してください"></textarea>
+                </div>
+              </div>
               <div class="teian-step__btn">
                 <button class="teian-step__btn-item">
                   <span class="teian-step__btn-item-lead">キャンセル</span>
@@ -291,11 +405,10 @@
         </div>
       </div>
     </div>
+    </div>
+    <!-- 以下共通 -->
+    <!--template=/common/template/footer.html-->
   </div>
-  <!-- 以下共通 -->
-  <!--template=/common/template/footer.html-->
-  </div>
-
 
   <style>
     .teian-search-modal {
@@ -307,17 +420,14 @@
       justify-content: center;
       padding: 16px;
     }
-
     .teian-search-modal__overlay {
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
     }
-
     .teian-search-modal:target {
       display: flex;
     }
-
     .teian-search-modal__dialog {
       position: relative;
       z-index: 1;
@@ -329,19 +439,16 @@
       padding: 24px;
       box-sizing: border-box;
     }
-
     .teian-search-modal__head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
     }
-
     .teian-search-modal__title {
       margin: 0;
       font-size: 20px;
     }
-
     .teian-search-modal__close {
       display: inline-block;
       color: #122823;
@@ -350,30 +457,25 @@
       line-height: 1;
       cursor: pointer;
     }
-
     .teian-search-modal__form-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px;
     }
-
     .teian-search-modal__field-label {
       display: block;
       font-weight: bold;
       margin-bottom: 8px;
     }
-
     .teian-search-modal__field-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       gap: 8px;
       align-items: center;
     }
-
     .teian-search-modal__field-row span {
       text-align: center;
     }
-
     .teian-search-modal input,
     .teian-search-modal select {
       width: 100%;
@@ -381,14 +483,12 @@
       padding: 0 10px;
       box-sizing: border-box;
     }
-
     .teian-search-modal__actions {
       margin-top: 20px;
       display: flex;
       justify-content: flex-end;
       gap: 10px;
     }
-
     .teian-search-modal__btn {
       display: inline-flex;
       align-items: center;
@@ -401,7 +501,6 @@
       text-decoration: none;
       cursor: pointer;
     }
-
     .teian-search-modal__btn--primary {
       background: #64a8ac;
       color: #fff;
@@ -415,50 +514,154 @@
         <h3 class="teian-search-modal__title" id="teianSearchModalTitle">検索条件を変更</h3>
         <a href="#" class="teian-search-modal__close" aria-label="閉じる">×</a>
       </div>
-      <form name="form1" method="get" action="/m_teian1/">
-        <input type="hidden" name="mode" value="disp">
-        <input type="hidden" name="key" value="[KEY]">
-
-        <div class="teian-search-modal__form-grid">
-          <div class="teian-search-modal__field">
-            <label class="teian-search-modal__field-label">希望物件価格</label>
-            <div class="teian-search-modal__field-row">
-              <input type="number" name="find_price1" placeholder="下限" value="[find_price1]">
-              <span>〜</span>
-              <input type="number" name="find_price2" placeholder="上限" value="[find_price2]">
-            </div>
-          </div>
-          <div class="teian-search-modal__field">
-            <label class="teian-search-modal__field-label">希望利回り</label>
-            <div class="teian-search-modal__field-row">
-              <input type="number" step="0.1" name="find_ritu1" placeholder="下限" value="[find_ritu1]">
-              <span>〜</span>
-              <input type="number" step="0.1" name="find_ritu2" placeholder="上限" value="[find_ritu2]">
-            </div>
-          </div>
-          <div class="teian-search-modal__field">
-            <label class="teian-search-modal__field-label">希望エリア（都道府県）</label>
-            <select name="find_pref">[OPT-PREF]</select>
-          </div>
-
-          <div class="teian-search-modal__field">
-            <label class="teian-search-modal__field-label">希望路線</label>
-            <ul id="find_line_ul_BK">[OPT-LINE]</ul><!--後でidをfind_line_ulにする-->
-          </div>
-          <div class="teian-search-modal__field">
-            <label class="teian-search-modal__field-label">希望駅</label>
-            <ul id="find_station_ul_BK">[OPT-STATION]</ul><!--後でidをfind_station_ulにする-->
+      <div class="teian-search-modal__form-grid">
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望物件価格</label>
+          <div class="teian-search-modal__field-row">
+            <input type="number" placeholder="下限">
+            <span>〜</span>
+            <input type="number" placeholder="上限">
           </div>
         </div>
-        <div class="teian-search-modal__actions">
-          <a href="#" class="teian-search-modal__btn">キャンセル</a>
-          <a href="#"
-            class="teian-search-modal__btn teian-search-modal__btn--primary">この条件で検索（仮）</a><!--submitする形にお願いできますでしょうか。-->
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望利回り</label>
+          <div class="teian-search-modal__field-row">
+            <input type="number" step="0.1" placeholder="下限">
+            <span>〜</span>
+            <input type="number" step="0.1" placeholder="上限">
+          </div>
         </div>
-      </form>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望エリア（都道府県）</label>
+          <select>
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="aomori">青森県</option>
+                        <option value="iwate">岩手県</option>
+                        <option value="miyagi">宮城県</option>
+                        <option value="akita">秋田県</option>
+                        <option value="yamagata">山形県</option>
+                        <option value="fukushima">福島県</option>
+                        <option value="ibaraki">茨城県</option>
+                        <option value="tochigi">栃木県</option>
+                        <option value="gunma">群馬県</option>
+                        <option value="saitama">埼玉県</option>
+                        <option value="chiba">千葉県</option>
+                        <option value="tokyo">東京都</option>
+                        <option value="kanagawa">神奈川県</option>
+                        <option value="niigata">新潟県</option>
+                        <option value="toyama">富山県</option>
+                        <option value="ishikawa">石川県</option>
+                        <option value="fukui">福井県</option>
+                        <option value="yamanashi">山梨県</option>
+                        <option value="nagano">長野県</option>
+                        <option value="gifu">岐阜県</option>
+                        <option value="shizuoka">静岡県</option>
+                        <option value="aichi">愛知県</option>
+                        <option value="mie">三重県</option>
+                        <option value="shiga">滋賀県</option>
+                        <option value="kyoto">京都府</option>
+                        <option value="osaka">大阪府</option>
+                        <option value="hyogo">兵庫県</option>
+                        <option value="nara">奈良県</option>
+                        <option value="wakayama">和歌山県</option>
+                        <option value="tottori">鳥取県</option>
+                        <option value="shimane">島根県</option>
+                        <option value="okayama">岡山県</option>
+                        <option value="hiroshima">広島県</option>
+                        <option value="yamaguchi">山口県</option>
+                        <option value="tokushima">徳島県</option>
+                        <option value="kagawa">香川県</option>
+                        <option value="ehime">愛媛県</option>
+                        <option value="kochi">高知県</option>
+                        <option value="fukuoka">福岡県</option>
+                        <option value="saga">佐賀県</option>
+                        <option value="nagasaki">長崎県</option>
+                        <option value="kumamoto">熊本県</option>
+                        <option value="oita">大分県</option>
+                        <option value="miyazaki">宮崎県</option>
+                        <option value="kagoshima">鹿児島県</option>
+                        <option value="okinawa">沖縄県</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望エリア詳細（市区町村）</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">駅検索用の希望エリア（都道府県）</label>
+          <select>
+                        <option value="">選択してください</option>
+                        <option value="hokkaido">北海道</option>
+                        <option value="aomori">青森県</option>
+                        <option value="iwate">岩手県</option>
+                        <option value="miyagi">宮城県</option>
+                        <option value="akita">秋田県</option>
+                        <option value="yamagata">山形県</option>
+                        <option value="fukushima">福島県</option>
+                        <option value="ibaraki">茨城県</option>
+                        <option value="tochigi">栃木県</option>
+                        <option value="gunma">群馬県</option>
+                        <option value="saitama">埼玉県</option>
+                        <option value="chiba">千葉県</option>
+                        <option value="tokyo">東京都</option>
+                        <option value="kanagawa">神奈川県</option>
+                        <option value="niigata">新潟県</option>
+                        <option value="toyama">富山県</option>
+                        <option value="ishikawa">石川県</option>
+                        <option value="fukui">福井県</option>
+                        <option value="yamanashi">山梨県</option>
+                        <option value="nagano">長野県</option>
+                        <option value="gifu">岐阜県</option>
+                        <option value="shizuoka">静岡県</option>
+                        <option value="aichi">愛知県</option>
+                        <option value="mie">三重県</option>
+                        <option value="shiga">滋賀県</option>
+                        <option value="kyoto">京都府</option>
+                        <option value="osaka">大阪府</option>
+                        <option value="hyogo">兵庫県</option>
+                        <option value="nara">奈良県</option>
+                        <option value="wakayama">和歌山県</option>
+                        <option value="tottori">鳥取県</option>
+                        <option value="shimane">島根県</option>
+                        <option value="okayama">岡山県</option>
+                        <option value="hiroshima">広島県</option>
+                        <option value="yamaguchi">山口県</option>
+                        <option value="tokushima">徳島県</option>
+                        <option value="kagawa">香川県</option>
+                        <option value="ehime">愛媛県</option>
+                        <option value="kochi">高知県</option>
+                        <option value="fukuoka">福岡県</option>
+                        <option value="saga">佐賀県</option>
+                        <option value="nagasaki">長崎県</option>
+                        <option value="kumamoto">熊本県</option>
+                        <option value="oita">大分県</option>
+                        <option value="miyazaki">宮崎県</option>
+                        <option value="kagoshima">鹿児島県</option>
+                        <option value="okinawa">沖縄県</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望路線</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="teian-search-modal__field">
+          <label class="teian-search-modal__field-label">希望駅</label>
+          <select>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+      </div>
+      <div class="teian-search-modal__actions">
+        <a href="#" class="teian-search-modal__btn">キャンセル</a>
+        <a href="#" class="teian-search-modal__btn teian-search-modal__btn--primary">この条件で検索（仮）</a>
+      </div>
     </div>
   </div>
-
 
 </body>
 

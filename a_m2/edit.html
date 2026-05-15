@@ -49,7 +49,7 @@
                         <input type="hidden" name="ID" value="[ID]">
                         <input type="hidden" name="SOCIALID" value="[SOCIALID]">
                         <input type="hidden" name="M2_ETC01" value="[M2_ETC01]">
-
+                        <input type="hidden" name="M2_ETC02" value="[M2_ETC02]">
                         <input type="hidden" name="M2_ETC03" value="[M2_ETC03]">
                         <input type="hidden" name="M2_ETC04" value="[M2_ETC04]">
                         <input type="hidden" name="M2_ETC05" value="[M2_ETC05]">
@@ -98,13 +98,6 @@
                                         <ul>[OPT-ENABLE]</ul>
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <th>顧客認証ID</th>
-                                    <td><input type="text" name="M2_ETC02" class="input_w10 form-control"
-                                            value="[M2_ETC02]" size="90"></td>
-                                </tr>
-
                                 <tr>
                                     <th>登録日時</th>
                                     <td><input type="text" name="NEWDATE" class="input_w10 form-control"
@@ -215,7 +208,8 @@
                                 </tr>
                                 <tr>
                                     <th>保有不動産（種類）</th>
-                                    <td>[OPT-M2_MSEL04]</td>
+                                    <td><select name="M2_MSEL04"
+                                            class="input_select form-control">[OPT-M2_MSEL04]</select></td>
                                 </tr>
                             </tbody>
                         </table>
